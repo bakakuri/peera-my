@@ -1,0 +1,38 @@
+[
+  {
+    "id": "en-restaurant-1",
+    "lang": "en",
+    "ttsLang": "en-US",
+    "title": "რესტორანში",
+    "level": "A2",
+    "number": 4,
+    "lines": [
+      { "who": "ო", "role": "ოფიციანტი", "text": "Good evening. Would you like to see the menu?", "highlight": "menu", "ka": "საღამო მშვიდობისა. გნებავთ მენიუს ნახვა?" },
+      { "who": "შ", "role": "სტუმარი", "text": "Yes, please. And could we have a table by the window?", "highlight": "table", "ka": "დიახ, გთხოვთ. შეიძლება ფანჯარასთან მაგიდა გვქონდეს?" },
+      { "who": "ო", "role": "ოფიციანტი", "text": "Of course. Please follow me.", "highlight": "follow", "ka": "რა თქმა უნდა. გთხოვთ, გამომყევით." }
+    ],
+    "words": [
+      { "text": "menu", "ka": "მენიუ" },
+      { "text": "table", "ka": "მაგიდა" },
+      { "text": "window", "ka": "ფანჯარა" }
+    ]
+  },
+  {
+    "id": "de-restaurant-1",
+    "lang": "de",
+    "ttsLang": "de-DE",
+    "title": "Im Restaurant · რესტორანში",
+    "level": "A1",
+    "number": 1,
+    "lines": [
+      { "who": "ო", "role": "ოფიციანტი", "text": "Guten Abend. Möchten Sie die Speisekarte sehen?", "highlight": "Speisekarte", "ka": "საღამო მშვიდობისა. გნებავთ მენიუს ნახვა?" },
+      { "who": "შ", "role": "სტუმარი", "text": "Ja, bitte. Und könnten wir einen Tisch am Fenster haben?", "highlight": "Tisch", "ka": "დიახ, გთხოვთ. შეიძლება ფანჯარასთან მაგიდა გვქონდეს?" },
+      { "who": "ო", "role": "ოფიციანტი", "text": "Natürlich. Folgen Sie mir bitte.", "highlight": "Folgen", "ka": "რა თქმა უნდა. გთხოვთ, გამომყევით." }
+    ],
+    "words": [
+      { "text": "die Speisekarte", "ka": "მენიუ" },
+      { "text": "der Tisch", "ka": "მაგიდა" },
+      { "text": "das Fenster", "ka": "ფანჯარა" }
+    ]
+  }
+]
