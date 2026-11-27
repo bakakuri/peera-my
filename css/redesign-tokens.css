@@ -1,0 +1,45 @@
+/* Peera.My V2 — visual language. Decorative imagery is provided as transparent PNG. */
+:root {
+  --ink: #1c194d;
+  --muted: #67638f;
+  --blue: #6945f5;
+  --indigo: #6625d5;
+  --yellow: #ffd04d;
+  --line: rgba(113,76,201,.17);
+  --shadow: 0 12px 35px rgba(93,55,165,.16), 0 4px 9px rgba(76,39,138,.07);
+  --grad-hero: radial-gradient(circle at 78% 30%,rgba(236,137,252,.6),transparent 37%),linear-gradient(123deg,#371985 0%,#6442d7 53%,#9e63ee 100%);
+  --grad-glass: linear-gradient(145deg,rgba(255,255,255,.93),rgba(246,228,255,.82));
+  --font: "Nunito","Noto Sans Georgian",system-ui,-apple-system,sans-serif;
+}
+html { scroll-behavior: smooth; background: #e8d9ff; }
+body {
+  background: radial-gradient(circle at 5% 10%,#ffdbdc 0,transparent 34%),
+              radial-gradient(circle at 95% 16%,#cbb5ff 0,transparent 40%),#e9dcff;
+  color: var(--ink);
+  font-family:var(--font);
+}
+button, input, select { font-family:var(--font); }
+button, a, [role="button"] { touch-action:manipulation; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
+  outline:3px solid #f3a321;outline-offset:3px;
+}
+::selection { background:#e6c8ff;color:#28115d; }
+::-webkit-scrollbar { width:9px;height:7px; }
+::-webkit-scrollbar-thumb { background:#c7b2ed;border-radius:20px; }
+@keyframes auraShift {0%,100% {filter:hue-rotate(0deg)}50%{filter:hue-rotate(8deg)}}
+@keyframes gentleLift {0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes revealIn {0% {opacity:0;transform:translateY(16px) scale(.99)}100%{opacity:1;transform:none}}
+@keyframes glint {0%,65%{transform:translateX(-160%) skew(-20deg)}100%{transform:translateX(500%) skew(-20deg)}}
+/* Standard glass surface and progressive enhancement */
+:where(.card,.badge,.aw,.rk,.drow,.lw,.qopt,.account,.course,.today,.dict-sheet,.auth-card) {
+  border:1px solid rgba(255,255,255,.95);
+}
+:where(.card,.aw,.rk,.drow,.lw,.qopt,.badge,.course,.today,.timg) {
+  transition:transform .23s cubic-bezier(.2,.8,.2,1),box-shadow .23s ease,filter .23s ease;
+}
+:where(.course,.aw,.rk,.drow,.lw,.qopt,.timg):hover {
+  transform:translateY(-3px);
+  box-shadow:0 17px 36px rgba(78,37,151,.2);
+}
+.ui-icon { object-fit:contain;flex:none;display:inline-block;vertical-align:middle; }
+:where(.hdr,.card,.course,.hero-card,.today,.dict-sheet,.lpath-wrap) { isolation:isolate; }
