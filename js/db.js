@@ -169,6 +169,7 @@ export async function saveStats(stats) {
   if (sb && user) {
     const { error } = await sb.from("user_stats").upsert(statsToRow(stats, user.id), { onConflict: "user_id" });
     if (error) console.warn("saveStats:", error.message);
+    syncProfile(stats);
     return;
   }
   lsSet(KEYS.stats, stats);
@@ -225,4 +226,30 @@ export async function clearLessons(code) {
   const { error, count } = await sb.from("lessons").delete({ count: "exact" }).eq("language_code", code);
   if (error) throw error;
   return count || 0;
+}
+
+/* ---------- რეიტინგი ---------- */
+let noProfiles = false;
+async function syncProfile(stats) {
+  if (!sb || !user || noProfiles) return;
+  const { error } = await sb
+    .from("profiles")
+    .upsert({ user_id: user.id, xp: stats.xp, streak: stats.streak, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
+  if (error) {
+    noProfiles = /profiles/.test(error.message);
+    console.warn("profiles:", error.message);
+  }
+}
+
+export async function loadLeaderboard(limit = 50) {
+  const { data, error } = await sb.from("profiles").select("user_id,name,xp,streak").order("xp", { ascending: false }).limit(limit);
+  if (error) throw error;
+  return data || [];
+}
+
+export async function saveMyName(name) {
+  const { error } = await sb
+    .from("profiles")
+    .upsert({ user_id: user.id, name, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
+  if (error) throw error;
 }

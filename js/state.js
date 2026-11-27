@@ -84,6 +84,7 @@ export const state = {
       s.bestStreak = Math.max(s.bestStreak || 0, s.streak);
       s.lastActive = today;
     }
+    const before = this.todayXp();
     s.reviewsTotal += reviews;
     s.reviewsCorrect += correct;
     s.xp += xp;
@@ -92,6 +93,40 @@ export const state = {
     day.reviews += reviews;
     day.xp += xp;
     s.activity[today] = day;
+    if (before < this.goal() && this.todayXp() >= this.goal()) this.goalHit = true;
+  },
+
+  // ---------- ყოველდღიური მიზანი ----------
+  goalHit: false,
+  goal() {
+    return Number(this.stats.activity._goal) || 50;
+  },
+  todayXp() {
+    return this.stats.activity[dayKey()]?.xp || 0;
+  },
+  consumeGoalHit() {
+    const v = this.goalHit;
+    this.goalHit = false;
+    return v;
+  },
+  async setGoal(n) {
+    this.stats.activity._goal = n;
+    await db.saveStats(this.stats);
+  },
+  // ბოლო 7 დღე (ორშაბათიდან კვირამდე მიმდინარე კვირა)
+  weekDays() {
+    const names = ["ორ", "სა", "ოთ", "ხუ", "პა", "შა", "კვ"];
+    const now = new Date();
+    const mon = new Date(now);
+    mon.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+    const todayK = dayKey();
+    return names.map((label, i) => {
+      const d = new Date(mon);
+      d.setDate(mon.getDate() + i);
+      const key = dayKey(d);
+      const xp = this.stats.activity[key]?.xp || 0;
+      return { label, key, xp, hit: xp >= this.goal(), today: key === todayK, future: key > todayK };
+    });
   },
 
   async review(word, grade) {
@@ -143,6 +178,53 @@ export const state = {
       out.push({ label: names[d.getDay()], value: this.stats.activity[dayKey(d)]?.reviews || 0, today: i === 0 });
     }
     return out;
+  },
+
+  // ---------- რჩეულები ----------
+  isFav(id) {
+    return !!this.stats.activity._fav?.[id];
+  },
+  async toggleFav(id) {
+    const f = { ...(this.stats.activity._fav || {}) };
+    if (f[id]) delete f[id];
+    else f[id] = 1;
+    this.stats.activity._fav = f;
+    await db.saveStats(this.stats);
+    return !!f[id];
+  },
+
+  // ყველა მიღწევა პროგრესით (cur / goal)
+  allAchievements() {
+    const s = this.stats;
+    const learned = this.words.filter((w) => (this.cards.get(w.id)?.reps || 0) >= 1).length;
+    const res = Object.values(this.lessonResults());
+    const perfect = res.filter((r) => r.total && r.best >= r.total).length;
+    const goal = this.goal();
+    const goalDays = Object.entries(s.activity).filter(([k, v]) => /^\d{4}-/.test(k) && v?.xp >= goal).length;
+    const A = (group, id, icon, title, hint, cur, g) => ({ group, id, icon, title, hint, cur: Math.min(cur, g), goal: g, done: cur >= g });
+    return [
+      A("სიტყვები", "w3", "📚", "3 სიტყვა", "ისწავლე 3 სიტყვა", learned, 3),
+      A("სიტყვები", "w10", "📖", "10 სიტყვა", "ისწავლე 10 სიტყვა", learned, 10),
+      A("სიტყვები", "w50", "🎓", "50 სიტყვა", "ისწავლე 50 სიტყვა", learned, 50),
+      A("სიტყვები", "w100", "🏫", "100 სიტყვა", "ისწავლე 100 სიტყვა", learned, 100),
+      A("სიტყვები", "w200", "🧠", "200 სიტყვა", "ისწავლე 200 სიტყვა", learned, 200),
+      A("გამეორებები", "r1", "🌱", "პირველი ნაბიჯი", "1 გამეორება", s.reviewsTotal, 1),
+      A("გამეორებები", "r25", "🎯", "25 გამეორება", "25 გამეორება სულ", s.reviewsTotal, 25),
+      A("გამეორებები", "r100", "💪", "100 გამეორება", "100 გამეორება სულ", s.reviewsTotal, 100),
+      A("გამეორებები", "r500", "🚀", "500 გამეორება", "500 გამეორება სულ", s.reviewsTotal, 500),
+      A("სერია", "s3", "🔥", "3 დღე ზედიზედ", "სერია 3 დღე", s.bestStreak || 0, 3),
+      A("სერია", "s7", "⚡", "კვირა ცეცხლზე", "სერია 7 დღე", s.bestStreak || 0, 7),
+      A("სერია", "s30", "🏆", "თვე ცეცხლზე", "სერია 30 დღე", s.bestStreak || 0, 30),
+      A("სერია", "g1", "✅", "დღის მიზანი", "შეასრულე დღიური მიზანი", goalDays, 1),
+      A("სერია", "g7", "🗓️", "7 მიზანი", "შეასრულე დღიური მიზანი 7 დღე", goalDays, 7),
+      A("XP", "x100", "⭐", "100 XP", "დააგროვე 100 XP", s.xp, 100),
+      A("XP", "x500", "🌟", "500 XP", "დააგროვე 500 XP", s.xp, 500),
+      A("XP", "x1000", "💎", "1000 XP", "დააგროვე 1000 XP", s.xp, 1000),
+      A("XP", "x5000", "👑", "5000 XP", "დააგროვე 5000 XP", s.xp, 5000),
+      A("გაკვეთილები", "l1", "🎧", "პირველი გაკვეთილი", "დაასრულე გაკვეთილი", s.lessons, 1),
+      A("გაკვეთილები", "l5", "🗺️", "5 გაკვეთილი", "დაასრულე 5 გაკვეთილი", s.lessons, 5),
+      A("გაკვეთილები", "lp", "💯", "იდეალური", "გაკვეთილი 100%-ით", perfect, 1),
+    ];
   },
 
   achievements() {

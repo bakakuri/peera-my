@@ -2,7 +2,7 @@ import { state } from "../state.js";
 import { labels } from "../srs.js";
 import { header, icon } from "../ui.js";
 import { vm } from "../word.js";
-import { esc, speak, highlight } from "../util.js";
+import { esc, speak, highlight, toast } from "../util.js";
 
 let S = null;
 
@@ -162,6 +162,7 @@ export default {
         S.xp += xp;
         popXp(root, xp);
       }
+      if (state.consumeGoalHit()) toast("🎯 დღევანდელი მიზანი შესრულდა!");
       setTimeout(() => {
         S.queue.shift();
         if (grade === 0) S.queue.push(w);

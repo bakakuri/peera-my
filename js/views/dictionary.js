@@ -2,10 +2,12 @@ import { state, LANGS } from "../state.js";
 import { BUCKETS } from "../srs.js";
 import { header, icon } from "../ui.js";
 import { vm } from "../word.js";
-import { esc, speak } from "../util.js";
+import { esc, speak, toast } from "../util.js";
+import { canListen, listen } from "../speech.js";
 import { frontHtml, backHtml } from "./cards.js";
 
 let tab = "all";
+let limit = 200;
 let query = "";
 
 const TABS = [{ id: "all", title: "ყველა", color: "#4f6bff" }, ...BUCKETS];
@@ -35,28 +37,41 @@ function countOf(id) {
   return id === "all" ? words.length : words.filter((w) => state.bucketOfWord(w.id) === id).length;
 }
 
+const heart = (on) => `<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.3 5c1.9 0 3.6 1 4.7 2.6h2C14.1 6 15.8 5 17.7 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z" fill="${on ? "#ff3b4e" : "none"}" stroke="${on ? "#ff3b4e" : "#a3a8c8"}" stroke-width="2" stroke-linejoin="round"/></svg>`;
+const spk = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+
 function rows(list) {
   if (!list.length) {
     return `<p class="dict-empty">${query ? "ვერაფერი მოიძებნა." : "აქ ჯერ სიტყვა არ არის. " + esc(hint[tab])}</p>`;
   }
-  return list
-    .map(
-      (w, i) => `
-    <button class="dict-row" data-id="${esc(w.id)}">
+  const shown = list.slice(0, limit);
+  return (
+    shown
+      .map(
+        (w, i) => `
+    <div class="drow" data-id="${esc(w.id)}">
       <span class="n">${i + 1}</span>
-      <span class="w"><i class="dot" style="background:${colorOf(state.bucketOfWord(w.id))}"></i><b>${esc(w.core?.term)}</b></span>
+      <button class="dsay" data-say="${esc(w.id)}" aria-label="მოსმენა">${spk}</button>
+      <span class="w"><b>${esc(w.core?.term)}</b></span>
       <span class="p">${esc(ph(w))}</span>
       <span class="t">${esc(w.semantics?.primaryTranslation)}</span>
-    </button>`
-    )
-    .join("");
+      <button class="dheart" data-fav="${esc(w.id)}" aria-label="რჩეული">${heart(state.isFav(w.id))}</button>
+    </div>`
+      )
+      .join("") + (list.length > limit ? `<button class="cta dmore" data-more>კიდევ ${Math.min(200, list.length - limit)} სიტყვა</button>` : "")
+  );
 }
 
+const PILLS = ["learned", "review", "study", "memorize"];
 function tabsHtml() {
-  return TABS.map(
-    (t) => `<button class="dtab${t.id === tab ? " on" : ""}" data-tab="${t.id}" style="--c:${t.color}">${t.title}<em>${countOf(t.id)}</em></button>`
+  return PILLS.map(
+    (id) =>
+      `<button class="dpill${tab === id ? " on" : ""}${tab !== "all" && tab !== id ? " dim" : ""}" data-tab="${id}" aria-pressed="${tab === id}" aria-label="${esc(titleOf(id))}"><img src="assets/tab-${id}.webp" alt="" draggable="false"><b class="cnt">${countOf(id)}</b></button>`
   ).join("");
 }
+
+const mic = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`;
+const mag = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7b80b4" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>`;
 
 function langsHtml() {
   return LANGS.filter((l) => state.wordsOf(l.code).length)
@@ -67,15 +82,17 @@ function langsHtml() {
 export default {
   render() {
     return `
-    <section class="hero hero-sm"><div class="deco hd1"></div>${header()}
+    <section class="hero hero-sm dict-hero"><div class="deco hd1"></div>${header()}
+      <img class="dh-book" src="assets/az-book.webp" alt="" width="190">
+      <img class="dh-girl" src="assets/girl-dict.webp" alt="" width="190">
       <div class="hero-title"><h1 class="rise">ლექსიკონი</h1></div>
     </section>
-    <section class="card dict-card rise">
+    <section class="dict-sheet rise">
       <div class="dlangs" id="dict-langs">${langsHtml()}</div>
-      <input class="dict-search" id="dict-search" type="search" placeholder="ძებნა…" value="${esc(query)}" autocomplete="off">
-      <div class="dtabs" id="dict-tabs">${tabsHtml()}</div>
+      <div class="dsearch">${mag}<input id="dict-search" type="search" placeholder="ძებნა..." value="${esc(query)}" autocomplete="off"><button class="dmic" id="dict-mic" aria-label="ხმოვანი ძებნა">${mic}</button></div>
+      <div class="dpills" id="dict-tabs">${tabsHtml()}</div>
       <p class="dict-hint" id="dict-hint">${esc(hint[tab])}</p>
-      <div class="dict-head"><span>#</span><span>სიტყვა</span><span>ფონეტიკა</span><span>თარგმანი</span></div>
+      <div class="dict-head"><span>#</span><span></span><span>სიტყვა</span><span>ფონეტიკა</span><span>თარგმანი</span><span></span></div>
       <div class="dict-list" id="dict-list">${rows(listFor())}</div>
     </section>`;
   },
@@ -128,13 +145,39 @@ export default {
       document.addEventListener("keydown", onKey);
     }
 
-    const onClick = (e) => {
-      const row = e.target.closest(".dict-row");
+    const onClick = async (e) => {
+      const say = e.target.closest("[data-say]");
+      const fav = e.target.closest("[data-fav]");
+      const row = e.target.closest(".drow");
       const t = e.target.closest("[data-tab]");
       const l = e.target.closest("[data-lang]");
-      if (row) open(row.dataset.id);
+      if (say) {
+        const w = state.words.find((x) => x.id === say.dataset.say);
+        if (w) speak(w.core?.term, state.langInfo().tts, 0.9);
+      } else if (fav) {
+        const on = await state.toggleFav(fav.dataset.fav);
+        fav.innerHTML = heart(on);
+      } else if (e.target.closest("[data-more]")) {
+        limit += 200;
+        $("#dict-list").innerHTML = rows(listFor());
+      } else if (e.target.closest("#dict-mic")) {
+        if (!canListen()) return toast("ხმოვანი ძებნა ამ ბრაუზერში არ მუშაობს");
+        const m = $("#dict-mic");
+        m.classList.add("rec");
+        try {
+          const heards = await listen(state.langInfo().tts);
+          query = heards[0];
+          $("#dict-search").value = query;
+          limit = 200;
+          $("#dict-list").innerHTML = rows(listFor());
+        } catch {
+          toast("ვერ გავიგე, სცადე ისევ");
+        }
+        m.classList.remove("rec");
+      } else if (row) open(row.dataset.id);
       else if (t) {
-        tab = t.dataset.tab;
+        tab = tab === t.dataset.tab ? "all" : t.dataset.tab;
+        limit = 200;
         repaint();
       } else if (l) {
         state.setLang(l.dataset.lang);
@@ -144,6 +187,7 @@ export default {
     const onInput = (e) => {
       if (e.target.id === "dict-search") {
         query = e.target.value;
+        limit = 200;
         $("#dict-list").innerHTML = rows(listFor());
       }
     };

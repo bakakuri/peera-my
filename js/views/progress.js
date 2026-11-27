@@ -61,7 +61,7 @@ export default {
     </section>
 
     <section class="block rise" style="animation-delay:.28s">
-      <div class="card-head plain"><h3>მიღწევები</h3></div>
+      <div class="card-head plain"><h3>მიღწევები</h3><a href="#/awards">ყველა და რეიტინგი ${icon.arrow}</a></div>
       <div class="badges">${badges}</div>
     </section>
 

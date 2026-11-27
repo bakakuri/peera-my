@@ -1,6 +1,9 @@
 import { state } from "../state.js";
 import { header, icon } from "../ui.js";
 import { esc, highlight, speak, toast } from "../util.js";
+import { canListen, listen, score, stopListening } from "../speech.js";
+
+const micIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`;
 
 let P = null;
 const STEP_NAMES = ["სიტყვები", "დიალოგი", "ვარჯიში", "შედეგი"];
@@ -44,17 +47,20 @@ const stepsBar = () =>
   `<div class="lp-steps">${STEP_NAMES.map((n, i) => `<span class="${i < P.step ? "done" : i === P.step ? "now" : ""}"><i></i><em>${n}</em></span>`).join("")}</div>`;
 
 function wordsStep(l) {
+  const mic = canListen();
   return `
   <h2 class="lp-title rise">ახალი სიტყვები</h2>
-  <p class="lp-sub rise">შეეხე სიტყვას და მოუსმინე</p>
+  <p class="lp-sub rise">შეეხე სიტყვას და მოუსმინე${canListen() ? ", მერე 🎤-ით გაიმეორე" : ""}</p>
   <div class="lwords">${l.words
     .map(
       (w, i) => `
-    <button class="lw rise" style="animation-delay:${0.08 * i}s" data-say="${i}">
-      <span class="lw-t"><b>${esc(w.text)}</b><small>${esc(w.ph || "")}</small></span>
-      <span class="lw-k">${esc(w.ka)}</span>
-      <span class="lw-s">${icon.speaker}</span>
-    </button>`
+    <div class="lw rise" style="animation-delay:${0.08 * i}s">
+      <span class="lw-t" data-say="${i}"><b>${esc(w.text)}</b><small>${esc(w.ph || "")}</small></span>
+      <span class="lw-k" data-say="${i}">${esc(w.ka)}</span>
+      <button class="lw-s" data-say="${i}" aria-label="მოსმენა">${icon.speaker}</button>
+      ${mic ? `<button class="lw-m" data-mic="w${i}" aria-label="წარმოთქმა">${micIcon}</button>` : ""}
+      <p class="mres" id="mres-w${i}" role="status"></p>
+    </div>`
     )
     .join("")}</div>
   <button class="cta cta-primary lp-next" data-next>დიალოგზე გადასვლა ${icon.arrow}</button>`;
@@ -71,6 +77,7 @@ function dialogueStep(l) {
         <p>${highlight(ln.text, ln.highlight)}</p>
         ${ln.ph ? `<small class="ph">${esc(ln.ph)}</small>` : ""}
         <small>${esc(ln.ka)}</small>
+        ${canListen() ? `<button class="bubble-mic" data-mic="l${i}" aria-label="წარმოთქმა">${micIcon}</button><p class="mres" id="mres-l${i}" role="status"></p>` : ""}
       </div>
       ${i % 2 ? `<span class="avatar coral">${esc(ln.who)}</span>` : ""}
     </div>`
@@ -118,6 +125,7 @@ function resultStep(l) {
     <div class="rstars">${[0, 1, 2].map((i) => star(i < stars, i)).join("")}</div>
     <div class="rscore rise" style="animation-delay:.5s"><b>${P.correct} / ${total}</b><span>სწორი პასუხი</span></div>
     <div class="rxp rise" style="animation-delay:.7s">+<b id="rxp">${P.xp}</b> XP</div>
+    <p class="rgoal" id="rgoal" hidden>🎯 დღევანდელი მიზანი შესრულდა!</p>
     ${next ? `<a class="cta cta-primary" href="#/lesson/${esc(next.id)}">შემდეგი გაკვეთილი ${icon.arrow}</a>` : ""}
     <a class="cta rback" href="#/lesson">გაკვეთილების გზა</a>
   </div>`;
@@ -176,6 +184,7 @@ export default {
         P.xp = await state.finishLesson(l, P.correct, P.quiz.length || 1);
         const el = root.querySelector("#rxp");
         if (el) el.textContent = P.xp;
+        if (state.consumeGoalHit()) root.querySelector("#rgoal")?.removeAttribute("hidden");
       }
       burst(root);
     }
@@ -198,8 +207,31 @@ export default {
     }
 
     const onClick = (e) => {
-      const t = e.target.closest("[data-say],[data-act],[data-line],[data-next],[data-opt],[data-qsay]");
+      const t = e.target.closest("[data-mic],[data-say],[data-act],[data-line],[data-next],[data-opt],[data-qsay]");
       if (!t) return;
+      if (t.dataset.mic !== undefined) {
+        const key = t.dataset.mic;
+        const target = key[0] === "w" ? l.words[Number(key.slice(1))].text : l.lines[Number(key.slice(1))].text;
+        const out = root.querySelector("#mres-" + key);
+        stopAudio();
+        if (t.classList.contains("rec")) { stopListening(); return; }
+        root.querySelectorAll("[data-mic].rec").forEach((b) => b.classList.remove("rec"));
+        t.classList.add("rec");
+        out.className = "mres";
+        out.textContent = "მოგისმენ…";
+        listen(l.ttsLang)
+          .then((heards) => {
+            const r = score(target, heards);
+            out.className = "mres " + (r.pct >= 80 ? "ok" : r.pct >= 50 ? "mid" : "bad");
+            out.textContent = `${r.pct >= 80 ? "შესანიშნავი" : r.pct >= 50 ? "თითქმის" : "კიდევ სცადე"} · ${r.pct}% · გავიგე: „${r.heard}“`;
+          })
+          .catch((err) => {
+            out.className = "mres bad";
+            out.textContent = err.message === "not-allowed" ? "მიკროფონზე წვდომა ჩართე" : "ვერ გავიგე, სცადე ისევ";
+          })
+          .finally(() => t.classList.remove("rec"));
+        return;
+      }
       if (t.dataset.say !== undefined) speak(l.words[Number(t.dataset.say)].text, l.ttsLang, 0.85);
       else if (t.dataset.act === "play") {
         if (playing) return stopAudio();
@@ -245,6 +277,7 @@ export default {
     paint();
     return () => {
       stopAudio();
+      stopListening();
       root.removeEventListener("click", onClick);
     };
   },
