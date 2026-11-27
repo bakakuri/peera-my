@@ -1,19 +1,24 @@
--- Peera.My — გაკვეთილები ბაზაში. გაუშვი ერთხელ Supabase → SQL Editor-ში (admin.sql-ის შემდეგ).
-create table if not exists public.lessons (
-  id            text primary key,
-  language_code text not null,
-  position      int  not null default 0,
-  data          jsonb not null,
-  created_at    timestamptz not null default now()
+-- Peera.My — lessons table with access controlled by app_private.is_admin().
+-- Run schema.sql and admin.sql first.
+CREATE TABLE IF NOT EXISTS public.lessons (
+  id text PRIMARY KEY,
+  language_code text NOT NULL,
+  position integer NOT NULL DEFAULT 0,
+  data jsonb NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
 );
-create index if not exists lessons_lang_idx on public.lessons (language_code, position);
-alter table public.lessons enable row level security;
+CREATE INDEX IF NOT EXISTS lessons_lang_idx ON public.lessons (language_code, position);
+ALTER TABLE public.lessons ENABLE ROW LEVEL SECURITY;
 
-drop policy if exists "lessons readable" on public.lessons;
-create policy "lessons readable" on public.lessons for select using (true);
-drop policy if exists "admin insert lessons" on public.lessons;
-create policy "admin insert lessons" on public.lessons for insert with check (public.is_admin());
-drop policy if exists "admin update lessons" on public.lessons;
-create policy "admin update lessons" on public.lessons for update using (public.is_admin()) with check (public.is_admin());
-drop policy if exists "admin delete lessons" on public.lessons;
-create policy "admin delete lessons" on public.lessons for delete using (public.is_admin());
+DROP POLICY IF EXISTS "lessons readable" ON public.lessons;
+CREATE POLICY "lessons readable" ON public.lessons FOR SELECT USING (true);
+DROP POLICY IF EXISTS "admin insert lessons" ON public.lessons;
+CREATE POLICY "admin insert lessons" ON public.lessons FOR INSERT
+  TO authenticated WITH CHECK ((SELECT app_private.is_admin()));
+DROP POLICY IF EXISTS "admin update lessons" ON public.lessons;
+CREATE POLICY "admin update lessons" ON public.lessons FOR UPDATE
+  TO authenticated USING ((SELECT app_private.is_admin()))
+  WITH CHECK ((SELECT app_private.is_admin()));
+DROP POLICY IF EXISTS "admin delete lessons" ON public.lessons;
+CREATE POLICY "admin delete lessons" ON public.lessons FOR DELETE
+  TO authenticated USING ((SELECT app_private.is_admin()));
