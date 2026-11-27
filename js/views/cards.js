@@ -1,25 +1,26 @@
 import { state } from "../state.js";
 import { labels } from "../srs.js";
 import { header, icon } from "../ui.js";
-import { vm, TABS } from "../word.js";
+import { vm } from "../word.js";
 import { esc, speak, highlight } from "../util.js";
 
 let S = null;
 
 function newSession() {
   const q = state.queue();
-  S = { queue: q, total: q.length, done: 0, flipped: false, tab: "meaning", busy: false, xp: 0 };
+  S = { queue: q, total: q.length, done: 0, flipped: false, busy: false, xp: 0 };
 }
-
-const tabsHtml = (tab) =>
-  TABS.map(
-    (t) => `<button class="tabbtn${t.id === tab ? " on" : ""}" data-tab="${t.id}">${t.label}</button>`
-  ).join("");
-
-const bodyHtml = (v, tab) => (TABS.find((t) => t.id === tab) || TABS[0]).body(v);
 
 const geFlag = `<svg viewBox="0 0 30 20" width="34" height="23" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><path d="M13 0h4v20h-4zM0 8h30v4H0z" fill="#E8112D"/><g fill="#E8112D"><path d="M4 2h2v4H4zM2 3h6v2H2zM22 2h2v4h-2zM20 3h6v2h-6zM4 14h2v4H4zM2 15h6v2H2zM22 14h2v4h-2zM20 15h6v2h-6z"/></g></svg>`;
 const tapIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B3FD8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5a2 2 0 0 1 4 0v6l3.2.8a2 2 0 0 1 1.5 2.1L17 19a2 2 0 0 1-2 1.8H11a2 2 0 0 1-1.6-.8L5.5 14.6a1.6 1.6 0 0 1 2.3-2.2L9 13.6"/></svg>`;
+
+function exampleBlock(v, mode) {
+  const ex = v.examples[0];
+  if (!ex) return "";
+  const phon = ex.phoneticKa ? `<small class="ph">${esc(ex.phoneticKa)}</small>` : "";
+  const tr = ex.translation ? `<small class="tr">${esc(ex.translation)}</small>` : "";
+  return `<div class="ex-box"><p>${highlight(ex.sentence || "", ex.highlight)}</p>${phon}${mode === "back" ? tr : ""}</div>`;
+}
 
 function frontHtml(v) {
   const chips = v.ka
@@ -28,24 +29,13 @@ function frontHtml(v) {
         `<div class="syl${i === v.stress ? " stress" : ""}"><b>${esc(k)}</b>${v.en[i] ? `<small>${esc(v.en[i])}</small>` : ""}</div>`
     )
     .join("");
-  const ex = v.examples[0];
-  const exHtml = ex
-    ? `<div class="ex-box rise" style="animation-delay:.55s"><p>${highlight(ex.sentence || "", ex.highlight)}</p>${ex.translation ? `<small>${esc(ex.translation)}</small>` : ""}</div>`
-    : "";
-  const cells = [
-    v.pos ? `<div><b>${esc(v.posEn || v.pos)}</b><small>${esc(v.pos)}</small></div>` : "",
-    v.diff != null ? `<div><b>${v.diff} / 10</b><small>სირთულე</small></div>` : "",
-    v.register ? `<div><b>${esc(v.register)}</b><small>სტილი</small></div>` : "",
-  ].join("");
   return `
   <div class="face front">
     <img class="face-city" src="${state.langInfo().img}" alt="">
     <div class="sheen"></div>
-    <svg class="spark s1" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
-    <svg class="spark s2" width="14" height="14" viewBox="0 0 24 24" fill="#FFC83D" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
     <button class="flip-hit" data-act="flip" aria-label="ბარათის გადაბრუნება"></button>
     <div class="front-in">
-      <div class="front-top rise" style="animation-delay:.1s">
+      <div class="front-top">
         <span class="lvl-pill"><b>${esc(v.cefr || "–")}</b>${esc(v.posEn || v.pos)}</span>
         <div class="speak-wrap">
           <i class="ring"></i><i class="ring r2"></i>
@@ -53,26 +43,26 @@ function frontHtml(v) {
         </div>
       </div>
       <div class="front-mid">
-        <div class="term rise" style="animation-delay:.2s">${esc(v.term)}</div>
-        <div class="ipa-row rise" style="animation-delay:.3s"><span class="ipa">${esc(v.ipa)}</span></div>
-        <div class="sylbox rise" style="animation-delay:.4s">
+        <div class="term">${esc(v.term)}</div>
+        <div class="ipa-row"><span class="ipa">${esc(v.ipa)}</span></div>
+        <div class="sylbox">
           <div class="lbl">წაიკითხე ქართულად</div>
           <div class="syls">${chips}</div>
         </div>
-        ${exHtml}
+        ${exampleBlock(v, "front")}
       </div>
-      ${cells ? `<div class="info-strip rise" style="animation-delay:.65s">${cells}</div>` : ""}
       <div class="tap-hint">${tapIcon}<span>შეეხე ბარათს და გადაატრიალე</span></div>
     </div>
   </div>`;
 }
 
-function backHtml(v, tab) {
+function backHtml(v) {
+  const desc = v.defNative || v.defTarget;
   return `
-  <div class="face back">
+  <div class="face back" data-act="flip">
     <img class="face-city" src="${state.langInfo().img}" alt="">
     <div class="sheen"></div>
-    <div class="back-top" data-act="flip">
+    <div class="back-in">
       <div class="back-head">
         <span class="flag-mini" aria-hidden="true">${geFlag}</span>
         <div class="back-term">${esc(v.term)}</div>
@@ -80,16 +70,17 @@ function backHtml(v, tab) {
       </div>
       <div class="primary">${esc(v.primary)}</div>
       <div class="chips">${v.alts.map((a) => `<span class="chip alt">${esc(a)}</span>`).join("")}</div>
+      ${desc ? `<p class="desc">${esc(desc)}</p>` : ""}
+      ${exampleBlock(v, "back")}
+      ${v.grammar ? `<div class="gram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B87800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" fill="#FFD24D"/></svg><p>${esc(v.grammar)}</p></div>` : ""}
+      <div class="tap-hint">${tapIcon}<span>შეეხე და დაბრუნდი</span></div>
     </div>
-    <div class="tabs">${tabsHtml(tab)}</div>
-    <div class="back-body">${bodyHtml(v, tab)}</div>
-    <div class="back-foot" data-act="flip"><div class="tap-hint">${tapIcon}<span>შეეხე და დაბრუნდი</span></div></div>
   </div>`;
 }
 
 function stageHtml(w, enter = true) {
   const v = vm(w);
-  return `<div class="cardwrap${enter ? " enter" : ""}"><div class="float"><div class="flipper${S.flipped ? " flipped" : ""}">${frontHtml(v)}${backHtml(v, S.tab)}</div></div></div>`;
+  return `<div class="cardwrap${enter ? " enter" : ""}"><div class="flipper${S.flipped ? " flipped" : ""}">${frontHtml(v)}${backHtml(v)}</div></div>`;
 }
 
 function srsHtml(w) {
@@ -185,7 +176,6 @@ export default {
         if (grade === 0) S.queue.push(w);
         else S.done += 1;
         S.flipped = false;
-        S.tab = "meaning";
         S.busy = false;
         if (!S.queue.length) {
           page().innerHTML = finishHtml();
@@ -204,28 +194,20 @@ export default {
 
     const onClick = (e) => {
       if (!cur()) return;
-      let t = e.target.closest("[data-act],[data-tab],[data-grade]");
-      if (!t && e.target.closest(".face.back")) t = e.target.closest(".face.back");
+      const t = e.target.closest("[data-act],[data-grade]");
       if (!t) return;
-      if (t.dataset.act === "flip" || t.classList.contains("back")) {
+      if (t.dataset.act === "flip") {
         if (S.busy) return;
-        const wrap = root.querySelector(".cardwrap");
-        wrap.classList.remove("enter", "pop");
-        void wrap.offsetWidth;
-        wrap.classList.add("pop");
         S.flipped = !S.flipped;
+        const wrap = root.querySelector(".cardwrap");
+        wrap.classList.add("flipping");
+        setTimeout(() => wrap.classList.remove("flipping"), 760);
         root.querySelector(".flipper").classList.toggle("flipped", S.flipped);
         root.querySelector("#srs").classList.toggle("ready", S.flipped);
       } else if (t.dataset.act === "speak") {
         e.stopPropagation();
         const v = vm(cur());
         speak(v.term, v.ttsLang, v.rate);
-      } else if (t.dataset.tab) {
-        S.tab = t.dataset.tab;
-        root.querySelectorAll(".tabbtn").forEach((b) => b.classList.toggle("on", b.dataset.tab === S.tab));
-        const body = root.querySelector(".back-body");
-        body.innerHTML = bodyHtml(vm(cur()), S.tab);
-        body.scrollTop = 0;
       } else if (t.dataset.grade !== undefined) {
         answer(Number(t.dataset.grade));
       }

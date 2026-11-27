@@ -179,9 +179,9 @@ img { display: block; }
 .cardwrap.leave-left { transform: translateX(-480px) rotate(-18deg); opacity: 0; }
 .cardwrap.leave-right { transform: translateX(480px) rotate(18deg); opacity: 0; }
 .float { position: absolute; inset: 0; transform-style: preserve-3d; animation: cardFloat 6s ease-in-out infinite; }
-.flipper { position: absolute; inset: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.3, 1.35, 0.5, 1); }
+.flipper { position: absolute; inset: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.25, 1); will-change: transform; }
 .flipper.flipped { transform: rotateY(180deg); }
-.flipper .face { transition: visibility 0s linear 0.38s; }
+.flipper .face { transition: visibility 0s linear 0.35s; }
 .flipper.flipped .front, .flipper:not(.flipped) .back { visibility: hidden; }
 .face-city { position: absolute; bottom: 0; z-index: 0; pointer-events: none; opacity: 0.6; -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%); mask-image: linear-gradient(to top, #000 45%, transparent 100%); }
 .l-de .face-city { left: -6%; width: 112%; }
@@ -217,7 +217,17 @@ img { display: block; }
 .ex-box::before { content: ""; position: absolute; left: 7px; top: 12px; bottom: 12px; width: 4px; border-radius: 2px; background: linear-gradient(180deg, #7a3bff, #4b3fd8); }
 .ex-box p { font-size: 14px; font-weight: 800; line-height: 1.35; color: var(--ink); }
 .ex-box mark { background: none; padding: 0; color: #6a2be0; font-weight: 900; }
-.ex-box small { display: block; margin-top: 4px; font-size: 12px; font-weight: 600; line-height: 1.35; color: var(--muted); }
+.ex-box small { display: block; margin-top: 5px; font-size: 12.5px; line-height: 1.35; }
+.ex-box .ph { font-weight: 800; color: #4b3fd8; }
+.ex-box .tr { font-weight: 600; color: var(--muted); }
+.cardwrap.flipping * { animation-play-state: paused !important; }
+.back-in { position: absolute; inset: 0; z-index: 2; padding: 16px 18px 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; cursor: pointer; -webkit-overflow-scrolling: touch; }
+.back-in .ex-box { margin-top: 0; }
+.desc { font-size: 13.5px; font-weight: 700; line-height: 1.45; color: #3a3f6e; text-align: center; }
+.gram { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: 16px; background: rgba(255, 241, 194, 0.92); }
+.gram svg { flex: none; margin-top: 1px; }
+.gram p { font-size: 12.5px; font-weight: 700; line-height: 1.4; color: var(--ink); }
+.back-in .tap-hint { margin-top: auto; padding-top: 6px; }
 .info-strip { display: flex; margin-top: 10px; padding: 8px 4px; border-radius: 20px; background: rgba(255, 255, 255, 0.6); }
 .info-strip div { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2px 4px; text-align: center; border-left: 1px solid rgba(90, 95, 138, 0.2); }
 .info-strip div:first-child { border-left: none; }
@@ -232,7 +242,7 @@ img { display: block; }
 .back-head { display: flex; align-items: center; gap: 10px; }
 .flag-mini { width: 40px; height: 40px; border-radius: 12px; background: #fff; box-shadow: 0 4px 10px rgba(60, 60, 180, 0.2); display: flex; align-items: center; justify-content: center; flex: none; overflow: hidden; }
 .back-term { flex: 1; font-size: 15px; font-weight: 900; color: #4a4fa8; }
-.primary { margin-top: 10px; font-size: 25px; font-weight: 900; line-height: 1.2; text-align: center; color: var(--ink); }
+.primary { margin-top: 6px; font-size: 25px; font-weight: 900; line-height: 1.2; text-align: center; color: var(--ink); }
 .back-top .chips { margin: 8px 0 0; justify-content: center; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
 .chip { display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: 13px; font-size: 11.5px; font-weight: 800; }
@@ -372,3 +382,4 @@ mark { background: #ffd24d; color: inherit; padding: 0 4px; border-radius: 6px; 
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 .flag-mini svg { display: block; }
+.back .face-city { opacity: 0.4; }
