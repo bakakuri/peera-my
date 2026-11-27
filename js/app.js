@@ -25,6 +25,7 @@ function render(keepFocus=false){
  const route=routeOf();const v=activeView(route);const active=document.activeElement;
  const name=keepFocus?active?.dataset?.input:null;const sel=keepFocus&&name&&active.selectionStart!=null?active.selectionStart:null;
  window.peeraSoundEnabled=store.profile.sound;
+ document.body.classList.toggle('reduce-motion',!store.profile.motion);
  root.innerHTML=`<div class="shell">${header()}<main class="page page--${esc(route.split('/')[0])}" id="page-content">${v.render(route)}</main></div>${nav(currentNav(route))}${isDrawer?drawer():''}`;
  document.body.classList.toggle('no-scroll',isDrawer);
  if(name){const next=root.querySelector(`[data-input="${name}"]`);if(next){next.focus();try{next.setSelectionRange(sel,sel)}catch{}}}

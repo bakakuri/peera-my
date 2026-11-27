@@ -1,4 +1,5 @@
 export function speak(text,language='de'){
+  if(window.peeraSoundEnabled===false) return false;
   if(!('speechSynthesis' in window)) return false;
   const voice=new SpeechSynthesisUtterance(String(text));
   voice.lang=({de:'de-DE',en:'en-GB',es:'es-ES'}[language]||'de-DE');

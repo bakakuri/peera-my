@@ -20,3 +20,5 @@
 @media(min-width:960px){.course-hero{height:255px}.course-hero .girl{height:282px;bottom:-22px}.course-hero-info{left:40%;top:28px}.course-hero-info h2{font-size:1.7rem}.course-hero-info p{font-size:.85rem}}
 .weekly-bars .bar-group{height:100%;justify-content:flex-end}
 .weekly-bars .bar-visual{flex-shrink:0}
+
+body.reduce-motion *,body.reduce-motion *:before,body.reduce-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
