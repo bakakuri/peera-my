@@ -155,9 +155,7 @@ img { display: block; }
 @keyframes cityDrift { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.015); } }
 @keyframes cloud { 0% { transform: translateX(-20px); } 100% { transform: translateX(40px); } }
 @keyframes tapHint { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(4px) scale(0.92); } }
-.cards-page { position: relative; min-height: 100dvh; margin-bottom: -112px; padding-bottom: 112px; overflow: hidden; background: linear-gradient(172deg, #2e7bff 0%, #4a5ff0 42%, #6a3fe0 78%, #8a3fe0 100%); }
-.cards-page.l-es { background: linear-gradient(172deg, #3d6bff 0%, #6a4fe8 45%, #c04fb0 80%, #ff7a59 100%); }
-.cards-page.l-de { background: linear-gradient(172deg, #2e7bff 0%, #4b4fe8 45%, #7a3fd8 80%, #b0439f 100%); }
+.cards-page { position: relative; min-height: 100dvh; margin-bottom: -112px; padding-bottom: 112px; overflow: hidden; }
 .bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .bg .orb { position: absolute; border-radius: 50%; }
 .bg .o1 { right: -70px; top: 70px; width: 230px; height: 230px; background: radial-gradient(circle at 35% 30%, #ffe27a, #ffc83d 60%, #ffae1a); opacity: 0.85; animation: floaty 9s ease-in-out infinite; }
@@ -187,7 +185,7 @@ img { display: block; }
 .l-de .face-city { left: -6%; width: 112%; }
 .l-en .face-city { right: -6px; height: 78%; }
 .l-es .face-city { right: -34px; height: 72%; }
-.face { position: absolute; inset: 0; border-radius: 36px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: linear-gradient(155deg, rgba(255, 255, 255, 0.8) 0%, rgba(235, 238, 255, 0.62) 100%); border: 1.5px solid rgba(255, 255, 255, 0.85); box-shadow: 0 26px 50px rgba(50, 55, 190, 0.3), inset 0 1px 0 #fff; }
+.face { position: absolute; inset: 0; border-radius: 36px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: linear-gradient(155deg, rgba(255, 255, 255, 0.74) 0%, rgba(235, 238, 255, 0.56) 100%); border: 1.5px solid rgba(255, 255, 255, 0.85); box-shadow: 0 26px 50px rgba(50, 55, 190, 0.3), inset 0 1px 0 #fff; }
 .sheen { position: absolute; top: 0; bottom: 0; left: 0; width: 80px; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.7), transparent); animation: sheen 5s ease-in-out 1.2s infinite; pointer-events: none; z-index: 3; }
 .spark { position: absolute; animation: twinkle 2.6s ease-in-out infinite; pointer-events: none; }
 .s1 { left: 26px; top: 82px; } .s2 { right: 34px; top: 190px; animation-delay: 0.6s; }
@@ -383,3 +381,12 @@ mark { background: #ffd24d; color: inherit; padding: 0 4px; border-radius: 6px; 
 }
 .flag-mini svg { display: block; }
 .back .face-city { opacity: 0.4; }
+
+/* ----- ენის ფონური ფოტო (მთელ აპზე) ----- */
+.bgimg { position: fixed; top: 0; bottom: 0; left: 50%; width: min(430px, 100%); transform: translateX(-50%); z-index: 0; pointer-events: none; background: linear-gradient(172deg, #3d6bff 0%, #c04fb0 60%, #ff9a59 100%) center / cover no-repeat; }
+.app[data-lang="en"] .bgimg { background-image: url("../assets/bg-en.webp"); }
+.app[data-lang="de"] .bgimg { background-image: url("../assets/bg-de.webp"); }
+.bgimg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(238, 240, 255, 0.3) 0%, rgba(244, 241, 255, 0.62) 55%, rgba(246, 242, 255, 0.84) 100%); transition: opacity 0.4s ease; }
+.app[data-route="cards"] .bgimg::after { background: linear-gradient(180deg, rgba(40, 60, 200, 0.38) 0%, rgba(40, 60, 200, 0) 24%, rgba(30, 20, 110, 0) 68%, rgba(30, 20, 110, 0.3) 100%); }
+.view { position: relative; z-index: 1; }
+.face.back { background: linear-gradient(155deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 242, 255, 0.82) 100%); }

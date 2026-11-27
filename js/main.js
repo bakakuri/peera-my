@@ -17,6 +17,7 @@ const routes = {
 
 const app = document.getElementById("app");
 app.innerHTML = `
+  <div class="bgimg" aria-hidden="true"></div>
   <main id="view" class="view"><div class="splash"><img src="assets/logo.webp" alt="Peera.My" width="180"></div></main>
   <nav id="nav" class="nav" aria-label="ძირითადი ნავიგაცია"></nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>`;
@@ -36,6 +37,8 @@ function go() {
   }
   viewEl.innerHTML = route.view.render();
   viewEl.className = "view";
+  app.dataset.lang = state.lang;
+  app.dataset.route = path in routes ? path.slice(1) || "home" : "home";
   navEl.innerHTML = navHtml(route.nav);
   cleanup = route.view.mount?.(viewEl) || null;
   window.scrollTo(0, 0);
