@@ -60,13 +60,23 @@ export async function signOut() {
 }
 
 /* ---------- სიტყვები ---------- */
+// Supabase თითო მოთხოვნაზე მაქს. 1000 სტრიქონს აბრუნებს, ამიტომ გვერდ-გვერდ ვკითხულობთ
+async function fetchAll(build, page = 1000) {
+  const out = [];
+  for (let from = 0; ; from += page) {
+    const { data, error } = await build().range(from, from + page - 1);
+    if (error) return { data: null, error };
+    out.push(...(data || []));
+    if (!data || data.length < page) break;
+  }
+  return { data: out, error: null };
+}
+
 export async function loadWords() {
   if (sb) {
-    const { data, error } = await sb
-      .from("words")
-      .select("id,data")
-      .order("position", { ascending: true })
-      .order("created_at", { ascending: true });
+    const { data, error } = await fetchAll(() =>
+      sb.from("words").select("id,data").order("position", { ascending: true }).order("created_at", { ascending: true }).order("id", { ascending: true })
+    );
     if (!error && data && data.length) return data.map((r) => ({ ...r.data, id: r.id }));
     if (error) console.warn("words:", error.message);
   }
@@ -135,7 +145,7 @@ const statsToRow = (s, uid) => ({
 export async function loadProgress() {
   if (sb && user) {
     const [cards, stats] = await Promise.all([
-      sb.from("user_cards").select("*").eq("user_id", user.id),
+      fetchAll(() => sb.from("user_cards").select("*").eq("user_id", user.id).order("word_id", { ascending: true })),
       sb.from("user_stats").select("*").eq("user_id", user.id).maybeSingle(),
     ]);
     return {

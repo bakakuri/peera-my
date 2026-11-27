@@ -3,12 +3,12 @@ import { header, flag, icon } from "../ui.js";
 import { esc, toast } from "../util.js";
 
 const TILES = [
-  { cls: "t1", href: "#/lesson", label: "მოსმენა და გამოთქმა", svg: `<path d="M4 15v-3a8 8 0 0 1 16 0v3" fill="none" stroke="#3D4FD0" stroke-width="2.2" stroke-linecap="round"/><rect x="3" y="13" width="5" height="8" rx="2.5" fill="#5B6CFF"/><rect x="16" y="13" width="5" height="8" rx="2.5" fill="#5B6CFF"/>` },
-  { cls: "t2", soon: true, label: "თამაშები და ტესტები", svg: `<rect x="2" y="7" width="20" height="11" rx="5.5" fill="#2F6BFF"/><path d="M7 10v4M5 12h4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="11" r="1.2" fill="#FFC83D"/><circle cx="18.5" cy="13.5" r="1.2" fill="#22C55E"/>` },
-  { cls: "t3", href: "#/awards", label: "მიღწევები", svg: `<path fill="#FFC21A" stroke="#F5A300" stroke-width="1" stroke-linejoin="round" d="M7 3h10v6a5 5 0 0 1-10 0z"/><path d="M7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3" fill="none" stroke="#F5A300" stroke-width="1.6"/><rect x="10.5" y="14" width="3" height="4" fill="#F5A300"/><rect x="8" y="18" width="8" height="3" rx="1" fill="#FFC21A" stroke="#F5A300" stroke-width="1"/>` },
-  { cls: "t4", soon: true, label: "გრამატიკა", svg: `<path fill="#4B7BFF" d="M2 5c3-1 7-1 10 1v14c-3-2-7-2-10-1z"/><path fill="#7FA2FF" d="M22 5c-3-1-7-1-10 1v14c3-2 7-2 10-1z"/><path d="M5 9h4M5 12h4M15 9h4M15 12h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>` },
-  { cls: "t5", href: "#/cards", label: "სიტყვების სწავლა", svg: `<path fill="#22C55E" d="M3 5h12a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/><circle cx="7" cy="10" r="1.1" fill="#fff"/><circle cx="10.5" cy="10" r="1.1" fill="#fff"/><circle cx="14" cy="10" r="1.1" fill="#fff"/><path fill="#2F9E6B" d="M19 9h2a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1v3l-3-3h-4"/>` },
-  { cls: "t6", soon: true, label: "სასწავლო გეგმა", svg: `<rect x="3" y="5" width="18" height="16" rx="3" fill="#fff" stroke="#FF5A7A" stroke-width="1.6"/><path d="M3 9h18V8a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3z" fill="#FF5A7A"/><path d="M8 3v4M16 3v4" stroke="#C93A5A" stroke-width="1.8" stroke-linecap="round"/><g fill="#FF8FA8"><rect x="6.5" y="12" width="2.4" height="2.4" rx=".6"/><rect x="10.8" y="12" width="2.4" height="2.4" rx=".6"/><rect x="15.1" y="12" width="2.4" height="2.4" rx=".6"/><rect x="6.5" y="16" width="2.4" height="2.4" rx=".6"/><rect x="10.8" y="16" width="2.4" height="2.4" rx=".6"/></g>` },
+  { img: "home-listen", href: "#/lesson", label: "მოსმენა და გამოთქმა" },
+  { img: "home-games", soon: true, label: "თამაშები და ტესტები" },
+  { img: "home-awards", href: "#/awards", label: "მიღწევები" },
+  { img: "home-grammar", soon: true, label: "გრამატიკა" },
+  { img: "home-words", href: "#/cards", label: "სიტყვების სწავლა" },
+  { img: "home-plan", soon: true, label: "სასწავლო გეგმა" },
 ];
 
 function goalCard() {
@@ -17,7 +17,7 @@ function goalCard() {
   const pct = Math.min(100, Math.round((xp / goal) * 100));
   const done = xp >= goal;
   const week = state.weekDays()
-    .map((d) => `<div class="wd${d.hit ? " hit" : ""}${d.today ? " today" : ""}${d.future ? " future" : ""}"><i>${d.hit ? "✓" : ""}</i><span>${d.label}</span></div>`)
+    .map((d) => `<div class="wd${d.hit ? " hit" : ""}${d.today ? " now" : ""}${d.future ? " future" : ""}"><i>${d.hit ? "✓" : ""}</i><span>${d.label}</span></div>`)
     .join("");
   return `
     <section class="card goal-card rise" style="animation-delay:.4s">
@@ -32,7 +32,7 @@ function goalCard() {
           <button class="goal-set" data-goal>შეცვალე მიზანი</button>
         </div>
       </div>
-      <div class="week">${week}</div>
+      <div class="gweek">${week}</div>
     </section>`;
 }
 
@@ -67,11 +67,12 @@ export default {
       </button>`;
     }).join("");
 
-    const tiles = TILES.map((t) => {
-      const inner = `<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">${t.svg}</svg><span>${t.label}</span>`;
+    const tiles = TILES.map((t, i) => {
+      const inner = `<img src="assets/${t.img}.webp" alt="${esc(t.label)}" draggable="false">`;
+      const st = `style="animation-delay:${0.5 + i * 0.06}s"`;
       return t.href
-        ? `<a class="tile ${t.cls}" href="${t.href}">${inner}</a>`
-        : `<button class="tile ${t.cls}" data-soon="1">${inner}</button>`;
+        ? `<a class="timg rise" ${st} href="${t.href}" aria-label="${esc(t.label)}">${inner}</a>`
+        : `<button class="timg rise" ${st} data-soon="1" aria-label="${esc(t.label)}">${inner}</button>`;
     }).join("");
 
     return `
@@ -110,7 +111,7 @@ export default {
         <h2><svg width="22" height="22" viewBox="0 0 24 24" fill="#4B5BFF" aria-hidden="true"><path d="M2 5c3-1 7-1 10 1v14c-3-2-7-2-10-1zM22 5c-3-1-7-1-10 1v14c3-2 7-2 10-1z"/></svg>კურსები</h2>
       </div>
       <div class="courses">${courses}</div>
-      <div class="tiles">${tiles}</div>
+      <div class="tiles-img">${tiles}</div>
     </section>`;
   },
 
