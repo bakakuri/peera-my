@@ -19,7 +19,7 @@ const hint = {
   memorize: "ბარათზე „ისევ“-ის არჩევისას სიტყვა აქ გადმოდის.",
 };
 
-const norm = (s) => String(s || "").toLowerCase();
+const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ß/g, "ss");
 const ph = (w) => w.core?.phonetic?.georgian?.transcription || (w.core?.phonetic?.georgian?.syllables || []).join("") || "";
 const colorOf = (id) => BUCKETS.find((b) => b.id === id)?.color || "#cfd3ea";
 const titleOf = (id) => BUCKETS.find((b) => b.id === id)?.title;
@@ -28,8 +28,8 @@ function listFor() {
   const q = norm(query.trim());
   return state
     .wordsOf()
-    .filter((w) => tab === "all" || state.bucketOfWord(w.id) === tab)
-    .filter((w) => !q || norm(w.core?.term).includes(q) || norm(w.semantics?.primaryTranslation).includes(q) || norm(ph(w)).includes(q));
+    .filter((w) => q || tab === "all" || state.bucketOfWord(w.id) === tab)
+    .filter((w) => !q || norm(w.core?.term).includes(q) || norm(w.core?.lemma).includes(q) || norm(ph(w)).includes(q) || norm(JSON.stringify(w.semantics || {})).includes(q));
 }
 
 function countOf(id) {
@@ -64,7 +64,8 @@ function rows(list) {
 
 const PILLS = ["learned", "review", "study", "memorize"];
 function tabsHtml() {
-  return PILLS.map(
+  const all = `<button class="dpill dall${tab === "all" ? " on" : ""}${tab !== "all" ? " dim" : ""}" data-tab="all" aria-pressed="${tab === "all"}"><span class="all-t">ყველა</span><b class="cnt">${countOf("all")}</b></button>`;
+  return all + PILLS.map(
     (id) =>
       `<button class="dpill${tab === id ? " on" : ""}${tab !== "all" && tab !== id ? " dim" : ""}" data-tab="${id}" aria-pressed="${tab === id}" aria-label="${esc(titleOf(id))}"><img src="assets/tab-${id}.webp" alt="" draggable="false"><b class="cnt">${countOf(id)}</b></button>`
   ).join("");
@@ -85,7 +86,6 @@ export default {
     <section class="hero hero-sm dict-hero"><div class="deco hd1"></div>${header()}
       <img class="dh-book" src="assets/az-book.webp" alt="" width="190">
       <img class="dh-girl" src="assets/girl-dict.webp" alt="" width="190">
-      <div class="hero-title"><h1 class="rise">ლექსიკონი</h1></div>
     </section>
     <section class="dict-sheet rise">
       <div class="dlangs" id="dict-langs">${langsHtml()}</div>
@@ -169,6 +169,9 @@ export default {
           query = heards[0];
           $("#dict-search").value = query;
           limit = 200;
+          tab = "all";
+          $("#dict-tabs").innerHTML = tabsHtml();
+          $("#dict-hint").textContent = hint.all;
           $("#dict-list").innerHTML = rows(listFor());
         } catch {
           toast("ვერ გავიგე, სცადე ისევ");
@@ -188,6 +191,11 @@ export default {
       if (e.target.id === "dict-search") {
         query = e.target.value;
         limit = 200;
+        if (query.trim() && tab !== "all") {
+          tab = "all";
+          $("#dict-tabs").innerHTML = tabsHtml();
+          $("#dict-hint").textContent = hint.all;
+        }
         $("#dict-list").innerHTML = rows(listFor());
       }
     };
