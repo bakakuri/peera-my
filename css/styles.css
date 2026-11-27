@@ -383,10 +383,12 @@ mark { background: #ffd24d; color: inherit; padding: 0 4px; border-radius: 6px; 
 .back .face-city { opacity: 0.4; }
 
 /* ----- ენის ფონური ფოტო (მთელ აპზე) ----- */
-.bgimg { position: fixed; top: 0; bottom: 0; left: 50%; width: min(430px, 100%); transform: translateX(-50%); z-index: 0; pointer-events: none; background: linear-gradient(172deg, #3d6bff 0%, #c04fb0 60%, #ff9a59 100%) center / cover no-repeat; }
+.bgimg { display: none; position: fixed; top: 0; bottom: 0; left: 50%; width: min(430px, 100%); transform: translateX(-50%); z-index: 0; pointer-events: none; background: linear-gradient(172deg, #3d6bff 0%, #c04fb0 60%, #ff9a59 100%) center / cover no-repeat; }
 .app[data-lang="en"] .bgimg { background-image: url("../assets/bg-en.webp"); }
 .app[data-lang="de"] .bgimg { background-image: url("../assets/bg-de.webp"); }
 .bgimg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(238, 240, 255, 0.3) 0%, rgba(244, 241, 255, 0.62) 55%, rgba(246, 242, 255, 0.84) 100%); transition: opacity 0.4s ease; }
 .app[data-route="cards"] .bgimg::after { background: linear-gradient(180deg, rgba(40, 60, 200, 0.38) 0%, rgba(40, 60, 200, 0) 24%, rgba(30, 20, 110, 0) 68%, rgba(30, 20, 110, 0.3) 100%); }
 .view { position: relative; z-index: 1; }
 .face.back { background: linear-gradient(155deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 242, 255, 0.82) 100%); }
+
+.app[data-route="cards"] .bgimg { display: block; }
