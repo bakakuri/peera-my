@@ -2,7 +2,7 @@ import { state } from "../state.js";
 import { labels } from "../srs.js";
 import { header, icon } from "../ui.js";
 import { vm, TABS } from "../word.js";
-import { esc, speak } from "../util.js";
+import { esc, speak, highlight } from "../util.js";
 
 let S = null;
 
@@ -18,6 +18,9 @@ const tabsHtml = (tab) =>
 
 const bodyHtml = (v, tab) => (TABS.find((t) => t.id === tab) || TABS[0]).body(v);
 
+const geFlag = `<svg viewBox="0 0 30 20" width="34" height="23" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><path d="M13 0h4v20h-4zM0 8h30v4H0z" fill="#E8112D"/><g fill="#E8112D"><path d="M4 2h2v4H4zM2 3h6v2H2zM22 2h2v4h-2zM20 3h6v2h-6zM4 14h2v4H4zM2 15h6v2H2zM22 14h2v4h-2zM20 15h6v2h-6z"/></g></svg>`;
+const tapIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B3FD8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5a2 2 0 0 1 4 0v6l3.2.8a2 2 0 0 1 1.5 2.1L17 19a2 2 0 0 1-2 1.8H11a2 2 0 0 1-1.6-.8L5.5 14.6a1.6 1.6 0 0 1 2.3-2.2L9 13.6"/></svg>`;
+
 function frontHtml(v) {
   const chips = v.ka
     .map(
@@ -25,33 +28,40 @@ function frontHtml(v) {
         `<div class="syl${i === v.stress ? " stress" : ""}"><b>${esc(k)}</b>${v.en[i] ? `<small>${esc(v.en[i])}</small>` : ""}</div>`
     )
     .join("");
+  const ex = v.examples[0];
+  const exHtml = ex
+    ? `<div class="ex-box rise" style="animation-delay:.55s"><p>${highlight(ex.sentence || "", ex.highlight)}</p>${ex.translation ? `<small>${esc(ex.translation)}</small>` : ""}</div>`
+    : "";
+  const cells = [
+    v.pos ? `<div><b>${esc(v.posEn || v.pos)}</b><small>${esc(v.pos)}</small></div>` : "",
+    v.diff != null ? `<div><b>${v.diff} / 10</b><small>სირთულე</small></div>` : "",
+    v.register ? `<div><b>${esc(v.register)}</b><small>სტილი</small></div>` : "",
+  ].join("");
   return `
   <div class="face front">
-    <div class="deco d1"></div><div class="deco d2"></div><div class="sheen"></div>
-    <svg class="spark s1" width="20" height="20" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
+    <div class="sheen"></div>
+    <svg class="spark s1" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
     <svg class="spark s2" width="14" height="14" viewBox="0 0 24 24" fill="#FFC83D" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
     <button class="flip-hit" data-act="flip" aria-label="ბარათის გადაბრუნება"></button>
     <div class="front-in">
-      <div class="row gap8 rise" style="animation-delay:.1s">
-        <span class="pill glass">${esc(v.pos)}</span>
-        <span class="pill white">${esc(v.cefr)}</span>
-      </div>
-      <div class="front-mid">
-        <div class="term rise" style="animation-delay:.2s">${esc(v.term)}</div>
-        <div class="ipa rise" style="animation-delay:.3s">${esc(v.ipa)}</div>
-        <div class="speak-wrap rise" style="animation-delay:.4s">
+      <div class="front-top rise" style="animation-delay:.1s">
+        <span class="lvl-pill"><b>${esc(v.cefr || "–")}</b>${esc(v.posEn || v.pos)}</span>
+        <div class="speak-wrap">
           <i class="ring"></i><i class="ring r2"></i>
           <button class="speak" data-act="speak" aria-label="მოსმენა">${icon.speaker}</button>
         </div>
-        <div class="sylbox rise" style="animation-delay:.5s">
+      </div>
+      <div class="front-mid">
+        <div class="term rise" style="animation-delay:.2s">${esc(v.term)}</div>
+        <div class="ipa-row rise" style="animation-delay:.3s"><span class="ipa">${esc(v.ipa)}</span></div>
+        <div class="sylbox rise" style="animation-delay:.4s">
           <div class="lbl">წაიკითხე ქართულად</div>
           <div class="syls">${chips}</div>
         </div>
+        ${exHtml}
       </div>
-      <div class="front-foot">
-        <img class="girl" src="assets/girl-point.webp" alt="" width="132" height="176">
-        <div class="hint">${icon.flip}<span>შეეხე და გადაატრიალე</span></div>
-      </div>
+      ${cells ? `<div class="info-strip rise" style="animation-delay:.65s">${cells}</div>` : ""}
+      <div class="tap-hint">${tapIcon}<span>შეეხე ბარათს და გადაატრიალე</span></div>
     </div>
   </div>`;
 }
@@ -59,25 +69,25 @@ function frontHtml(v) {
 function backHtml(v, tab) {
   return `
   <div class="face back">
-    <div class="back-top">
-      <div class="deco d3"></div>
-      <div class="row gap10 rel">
-        <button class="roundbtn" data-act="flip" aria-label="უკან გადაბრუნება">${icon.back}</button>
+    <div class="sheen"></div>
+    <div class="back-top" data-act="flip">
+      <div class="back-head">
+        <span class="flag-mini" aria-hidden="true">${geFlag}</span>
         <div class="back-term">${esc(v.term)}</div>
         <span class="pill dark">+${v.xp} XP</span>
       </div>
-      <div class="lbl dark rel">თარგმანი</div>
-      <div class="primary rel">${esc(v.primary)}</div>
-      <div class="chips rel">${v.alts.map((a) => `<span class="chip alt">${esc(a)}</span>`).join("")}</div>
+      <div class="primary">${esc(v.primary)}</div>
+      <div class="chips">${v.alts.map((a) => `<span class="chip alt">${esc(a)}</span>`).join("")}</div>
     </div>
     <div class="tabs">${tabsHtml(tab)}</div>
     <div class="back-body">${bodyHtml(v, tab)}</div>
+    <div class="back-foot" data-act="flip"><div class="tap-hint">${tapIcon}<span>შეეხე და დაბრუნდი</span></div></div>
   </div>`;
 }
 
 function stageHtml(w, enter = true) {
   const v = vm(w);
-  return `<div class="cardwrap${enter ? " enter" : ""}"><div class="flipper${S.flipped ? " flipped" : ""}">${frontHtml(v)}${backHtml(v, S.tab)}</div></div>`;
+  return `<div class="cardwrap${enter ? " enter" : ""}"><div class="float"><div class="flipper${S.flipped ? " flipped" : ""}">${frontHtml(v)}${backHtml(v, S.tab)}</div></div></div>`;
 }
 
 function srsHtml(w) {
@@ -117,7 +127,7 @@ function pageHtml() {
   const w = S.queue[0];
   const pct = S.total ? Math.round((S.done / S.total) * 100) : 0;
   return `
-  <div class="cards-bg"></div>
+  <div class="city" aria-hidden="true"><i class="cloud c1"></i><i class="cloud c2"></i><img src="${state.langInfo().img}" alt=""></div>
   <div class="cards-top">${header()}
     <div class="progress-row">
       <div class="bar"><i id="cbar" style="width:${pct}%"></i></div>
@@ -143,7 +153,7 @@ function popXp(root, xp) {
 export default {
   render() {
     newSession();
-    return `<div class="cards-page">${pageHtml()}</div>`;
+    return `<div class="cards-page l-${state.lang}">${pageHtml()}</div>`;
   },
 
   mount(root) {
@@ -185,10 +195,16 @@ export default {
     }
 
     const onClick = (e) => {
-      const t = e.target.closest("[data-act],[data-tab],[data-grade]");
-      if (!t || !cur()) return;
-      if (t.dataset.act === "flip") {
+      if (!cur()) return;
+      let t = e.target.closest("[data-act],[data-tab],[data-grade]");
+      if (!t && e.target.closest(".face.back")) t = e.target.closest(".face.back");
+      if (!t) return;
+      if (t.dataset.act === "flip" || t.classList.contains("back")) {
         if (S.busy) return;
+        const wrap = root.querySelector(".cardwrap");
+        wrap.classList.remove("enter", "pop");
+        void wrap.offsetWidth;
+        wrap.classList.add("pop");
         S.flipped = !S.flipped;
         root.querySelector(".flipper").classList.toggle("flipped", S.flipped);
         root.querySelector("#srs").classList.toggle("ready", S.flipped);
