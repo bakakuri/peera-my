@@ -155,18 +155,18 @@ img { display: block; }
 @keyframes cityDrift { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.015); } }
 @keyframes cloud { 0% { transform: translateX(-20px); } 100% { transform: translateX(40px); } }
 @keyframes tapHint { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(4px) scale(0.92); } }
-.cards-page { position: relative; min-height: 100dvh; margin-bottom: -112px; padding-bottom: 112px; overflow: hidden; background: linear-gradient(180deg, #3f8cff 0%, #8fb0ff 34%, #c8b9ff 66%, #ffd9bf 100%); }
-.cards-page.l-de { background: linear-gradient(180deg, #4a6fff 0%, #9aa6ff 34%, #d3b4f2 66%, #ffcfa8 100%); }
-.cards-page.l-en { background: linear-gradient(180deg, #3f8cff 0%, #8fb0ff 34%, #c8b9ff 66%, #ffd9bf 100%); }
-.cards-page.l-es { background: linear-gradient(180deg, #5a7bff 0%, #b6a5f5 32%, #ffb99a 68%, #ffd98a 100%); }
-.city { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.city img { position: absolute; bottom: 120px; opacity: 0.5; filter: saturate(0.85) blur(0.4px); -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 100%); mask-image: linear-gradient(to top, #000 55%, transparent 100%); animation: cityDrift 9s ease-in-out infinite; }
-.l-de .city img { left: -12%; width: 124%; bottom: 100px; }
-.l-en .city img { right: -14px; height: 62%; }
-.l-es .city img { right: -48px; height: 58%; }
-.cloud { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.55); filter: blur(18px); animation: cloud 14s ease-in-out infinite alternate; }
-.cloud.c1 { left: -20px; top: 120px; width: 170px; height: 54px; }
-.cloud.c2 { right: -30px; top: 330px; width: 200px; height: 60px; animation-duration: 18s; }
+.cards-page { position: relative; min-height: 100dvh; margin-bottom: -112px; padding-bottom: 112px; overflow: hidden; background: linear-gradient(172deg, #2e7bff 0%, #4a5ff0 42%, #6a3fe0 78%, #8a3fe0 100%); }
+.cards-page.l-es { background: linear-gradient(172deg, #3d6bff 0%, #6a4fe8 45%, #c04fb0 80%, #ff7a59 100%); }
+.cards-page.l-de { background: linear-gradient(172deg, #2e7bff 0%, #4b4fe8 45%, #7a3fd8 80%, #b0439f 100%); }
+.bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bg .orb { position: absolute; border-radius: 50%; }
+.bg .o1 { right: -70px; top: 70px; width: 230px; height: 230px; background: radial-gradient(circle at 35% 30%, #ffe27a, #ffc83d 60%, #ffae1a); opacity: 0.85; animation: floaty 9s ease-in-out infinite; }
+.bg .o2 { left: -80px; top: 300px; width: 220px; height: 220px; background: rgba(255, 255, 255, 0.12); animation: floaty 11s ease-in-out infinite; }
+.bg .o3 { right: -40px; bottom: 150px; width: 180px; height: 180px; background: rgba(255, 122, 89, 0.4); animation: floaty 10s ease-in-out 1s infinite; }
+.bg .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(255, 255, 255, 0.28) 1.5px, transparent 1.7px); background-size: 24px 24px; -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 60%); mask-image: linear-gradient(180deg, #000 0%, transparent 60%); }
+.bg .wave { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 190px; }
+.bg .star { position: absolute; animation: twinkle 3s ease-in-out infinite; }
+.bg .st1 { left: 28px; top: 120px; } .bg .st2 { right: 60px; top: 330px; animation-delay: 0.8s; } .bg .st3 { left: 60px; bottom: 210px; animation-delay: 1.6s; }
 .cards-top { position: relative; z-index: 3; }
 .progress-row { display: flex; align-items: center; gap: 12px; padding: 0 20px; margin-top: 6px; }
 .progress-row .bar { flex: 1; height: 12px; border-radius: 6px; background: rgba(255, 255, 255, 0.55); overflow: hidden; box-shadow: inset 0 1px 3px rgba(60, 60, 180, 0.2); }
@@ -181,7 +181,13 @@ img { display: block; }
 .float { position: absolute; inset: 0; transform-style: preserve-3d; animation: cardFloat 6s ease-in-out infinite; }
 .flipper { position: absolute; inset: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.3, 1.35, 0.5, 1); }
 .flipper.flipped { transform: rotateY(180deg); }
-.face { position: absolute; inset: 0; border-radius: 36px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: linear-gradient(155deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.5) 100%); border: 1.5px solid rgba(255, 255, 255, 0.85); box-shadow: 0 26px 50px rgba(50, 55, 190, 0.3), inset 0 1px 0 #fff; }
+.flipper .face { transition: visibility 0s linear 0.38s; }
+.flipper.flipped .front, .flipper:not(.flipped) .back { visibility: hidden; }
+.face-city { position: absolute; bottom: 0; z-index: 0; pointer-events: none; opacity: 0.6; -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%); mask-image: linear-gradient(to top, #000 45%, transparent 100%); }
+.l-de .face-city { left: -6%; width: 112%; }
+.l-en .face-city { right: -6px; height: 78%; }
+.l-es .face-city { right: -34px; height: 72%; }
+.face { position: absolute; inset: 0; border-radius: 36px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: linear-gradient(155deg, rgba(255, 255, 255, 0.8) 0%, rgba(235, 238, 255, 0.62) 100%); border: 1.5px solid rgba(255, 255, 255, 0.85); box-shadow: 0 26px 50px rgba(50, 55, 190, 0.3), inset 0 1px 0 #fff; }
 .sheen { position: absolute; top: 0; bottom: 0; left: 0; width: 80px; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.7), transparent); animation: sheen 5s ease-in-out 1.2s infinite; pointer-events: none; z-index: 3; }
 .spark { position: absolute; animation: twinkle 2.6s ease-in-out infinite; pointer-events: none; }
 .s1 { left: 26px; top: 82px; } .s2 { right: 34px; top: 190px; animation-delay: 0.6s; }
@@ -221,6 +227,7 @@ img { display: block; }
 .tap-hint svg { animation: tapHint 1.6s ease-in-out infinite; }
 
 .back { transform: rotateY(180deg); display: flex; flex-direction: column; }
+.back-top, .tabs, .back-body, .back-foot { position: relative; z-index: 2; }
 .back-top { position: relative; flex: none; padding: 16px 18px 12px; display: flex; flex-direction: column; cursor: pointer; }
 .back-head { display: flex; align-items: center; gap: 10px; }
 .flag-mini { width: 40px; height: 40px; border-radius: 12px; background: #fff; box-shadow: 0 4px 10px rgba(60, 60, 180, 0.2); display: flex; align-items: center; justify-content: center; flex: none; overflow: hidden; }

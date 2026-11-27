@@ -39,6 +39,7 @@ function frontHtml(v) {
   ].join("");
   return `
   <div class="face front">
+    <img class="face-city" src="${state.langInfo().img}" alt="">
     <div class="sheen"></div>
     <svg class="spark s1" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
     <svg class="spark s2" width="14" height="14" viewBox="0 0 24 24" fill="#FFC83D" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
@@ -69,6 +70,7 @@ function frontHtml(v) {
 function backHtml(v, tab) {
   return `
   <div class="face back">
+    <img class="face-city" src="${state.langInfo().img}" alt="">
     <div class="sheen"></div>
     <div class="back-top" data-act="flip">
       <div class="back-head">
@@ -127,7 +129,13 @@ function pageHtml() {
   const w = S.queue[0];
   const pct = S.total ? Math.round((S.done / S.total) * 100) : 0;
   return `
-  <div class="city" aria-hidden="true"><i class="cloud c1"></i><i class="cloud c2"></i><img src="${state.langInfo().img}" alt=""></div>
+  <div class="bg" aria-hidden="true">
+    <i class="dots"></i><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
+    <svg class="star st1" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
+    <svg class="star st2" width="14" height="14" viewBox="0 0 24 24" fill="#FFC83D"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
+    <svg class="star st3" width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>
+    <svg class="wave" viewBox="0 0 430 190" preserveAspectRatio="none"><path d="M0 70 C90 20 160 120 260 70 S390 30 430 60 V190 H0Z" fill="rgba(255,255,255,.1)"/><path d="M0 120 C100 80 180 160 280 115 S390 90 430 110 V190 H0Z" fill="rgba(255,200,61,.22)"/></svg>
+  </div>
   <div class="cards-top">${header()}
     <div class="progress-row">
       <div class="bar"><i id="cbar" style="width:${pct}%"></i></div>
