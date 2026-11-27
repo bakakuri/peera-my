@@ -103,8 +103,28 @@ export const state = {
     return xp;
   },
 
-  async completeLesson(xp = 30) {
-    this.bump({ xp, lessons: 1 });
+  // ---------- გაკვეთილები ----------
+  lessonsFor(code = this.lang) {
+    return this.lessons
+      .filter((l) => l.lang === code)
+      .sort((a, b) => (a.level === b.level ? a.number - b.number : a.level < b.level ? -1 : 1));
+  },
+  lessonResults() {
+    return this.stats.activity._lessons || {};
+  },
+  lessonDone(id) {
+    return !!this.lessonResults()[id];
+  },
+  nextLesson(code = this.lang) {
+    return this.lessonsFor(code).find((l) => !this.lessonDone(l.id)) || null;
+  },
+  async finishLesson(lesson, correct, total) {
+    const results = { ...this.lessonResults() };
+    const prev = results[lesson.id];
+    const xp = correct * 5 + 20;
+    results[lesson.id] = { best: Math.max(prev?.best || 0, correct), total, at: new Date().toISOString() };
+    this.stats.activity._lessons = results;
+    this.bump({ xp, lessons: prev ? 0 : 1 });
     await db.saveStats(this.stats);
     return xp;
   },

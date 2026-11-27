@@ -20,6 +20,7 @@ export default {
     const s = state.stats;
     const ach = state.achievements().filter((a) => a.done).length;
     const due = state.queue().length;
+    const nextL = state.nextLesson();
 
     const courses = LANGS.map((l, i) => {
       const n = state.wordsOf(l.code).length;
@@ -56,7 +57,7 @@ export default {
       <div class="hero-copy">
         <p class="tag rise" style="animation-delay:.1s">ისწავლე. ისაუბრე. მიაღწიე.</p>
         <h1 class="rise" style="animation-delay:.2s">დაიწყე<br><span>${esc(lang.name)}</span><br>ენის სწავლა!</h1>
-        <a class="cta cta-yellow rise" style="animation-delay:.3s" href="#/lesson"><i class="shine"></i>${icon.play}<span>დღევანდელი გაკვეთილი</span>${icon.arrow}</a>
+        <a class="cta cta-yellow rise" style="animation-delay:.3s" href="${nextL ? `#/lesson/${esc(nextL.id)}` : "#/lesson"}"><i class="shine"></i>${icon.play}<span>დღევანდელი გაკვეთილი</span>${icon.arrow}</a>
       </div>
     </section>
 

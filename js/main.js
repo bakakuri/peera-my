@@ -4,6 +4,7 @@ import { navHtml } from "./ui.js";
 import home from "./views/home.js";
 import cards from "./views/cards.js";
 import lesson from "./views/lesson.js";
+import lessonPlay from "./views/lessonPlay.js";
 import progress from "./views/progress.js";
 import auth from "./views/auth.js";
 import admin from "./views/admin.js";
@@ -13,6 +14,7 @@ const routes = {
   "/": { view: home, nav: "home" },
   "/cards": { view: cards, nav: "cards" },
   "/lesson": { view: lesson, nav: "lesson" },
+  "/lesson/:id": { view: lessonPlay, nav: "lesson" },
   "/progress": { view: progress, nav: "progress" },
   "/auth": { view: auth, nav: "progress" },
   "/admin": { view: admin, nav: "progress" },
@@ -34,17 +36,19 @@ let cleanup = null;
 function go() {
   if (!ready) return;
   const path = (location.hash.slice(1) || "/").split("?")[0];
-  const route = routes[path] || routes["/"];
+  const lm = path.match(/^\/lesson\/([^/]+)$/);
+  const param = lm ? decodeURIComponent(lm[1]) : null;
+  const route = (lm ? routes["/lesson/:id"] : routes[path]) || routes["/"];
   if (cleanup) {
     try { cleanup(); } catch {}
     cleanup = null;
   }
-  viewEl.innerHTML = route.view.render();
+  viewEl.innerHTML = route.view.render(param);
   viewEl.className = "view";
   app.dataset.lang = state.lang;
-  app.dataset.route = path in routes ? path.slice(1) || "home" : "home";
+  app.dataset.route = lm ? "lesson-play" : path in routes ? path.slice(1) || "home" : "home";
   navEl.innerHTML = navHtml(route.nav);
-  cleanup = route.view.mount?.(viewEl) || null;
+  cleanup = route.view.mount?.(viewEl, param) || null;
   window.scrollTo(0, 0);
 }
 
