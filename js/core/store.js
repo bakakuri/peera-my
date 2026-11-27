@@ -1,16 +1,48 @@
 import * as db from './db.js';
+import {cloud} from './cloud.js';
 import {dateKey,flag} from './utils.js';
 const FILES=['courses','words','lessons','achievements','leaderboard','profile','settings','stats','grammar','listening'];
 const today=()=>new Date().toISOString();
 const defaultCard=id=>({id,reps:0,interval:0,ease:2.5,dueAt:today(),lastGrade:null});
 export const store={
   data:{},user:null, ready:false,
+  source:'local',cloudError:'',
   async init(){
-    const values=await Promise.all(FILES.map(async key=>{const r=await fetch(`data/${key}.json`,{cache:'no-cache'});if(!r.ok)throw Error(`JSON ${key}: HTTP ${r.status}`);return r.json();}));
+    const values=await Promise.all(FILES.map(async key=>{
+      const r=await fetch(`data/${key}.json`,{cache:'no-cache'});
+      if(!r.ok)throw Error(`JSON ${key}: HTTP ${r.status}`);return r.json();
+    }));
     FILES.forEach((key,i)=>this.data[key]=values[i]);
-    const saved=await db.get('user');
-    this.user=saved||this.newUser();this.ready=true;
-    if(!saved)await this.save();
+    if(await cloud.init()){
+      try{
+        const catalog=await cloud.readCatalog();
+        for(const key of FILES)if(catalog[key])this.data[key]=catalog[key];
+        this.source='supabase';
+      }catch(error){this.cloudError=error.message;console.warn('Catalog fallback:',error)}
+    }else this.cloudError=cloud.error;
+    await this.loadActiveUser();this.ready=true;
+  },
+  async loadActiveUser(){
+    if(cloud.user){
+      try{
+        const remote=await cloud.readProgress();this.user=remote||this.newSignedUser();
+        if(!this.user?.profile||!this.user?.stats)throw Error('დაზიანებული პროფილის მონაცემები');
+        if(!remote)await this.save();
+      }catch(error){
+        this.cloudError=error.message;console.error('Progress:',error);
+        const cached=await db.get('cloud-progress:'+cloud.user.id);
+        this.user=cached||this.newSignedUser();
+      }
+    }else{
+      this.user=(await db.get('user'))||this.newUser();
+      await db.set('user',this.user);
+    }
+  },
+  async reloadAuth(){await this.loadActiveUser()},
+  newSignedUser(){
+    const profile={...structuredClone(this.data.profile),name:cloud.user?.email?.split('@')[0]||'მოსწავლე',demo:false};
+    const stats={...structuredClone(this.data.stats),xp:0,streak:0,bestStreak:0,reviews:0,correct:0,lessons:0,perfect:0,activity:Array(14).fill(0),weekly:Array(7).fill(0)};
+    return {profile,stats,cards:{},completed:{},favorites:[],recent:[],daily:{},preferences:{},createdAt:today()};
   },
   newUser(){
     const profile=structuredClone(this.data.profile);
@@ -23,7 +55,12 @@ export const store={
     }
     return {profile,stats,cards,completed:{'de-01':{score:4},'de-02':{score:3}},favorites:[],recent:[],daily:{},preferences:{},createdAt:today()};
   },
-  async save(){await db.set('user',this.user)},
+  async save(){
+    if(cloud.user){
+      await db.set('cloud-progress:'+cloud.user.id,this.user);
+      await cloud.writeProgress(this.user);
+    }else await db.set('user',this.user);
+  },
   get profile(){return this.user.profile},get stats(){return this.user.stats},
   get words(){return this.data.words},get lessons(){return this.data.lessons},
   get lang(){return this.profile.language},
@@ -59,6 +96,6 @@ export const store={
   metric(stat){return ({xp:this.stats.xp,streak:this.stats.streak,lessons:Object.keys(this.user.completed).length,reviews:this.stats.reviews,learned:this.learned(),perfect:this.stats.perfect})[stat]||0},
   achievement(a){return {current:Math.min(a.goal,this.metric(a.stat)),done:this.metric(a.stat)>=a.goal}},
   async updateProfile(fields){Object.assign(this.profile,fields);await this.save()},
-  async freshStart(){this.user=this.newUser();await this.save()},
+  async freshStart(){this.user=cloud.user?this.newSignedUser():this.newUser();await this.save()},
   appStatus(){return {words:this.words.length,lessons:this.lessons.length,lang:this.lang,flag:flag(this.lang)}}
 };

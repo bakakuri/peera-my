@@ -34,3 +34,11 @@ export async function reset(){
   memory.clear();const db=await open();if(!db)return;
   return new Promise(resolve=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=resolve;tx.onerror=resolve;});
 }
+
+export async function remove(key){
+  memory.delete(key);const db=await open();if(!db)return false;
+  return new Promise(resolve=>{
+    const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(key);
+    tx.oncomplete=()=>resolve(true);tx.onerror=()=>resolve(false);
+  });
+}

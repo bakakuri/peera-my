@@ -14,8 +14,9 @@ import listening from './views/listening.js';
 import plan from './views/plan.js';
 import games from './views/games.js';
 import notfound from './views/notfound.js';
+import auth from './views/auth.js';
 import {esc} from './core/utils.js';
-const views={home,learn,lesson,cards,dictionary,progress,achievements,leaderboard,profile,grammar,listening,plan,games};
+const views={home,learn,lesson,cards,dictionary,progress,achievements,leaderboard,profile,grammar,listening,plan,games,auth};
 let isDrawer=false;let toastTimer;let lastRoute='';
 const root=document.getElementById('app');
 const routeOf=()=>location.hash.replace(/^#\//,'').split('?')[0]||'home';
@@ -46,9 +47,11 @@ root.addEventListener('click',async e=>{
  const route=routeOf(),v=activeView(route);
  try{await v.handle?.(action,el,refresh)}catch(err){console.error(err);window.peeraToast('შეცდომა: '+err.message)}
 });
+root.addEventListener('submit',e=>{if(e.target.id==='cloud-auth-form'){e.preventDefault();e.target.querySelector('[data-action="auth-submit"]')?.click()}});
 root.addEventListener('input',e=>{const target=e.target;if(target.dataset.input){activeView(routeOf()).input?.(target.dataset.input,target.value,refresh)}});
 root.addEventListener('change',async e=>{const t=e.target;if(t.dataset.change)await activeView(routeOf()).input?.(t.dataset.change,t.value,refresh)});
 root.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.closest('[data-action="flip-card"]')){e.preventDefault();e.target.click()}if(e.key==='Escape'&&isDrawer){isDrawer=false;render()}});
+window.addEventListener('peera:auth',async()=>{if(!store.ready)return;try{await store.reloadAuth();render()}catch(error){console.error(error);window.peeraToast('სინქრონიზაცია ვერ მოხერხდა')}});
 window.addEventListener('hashchange',()=>{
  const query=location.hash.split('?')[1];if(routeOf()==='learn'&&query){const params=new URLSearchParams(query);const lang=params.get('lang');if(lang)learn.setCourse(lang)}
  isDrawer=false;render();
