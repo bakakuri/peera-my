@@ -75,6 +75,10 @@ export async function loadWords() {
 }
 
 export async function loadLessons() {
+  if (sb) {
+    const { data, error } = await sb.from("lessons").select("id,data").order("position", { ascending: true });
+    if (!error && data && data.length) return data.map((r) => ({ ...r.data, id: r.id }));
+  }
   try {
     const res = await fetch("data/lessons.json");
     return await res.json();
@@ -198,6 +202,27 @@ export async function upsertWords(rows, onProgress, size = 25) {
 
 export async function clearLanguage(code) {
   const { error, count } = await sb.from("words").delete({ count: "exact" }).eq("language_code", code);
+  if (error) throw error;
+  return count || 0;
+}
+
+export async function lessonCounts(codes = ["de", "en", "es"]) {
+  const out = {};
+  for (const code of codes) {
+    const { count, error } = await sb.from("lessons").select("id", { count: "exact", head: true }).eq("language_code", code);
+    if (error) throw error;
+    out[code] = count || 0;
+  }
+  return out;
+}
+
+export async function upsertLessons(rows) {
+  const { error } = await sb.from("lessons").upsert(rows, { onConflict: "id" });
+  if (error) throw error;
+}
+
+export async function clearLessons(code) {
+  const { error, count } = await sb.from("lessons").delete({ count: "exact" }).eq("language_code", code);
   if (error) throw error;
   return count || 0;
 }

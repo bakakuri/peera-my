@@ -4,6 +4,28 @@ import { header, icon } from "../ui.js";
 import { esc, toast } from "../util.js";
 
 let pending = null; // { rows, langs, name }
+let pendingL = null;
+
+// გაკვეთილების JSON → ბაზის სტრიქონები (მასივი, {lessons:[]} ან ერთი გაკვეთილი)
+function parseLessons(json) {
+  const list = Array.isArray(json) ? json : json.lessons || (json.id && json.lines ? [json] : []);
+  const rows = [];
+  const errors = [];
+  const seen = new Set();
+  list.forEach((l, i) => {
+    const code = String(l?.lang || "").slice(0, 2).toLowerCase();
+    if (!l?.id || !l?.title || !code || !Array.isArray(l.lines) || !Array.isArray(l.words)) {
+      errors.push(`#${i + 1}: აკლია id / lang / title / lines[] / words[]`);
+      return;
+    }
+    if (seen.has(l.id)) return errors.push(`#${i + 1}: განმეორებული id ${l.id}`);
+    seen.add(l.id);
+    rows.push({ id: String(l.id), language_code: code, position: Number(l.number) || i + 1, data: l });
+  });
+  const langs = {};
+  rows.forEach((r) => (langs[r.language_code] = (langs[r.language_code] || 0) + 1));
+  return { rows, errors, langs };
+}
 
 // JSON ფაილი → ბაზის სტრიქონები (ფორმატი: მასივი, {entries:[]}, {words:[]} ან ერთი სიტყვა)
 function parse(json) {
@@ -60,6 +82,11 @@ export default {
       return LANGS.map((l) => `<div class="adm-count"><b>${c[l.code] ?? 0}</b><span>${esc(l.name)}</span></div>`).join("");
     };
 
+    const lcounts = async () => {
+      const c = await db.lessonCounts();
+      return LANGS.map((l) => `<div class="adm-count"><b>${c[l.code] ?? 0}</b><span>${esc(l.name)}</span></div>`).join("");
+    };
+
     async function paint() {
       const ok = await db.isAdmin();
       if (dead) return;
@@ -69,6 +96,8 @@ export default {
       }
       let countsHtml = "";
       try { countsHtml = await counts(); } catch (e) { countsHtml = `<p class="form-msg">${esc(e.message)}</p>`; }
+      let lcountsHtml = "";
+      try { lcountsHtml = await lcounts(); } catch (e) { lcountsHtml = `<p class="form-msg">გაუშვი supabase/lessons.sql (${esc(e.message)})</p>`; }
       if (dead) return;
       body.innerHTML = `
         <div class="card-head plain"><h3>ბაზაში სიტყვები</h3></div>
@@ -91,6 +120,19 @@ export default {
           <select id="adm-lang" class="adm-select">${LANGS.map((l) => `<option value="${l.code}"${l.code === state.lang ? " selected" : ""}>${esc(l.name)}</option>`).join("")}</select>
           <button class="cta adm-danger" id="adm-clear">გასუფთავება</button>
         </div>
+        <div class="adm-sep"></div>
+        <div class="card-head plain"><h3>გაკვეთილები</h3></div>
+        <div class="adm-counts" id="adm-lcounts">${lcountsHtml}</div>
+        <label class="file-pick">
+          <input type="file" id="adm-lfile" accept=".json,application/json" hidden>
+          <span id="adm-lfile-name">აირჩიე გაკვეთილების JSON</span>
+        </label>
+        <div class="adm-preview" id="adm-lpreview"></div>
+        <button class="cta cta-primary" id="adm-lupload" disabled>გაკვეთილების ჩაწერა ${icon.arrow}</button>
+        <div class="adm-clear" style="margin-top:12px">
+          <select id="adm-llang" class="adm-select">${LANGS.map((l) => `<option value="${l.code}"${l.code === state.lang ? " selected" : ""}>${esc(l.name)}</option>`).join("")}</select>
+          <button class="cta adm-danger" id="adm-lclear">გაკვეთილების გასუფთავება</button>
+        </div>
         <p class="form-msg" id="adm-msg" role="status"></p>`;
     }
 
@@ -100,6 +142,28 @@ export default {
     };
 
     const onChange = async (e) => {
+      if (e.target.id === "adm-lfile") {
+        const f = e.target.files[0];
+        pendingL = null;
+        root.querySelector("#adm-lupload").disabled = true;
+        const prev = root.querySelector("#adm-lpreview");
+        if (!f) return;
+        root.querySelector("#adm-lfile-name").textContent = f.name;
+        try {
+          const res = parseLessons(JSON.parse((await f.text()).replace(/^\uFEFF/, "")));
+          const langs = Object.entries(res.langs).map(([c, n]) => `${esc(langName(c))}: <b>${n}</b>`).join(" · ");
+          prev.innerHTML = res.rows.length
+            ? `<p class="adm-ok">ნაპოვნია <b>${res.rows.length}</b> გაკვეთილი (${langs}).</p>${res.errors.length ? `<p class="form-msg">გამოტოვებულია ${res.errors.length}: ${esc(res.errors.slice(0, 3).join("; "))}</p>` : ""}`
+            : `<p class="form-msg">ვალიდური გაკვეთილი ვერ მოიძებნა. ${esc(res.errors.slice(0, 3).join("; "))}</p>`;
+          if (res.rows.length) {
+            pendingL = res.rows;
+            root.querySelector("#adm-lupload").disabled = false;
+          }
+        } catch (err) {
+          prev.innerHTML = `<p class="form-msg">JSON ვერ წაიკითხა: ${esc(err.message)}</p>`;
+        }
+        return;
+      }
       if (e.target.id !== "adm-file") return;
       const f = e.target.files[0];
       pending = null;
@@ -124,6 +188,38 @@ export default {
     };
 
     const onClick = async (e) => {
+      const lup = e.target.closest("#adm-lupload");
+      const lcl = e.target.closest("#adm-lclear");
+      if (lup && pendingL) {
+        lup.disabled = true;
+        try {
+          await db.upsertLessons(pendingL);
+          msg(`ჩაიწერა ${pendingL.length} გაკვეთილი.`, true);
+          toast(`ჩაიწერა ${pendingL.length} გაკვეთილი`);
+          pendingL = null;
+          await state.load();
+          root.querySelector("#adm-lcounts").innerHTML = await lcounts();
+        } catch (err) {
+          msg("ვერ ჩაიწერა: " + (err.message || err), false);
+          lup.disabled = false;
+        }
+        return;
+      }
+      if (lcl) {
+        const code = root.querySelector("#adm-llang").value;
+        const n = (await db.lessonCounts([code]))[code];
+        if (!n) return msg(`${langName(code)}: გაკვეთილი ბაზაში არ არის.`, false);
+        if (!window.confirm(`წაიშლება ${langName(code)} ენის ${n} გაკვეთილი. გაგრძელება?`)) return;
+        try {
+          const removed = await db.clearLessons(code);
+          msg(`წაიშალა ${removed} გაკვეთილი (${langName(code)}).`, true);
+          await state.load();
+          root.querySelector("#adm-lcounts").innerHTML = await lcounts();
+        } catch (err) {
+          msg("ვერ წაიშალა: " + (err.message || err), false);
+        }
+        return;
+      }
       const up = e.target.closest("#adm-upload");
       const cl = e.target.closest("#adm-clear");
       if (up && pending) {
