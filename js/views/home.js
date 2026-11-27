@@ -2,146 +2,96 @@ import { state, LANGS } from "../state.js";
 import { header, flag, icon } from "../ui.js";
 import { esc, toast } from "../util.js";
 
-const TILES = [
-  { img: "home-listen", href: "#/lesson", label: "მოსმენა და გამოთქმა" },
-  { img: "home-games", soon: true, label: "თამაშები და ტესტები" },
-  { img: "home-awards", href: "#/awards", label: "მიღწევები" },
-  { img: "home-grammar", soon: true, label: "გრამატიკა" },
-  { img: "home-words", href: "#/cards", label: "სიტყვების სწავლა" },
-  { img: "home-plan", soon: true, label: "სასწავლო გეგმა" },
-  { img: "az-book", href: "#/dictionary", label: "ლექსიკონი" },
+const FEATURES = [
+  { icon: "v3-icons/cap", label: "სასწავლო", href: "#/lesson", tone: "mint" },
+  { icon: "v3-icons/bubbles", label: "სიტყვების სწავლა", href: "#/cards", tone: "lime" },
+  { icon: "v3-icons/book", label: "გრამატიკა", soon: true, tone: "honey" },
+  { icon: "v3-icons/headphones", label: "მოსმენა და გამოთქმა", href: "#/lesson", tone: "violet" },
+  { icon: "v3-icons/calendar", label: "სასწავლო გეგმა", soon: true, tone: "pink" },
+  { icon: "v3-icons/gamepad", label: "თამაშები და ტესტები", soon: true, tone: "aqua" }
 ];
 
-function goalCard() {
-  const goal = state.goal();
-  const xp = state.todayXp();
-  const pct = Math.min(100, Math.round((xp / goal) * 100));
-  const done = xp >= goal;
-  const week = state.weekDays()
-    .map((d) => `<div class="wd${d.hit ? " hit" : ""}${d.today ? " now" : ""}${d.future ? " future" : ""}"><i>${d.hit ? "✓" : ""}</i><span>${d.label}</span></div>`)
-    .join("");
-  return `
-    <section class="card goal-card rise" style="animation-delay:.4s">
-      <div class="goal-top">
-        <div class="goal-ring">
-          <svg width="74" height="74" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="31" fill="none" stroke="#E4E6F5" stroke-width="9"/><circle cx="38" cy="38" r="31" fill="none" stroke="${done ? "#22C55E" : "#FFAE1A"}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${(pct * 1.948).toFixed(1)} 195" transform="rotate(-90 38 38)"/></svg>
-          <b>${pct}%</b>
-        </div>
-        <div class="goal-txt">
-          <h3>${done ? "დღის მიზანი შესრულდა! 🎉" : "დღევანდელი მიზანი"}</h3>
-          <p><b>${xp}</b> / ${goal} XP</p>
-          <button class="goal-set" data-goal>შეცვალე მიზანი</button>
-        </div>
-      </div>
-      <div class="gweek">${week}</div>
-    </section>`;
+function courseCard(lang) {
+  const words = state.wordsOf(lang.code).length;
+  const learned = state.learnedOf(lang.code);
+  const pct = words ? Math.round(100 * learned / words) : 0;
+  const active = lang.code === state.lang;
+  const short = lang.code === "de" ? "გერმანული ენა" : lang.code === "en" ? "ინგლისური ენა" : "ესპანური ენა";
+  return `<button class="v3-course v3-course-${lang.code}${active ? " selected" : ""}" ${words ? `data-lang="${lang.code}"` : "data-soon"} aria-pressed="${active}">
+    <span class="v3-course-sky"></span><img class="v3-course-landmark" src="${lang.img}" alt="">
+    <span class="v3-course-top">${flag(lang.flag)}<b>${esc(short)}</b></span>
+    <span class="v3-course-bottom"><small>${words ? `${words.toLocaleString("en-US")} სიტყვა` : "მალე"}</small><strong>${pct}%</strong></span>
+    <span class="v3-course-progress"><i style="width:${pct}%"></i></span>
+    <span class="v3-course-arrow">›</span>
+  </button>`;
+}
+
+function featureCard(feature) {
+  const content = `<img src="assets/${feature.icon}.png" alt=""><b>${feature.label}</b><span aria-hidden="true">›</span>`;
+  return feature.soon
+    ? `<button class="v3-feature ${feature.tone}" data-soon aria-label="${feature.label}">${content}</button>`
+    : `<a class="v3-feature ${feature.tone}" href="${feature.href}">${content}</a>`;
+}
+
+function days() {
+  return state.weekDays().map(day => `<span class="v3-week-day${day.hit ? " hit" : ""}${day.today ? " today" : ""}"><i>${day.hit ? "✓" : ""}</i><small>${day.label}</small></span>`).join("");
 }
 
 export default {
   render() {
-    const lang = state.langInfo();
-    const list = state.wordsOf();
-    const learned = state.learnedOf();
-    const pct = list.length ? Math.round((learned / list.length) * 100) : 0;
     const s = state.stats;
-    const ach = state.achievements().filter((a) => a.done).length;
+    const learned = state.learnedOf();
     const due = state.queue().length;
-    const nextL = state.nextLesson();
-
-    const courses = LANGS.map((l, i) => {
-      const n = state.wordsOf(l.code).length;
-      const p = n ? Math.round((state.learnedOf(l.code) / n) * 100) : 0;
-      const active = l.code === state.lang;
-      return `
-      <button class="course rise${active ? " active" : ""}" style="animation-delay:${0.45 + i * 0.1}s" ${n ? `data-lang="${l.code}"` : 'data-soon="1"'} aria-pressed="${active}">
-        <span class="course-img" style="background:${l.bg}">
-          <img src="${l.img}" alt="" loading="lazy">
-          ${flag(l.flag)}
-          ${n ? "" : '<em class="soon-badge">მალე</em>'}
-        </span>
-        <span class="course-info">
-          <b>${l.name}</b>
-          <small>${n ? `${n} სიტყვა` : "მალე დაემატება"}</small>
-          <span class="mini"><i style="width:${p}%"></i></span>
-          <strong>${p}%</strong>
-        </span>
-      </button>`;
-    }).join("");
-
-    const tiles = TILES.map((t, i) => {
-      const inner = t.img === "az-book" ? `<span class="quick-dictionary"><img src="assets/az-book.png" alt="" loading="lazy"><b>ლექსიკონი</b></span>` : `<img src="assets/${t.img}.png" alt="${esc(t.label)}" draggable="false" loading="lazy">`;
-      const st = `style="animation-delay:${0.5 + i * 0.06}s"`;
-      return t.href
-        ? `<a class="timg rise" ${st} href="${t.href}" aria-label="${esc(t.label)}">${inner}</a>`
-        : `<button class="timg rise" ${st} data-soon="1" aria-label="${esc(t.label)}">${inner}</button>`;
-    }).join("");
-
-    return `
-    <section class="hero hero-home">
-      <div class="deco hd1"></div><div class="deco hd2"></div>
-      <img class="hero-girl" src="assets/girl-point.png" alt="" width="190" height="257">
-      ${header()}
-      <div class="hero-copy">
-        <p class="tag rise" style="animation-delay:.1s">✦ შენი ყოველდღიური სასწავლო თავგადასავალი</p>
-        <h1 class="rise" style="animation-delay:.2s">განაგრძე სწავლა,<br><span>Peera.My-თან!</span></h1>
-        <p class="hero-desc rise">ისწავლე ${esc(lang.name)} მარტივად, საინტერესო დავალებებით და ყოველდღიური წინსვლით.</p>
-        <a class="cta cta-yellow rise" style="animation-delay:.3s" href="${nextL ? `#/lesson/${esc(nextL.id)}` : "#/lesson"}"><i class="shine"></i>${icon.play}<span>სწავლის გაგრძელება</span>${icon.arrow}</a>
-      </div>
-    </section>
-
-    <section class="block">
-      <div class="card-head plain">
-        <h2><svg width="22" height="22" viewBox="0 0 24 24" fill="#4B5BFF" aria-hidden="true"><path d="M2 5c3-1 7-1 10 1v14c-3-2-7-2-10-1zM22 5c-3-1-7-1-10 1v14c3-2 7-2 10-1z"/></svg>ჩემი კურსები</h2>
-      </div>
-      <div class="courses">${courses}</div>
-    </section>
-
-    <section class="card progress-card rise" style="animation-delay:.35s">
-      <div class="card-head">
-        <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="#4B5BFF" aria-hidden="true"><rect x="3" y="13" width="5" height="8" rx="1.5"/><rect x="10" y="8" width="5" height="13" rx="1.5"/><rect x="17" y="3" width="5" height="18" rx="1.5"/></svg>თქვენი პროგრესი</h2>
-        <a href="#/progress">ნახვა მეტი ${icon.arrow}</a>
-      </div>
-      <div class="stats">
-        <div class="ring-stat">
-          <svg width="70" height="70" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="31" fill="none" stroke="#E4E6F5" stroke-width="9"/><circle cx="38" cy="38" r="31" fill="none" stroke="#22C55E" stroke-width="9" stroke-linecap="round" stroke-dasharray="${(pct * 1.948).toFixed(1)} 195" transform="rotate(-90 38 38)"/></svg>
-          <b>${pct}%</b>
+    const goal = state.goal();
+    const today = state.todayXp();
+    const percent = Math.min(100, Math.round(100 * today / goal));
+    const course = state.nextLesson();
+    const nextHref = course ? `#/lesson/${encodeURIComponent(course.id)}` : "#/lesson";
+    const achieved = state.allAchievements().filter(x => x.done).length;
+    return `<div class="v3-home">
+      <section class="v3-top">${header()}</section>
+      <div class="v3-content">
+        <section class="v3-hero-card">
+          <img class="v3-hero-city v3-city-left" src="assets/berlin.png" alt="">
+          <img class="v3-hero-city v3-city-right" src="assets/bigben.png" alt="">
+          <img class="v3-hero-student" src="assets/girl-dict.png" alt="მოსწავლე ყვითელ ჰუდიში">
+          <div class="v3-hero-message"><h1>განაგრძე სწავლა,<br><em>Peera.My-თან!</em></h1>
+            <p>ისწავლე ენები მარტივად, საინტერესოდ და შედეგიანად!</p>
+            <a class="v3-green-button" href="${nextHref}"><img src="assets/icons/play.png" alt=""> სწავლის გაგრძელება <span>›</span></a>
+          </div>
+        </section>
+        <section class="v3-section">
+          <div class="v3-section-heading"><h2><img src="assets/icons/lessons-3d.png" alt=""> ჩემი კურსები</h2><a href="#/lesson">ყველა კურსი ›</a></div>
+          <div class="v3-courses">${LANGS.filter(l => state.wordsOf(l.code).length).map(courseCard).join("")}</div>
+        </section>
+        <div class="v3-stats-strip">
+          <a href="#/progress"><img src="assets/icons/star.png" alt=""><span><b>${s.xp.toLocaleString("en-US")} XP</b><small>გამოცდილება</small></span></a>
+          <a href="#/dictionary"><img src="assets/icons/dictionary-3d.png" alt=""><span><b>${learned.toLocaleString("en-US")}</b><small>ნასწავლი სიტყვა</small></span></a>
+          <a href="#/cards"><img src="assets/icons/awards-3d.png" alt=""><span><b>${today} / ${goal}</b><small>დღიური მიზანი</small></span></a>
         </div>
-        <div class="stat">${icon.flame}<b>${s.streak} დღე</b><small>სერია</small></div>
-        <div class="stat">${icon.star}<b>${s.xp}</b><small>ქულა</small></div>
-        <div class="stat">${icon.trophy}<b>${ach}</b><small>მიღწევა</small></div>
+        <section class="v3-section v3-quick-section"><div class="v3-section-heading"><h2><img src="assets/icons/flame.png" alt=""> სწრაფი წვდომა</h2></div>
+          <div class="v3-feature-grid">${FEATURES.map(featureCard).join("")}</div>
+        </section>
+        <a href="#/awards" class="v3-achievement-banner"><img src="assets/icons/awards-3d.png" alt=""><span><b>მიღწევები</b><small>მოიპოვე მედლები და ჯილდოები! უკვე გახსნილია ${achieved}.</small></span><i>›</i></a>
+        <section class="v3-goal-panel"><div class="v3-goal-top"><img src="assets/icons/calendar.png" alt=""><div><h3>${percent === 100 ? "დღის მიზანი შესრულებულია!" : "დღევანდელი მიზანი"}</h3><p>${today} / ${goal} XP · ${due} სიტყვა გელოდება</p></div><button data-goal aria-label="დღიური მიზნის შეცვლა">შეცვლა</button></div>
+          <div class="v3-goal-track"><i style="width:${percent}%"></i></div><div class="v3-week">${days()}</div>
+        </section>
       </div>
-      ${due ? `<a class="due" href="#/cards"><b>${due}</b> ბარათი გელოდება ${icon.arrow}</a>` : ""}
-    </section>
-
-
-    <section class="block home-tools-block">
-      <div class="card-head plain quick-heading"><h2><img src="assets/icons/star.png" alt=""> სწრაფი წვდომა</h2></div>
-      <div class="tiles-img">${tiles}</div>
-      <a class="home-ach-link" href="#/awards"><img src="assets/home-awards.png" alt="მიღწევები" loading="lazy"><span>მოიპოვე ახალი ჯილდოები</span></a>
-    </section>
-
-    ${goalCard()}`;
+    </div>`;
   },
-
   mount(root) {
-    const onClick = async (e) => {
+    const onClick = async e => {
       if (e.target.closest("[data-goal]")) {
-        const opts = [30, 50, 100, 150];
-        const next = opts[(opts.indexOf(state.goal()) + 1) % opts.length];
-        await state.setGoal(next);
-        window.dispatchEvent(new Event("hashchange"));
-        toast(`დღიური მიზანი: ${next} XP`);
-        return;
+        const options = [30,50,100,150];
+        const goal = options[(options.indexOf(state.goal()) + 1) % options.length];
+        await state.setGoal(goal); window.dispatchEvent(new Event("hashchange"));
+        toast(`დღიური მიზანი: ${goal} XP`);
       }
       const lang = e.target.closest("[data-lang]");
-      if (lang) {
-        state.setLang(lang.dataset.lang);
-        window.dispatchEvent(new Event("hashchange"));
-        return;
-      }
+      if (lang) { state.setLang(lang.dataset.lang); window.dispatchEvent(new Event("hashchange")); }
       if (e.target.closest("[data-soon]")) toast("ეს განყოფილება მალე დაემატება");
     };
     root.addEventListener("click", onClick);
     return () => root.removeEventListener("click", onClick);
-  },
+  }
 };

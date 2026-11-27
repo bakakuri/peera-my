@@ -4,39 +4,20 @@ import { esc, toast } from "../util.js";
 
 const lockIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
 const checkIcon = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`;
-const ROW = 118;
-
 function pathHtml(list, nextId) {
   if (!list.length) return "";
-  const xs = list.map((_, i) => Math.round(Math.sin(i * 1.15) * 28)); // % ცენტრიდან
-  const pts = xs.map((x, i) => [50 + x, ROW * i + ROW / 2]);
-  let d = `M ${pts[0][0]} ${pts[0][1]}`;
-  for (let i = 1; i < pts.length; i++) {
-    const [px, py] = pts[i - 1];
-    const [x, y] = pts[i];
-    d += ` C ${px} ${py + ROW * 0.55}, ${x} ${y - ROW * 0.55}, ${x} ${y}`;
-  }
-  const nodes = list
-    .map((l, i) => {
-      const done = state.lessonDone(l.id);
-      const unlocked = i === 0 || state.lessonDone(list[i - 1].id) || done;
-      const cur = l.id === nextId;
-      const cls = done ? "done" : cur ? "current" : unlocked ? "open" : "locked";
-      const inner = done ? checkIcon : unlocked ? `<b>${l.number}</b>` : lockIcon;
-      const res = state.lessonResults()[l.id];
-      return `
-      <button class="lnode ${cls} rise" style="left:${pts[i][0]}%;top:${pts[i][1]}px;animation-delay:${0.15 + i * 0.07}s" data-lesson="${esc(l.id)}" data-locked="${unlocked ? "" : "1"}" aria-label="${esc(l.title)}">
-        ${cur ? '<i class="lring"></i><em class="lstart">დაიწყე</em>' : ""}
-        <span class="lcircle">${inner}</span>
-        <span class="lname"><b>${esc(l.title)}</b><small>${res ? `${res.best} / ${res.total} სწორი` : esc(l.sub || "")}</small></span>
-      </button>`;
-    })
-    .join("");
-  return `
-    <div class="lpath" style="height:${ROW * list.length}px">
-      <svg class="lpath-line" viewBox="0 0 100 ${ROW * list.length}" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" vector-effect="non-scaling-stroke"/></svg>
-      ${nodes}
-    </div>`;
+  return `<div class="v3-lesson-map">${list.map((l,i) => {
+    const done = state.lessonDone(l.id);
+    const unlocked = i === 0 || state.lessonDone(list[i - 1].id) || done;
+    const current = l.id === nextId;
+    const res = state.lessonResults()[l.id];
+    const cls = done ? "done" : current ? "current" : unlocked ? "open" : "locked";
+    return `<button type="button" class="v3-lesson-tile ${cls}" data-lesson="${esc(l.id)}" data-locked="${unlocked ? "" : "1"}" aria-label="${esc(l.title)}">
+      <span class="v3-lesson-node">${done ? checkIcon : unlocked ? `<b>${l.number}</b>` : lockIcon}</span>
+      <span class="v3-lesson-info"><small>გაკვეთილი ${l.number} ${current ? "· დაიწყე" : done ? "· დასრულებულია" : ""}</small><b>${esc(l.title)}</b><em>${esc(l.sub || "")}</em><span class="v3-lesson-stars">${done ? "⭐⭐⭐" : "☆☆☆"} <i>+${l.level === "A1" ? 50 : 100} XP</i></span></span>
+      <span class="v3-lesson-status">${done ? "✓" : current ? "▶" : unlocked ? "›" : "🔒"}</span>
+    </button>`;
+  }).join("")}</div>`;
 }
 
 export default {
