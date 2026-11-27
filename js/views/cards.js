@@ -81,14 +81,17 @@ function stageHtml(w, enter = true) {
   return `<div class="cardwrap${enter ? " enter" : ""}"><div class="flipper${S.flipped ? " flipped" : ""}">${frontHtml(v)}${backHtml(v)}</div></div>`;
 }
 
+// ღილაკები = ლექსიკონის ჩანართები: ისევ→საზეპირო, რთული→სასწავლი, კარგი→გასამეორებელი, ადვილი→ნასწავლი
 function srsHtml(w) {
   const l = labels(state.cards.get(w.id) || {});
   const v = vm(w);
+  const pill = (grade, img, name, when) =>
+    `<button class="srsp" data-grade="${grade}" aria-label="${name}"><img src="assets/tab-${img}.webp" alt="" draggable="false"><b class="cnt">${when}</b></button>`;
   return `
-  <button class="srs again" data-grade="0"><b>ისევ</b><small>${l.again}</small></button>
-  <button class="srs hard" data-grade="1"><b>რთული</b><small>${l.hard}</small></button>
-  <button class="srs good" data-grade="2"><b>კარგი</b><small>${l.good}</small></button>
-  <button class="srs easy" data-grade="3"><b>ადვილი</b><small>${l.easy}</small></button>
+  ${pill(0, "memorize", "საზეპირო", l.again)}
+  ${pill(1, "study", "სასწავლი", l.hard)}
+  ${pill(2, "review", "გასამეორებელი", l.good)}
+  ${pill(3, "learned", "ნასწავლი", l.easy)}
   <span class="visually-hidden">+${v.xp} XP</span>`;
 }
 
