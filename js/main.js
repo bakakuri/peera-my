@@ -7,6 +7,7 @@ import lesson from "./views/lesson.js";
 import progress from "./views/progress.js";
 import auth from "./views/auth.js";
 import admin from "./views/admin.js";
+import dictionary from "./views/dictionary.js";
 
 const routes = {
   "/": { view: home, nav: "home" },
@@ -15,6 +16,7 @@ const routes = {
   "/progress": { view: progress, nav: "progress" },
   "/auth": { view: auth, nav: "progress" },
   "/admin": { view: admin, nav: "progress" },
+  "/dictionary": { view: dictionary, nav: "dict" },
 };
 
 const app = document.getElementById("app");

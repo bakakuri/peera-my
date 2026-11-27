@@ -35,6 +35,7 @@ export function schedule(card, grade, now = new Date()) {
     lapses,
     dueAt: due.toISOString(),
     updatedAt: now.toISOString(),
+    lastGrade: grade,
   };
 }
 
@@ -56,3 +57,22 @@ export function labels(card) {
 }
 
 export const isDue = (card, now = new Date()) => !!card && new Date(card.dueAt) <= now;
+
+// ლექსიკონის განყოფილება ბოლო შეფასებით: ადვილი → ნასწავლი, კარგი → გასამეორებელი,
+// რთული → სასწავლი, ისევ → საზეპირო
+export const BUCKETS = [
+  { id: "learned", grade: 3, title: "ნასწავლი", btn: "ადვილი", color: "#22c55e" },
+  { id: "review", grade: 2, title: "გასამეორებელი", btn: "კარგი", color: "#4f6bff" },
+  { id: "study", grade: 1, title: "სასწავლი", btn: "რთული", color: "#ff9a3d" },
+  { id: "memorize", grade: 0, title: "საზეპირო", btn: "ისევ", color: "#ff5a7a" },
+];
+
+export function bucketOf(card) {
+  if (!card) return null;
+  let g = card.lastGrade;
+  if (g == null) {
+    // ძველი ჩანაწერი, სადაც ბოლო შეფასება არ ინახებოდა
+    g = !card.reps ? 0 : card.intervalDays <= 1 ? 1 : card.intervalDays <= 3 ? 2 : 3;
+  }
+  return BUCKETS.find((b) => b.grade === g)?.id || null;
+}

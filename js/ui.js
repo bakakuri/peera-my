@@ -15,6 +15,7 @@ const ICONS = {
   home: `<path d="M12 3.2l8.6 7.4a1 1 0 0 1 .3 1.1l-.1.2V19a1.5 1.5 0 0 1-1.5 1.5h-3.4v-5.6h-5.8v5.6H6.7A1.5 1.5 0 0 1 5.2 19v-7.1l-.1-.2a1 1 0 0 1 .3-1.1z" fill="currentColor"/>`,
   cards: `<rect x="3" y="7" width="14" height="12" rx="3" fill="currentColor" fill-opacity=".28" stroke="currentColor" stroke-width="2.2"/><path d="M7 4h12a2 2 0 0 1 2 2v9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>`,
   lesson: `<path d="M2.5 5.2C5.6 4 9.2 4.2 12 6v13.6c-2.8-1.8-6.4-2-9.5-.8zM21.5 5.2C18.4 4 14.8 4.2 12 6v13.6c2.8-1.8 6.4-2 9.5-.8z" fill="currentColor"/>`,
+  dict: `<path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="currentColor" fill-opacity=".28" stroke="currentColor" stroke-width="2"/><path d="M8 8h7M8 12h7M8 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`,
   progress: `<rect x="3.5" y="12" width="4.6" height="8.5" rx="1.6" fill="currentColor"/><rect x="9.7" y="7" width="4.6" height="13.5" rx="1.6" fill="currentColor"/><rect x="15.9" y="3" width="4.6" height="17.5" rx="1.6" fill="currentColor"/>`,
 };
 
@@ -24,6 +25,7 @@ const NAV = [
   { id: "home", href: "#/", label: "მთავარი" },
   { id: "cards", href: "#/cards", label: "ბარათები" },
   { id: "lesson", href: "#/lesson", label: "გაკვეთილი" },
+  { id: "dict", href: "#/dictionary", label: "ლექსიკონი" },
   { id: "progress", href: "#/progress", label: "პროგრესი" },
 ];
 

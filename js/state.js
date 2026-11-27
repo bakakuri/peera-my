@@ -1,5 +1,5 @@
 import * as db from "./db.js";
-import { schedule, isDue } from "./srs.js";
+import { bucketOf, schedule, isDue } from "./srs.js";
 import { dayKey, lsGet, lsSet } from "./util.js";
 
 export const LANGS = [
@@ -53,6 +53,10 @@ export const state = {
 
   wordsOf(code = this.lang) {
     return this.words.filter((w) => langOf(w) === code);
+  },
+
+  bucketOfWord(id) {
+    return bucketOf(this.cards.get(id));
   },
 
   learnedOf(code = this.lang) {

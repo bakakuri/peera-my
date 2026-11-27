@@ -411,3 +411,37 @@ mark { background: #ffd24d; color: inherit; padding: 0 4px; border-radius: 6px; 
 .adm-danger { width: auto; flex: none; background: linear-gradient(135deg, #ff7a59, #e5384f); color: #fff; box-shadow: 0 8px 18px rgba(229, 56, 79, 0.35); }
 .admin-link { display: flex; margin-top: 10px; color: #3d5aff; font-weight: 800; text-decoration: none; }
 [hidden] { display: none !important; }
+
+/* ----- ლექსიკონი ----- */
+.dict-card { padding: 14px 12px 8px; }
+.dlangs { display: flex; gap: 8px; margin-bottom: 10px; }
+.dlang { height: 32px; padding: 0 14px; border-radius: 16px; border: none; background: #eef0ff; color: #3a3fb5; font-size: 12.5px; font-weight: 800; }
+.dlang.on { background: linear-gradient(135deg, #4f6bff, #6a3fe0); color: #fff; }
+.dict-search { width: 100%; height: 44px; border-radius: 16px; border: 2px solid var(--line); background: #f8f9ff; padding: 0 14px; font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); outline: none; }
+.dict-search:focus { border-color: #4f6bff; background: #fff; }
+.dtabs { display: flex; gap: 8px; overflow-x: auto; margin: 12px -12px 0; padding: 2px 12px 6px; scrollbar-width: none; }
+.dtabs::-webkit-scrollbar { display: none; }
+.dtab { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: 18px; border: 2px solid transparent; background: #f1f3ff; color: var(--ink); font-size: 12.5px; font-weight: 800; transition: transform 0.15s ease; }
+.dtab em { font-style: normal; font-size: 11px; font-weight: 900; min-width: 22px; padding: 2px 6px; border-radius: 10px; background: #fff; color: var(--c, #4f6bff); }
+.dtab.on { background: var(--c, #4f6bff); color: #fff; box-shadow: 0 6px 14px rgba(60, 70, 180, 0.25); }
+.dtab:active { transform: scale(0.95); }
+.dict-hint { margin: 6px 4px 10px; font-size: 12px; font-weight: 700; color: var(--muted); }
+.dict-head, .dict-row { display: grid; grid-template-columns: 30px 1.15fr 1fr 1fr; gap: 8px; align-items: center; text-align: left; }
+.dict-head { padding: 6px 8px; border-radius: 12px; background: #eef0ff; font-size: 11px; font-weight: 900; color: #3a3fb5; }
+.dict-row { width: 100%; padding: 10px 8px; border: none; border-bottom: 1px solid var(--line); background: none; transition: background 0.15s ease; }
+.dict-row:active { background: #f3f5ff; }
+.dict-row .n { font-size: 11.5px; font-weight: 800; color: #9aa0c4; }
+.dict-row .w { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.dict-row .w b { font-size: 14px; font-weight: 900; color: var(--ink); overflow-wrap: anywhere; }
+.dict-row .p { font-size: 12.5px; font-weight: 700; color: #4b3fd8; overflow-wrap: anywhere; }
+.dict-row .t { font-size: 12.5px; font-weight: 700; color: #3a3f6e; overflow-wrap: anywhere; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.dict-empty { padding: 22px 10px; text-align: center; font-size: 13px; font-weight: 700; color: var(--muted); line-height: 1.5; }
+
+.modal { position: fixed; top: 0; bottom: 0; left: 50%; width: min(430px, 100%); transform: translateX(-50%); z-index: 80; display: flex; align-items: center; justify-content: center; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(20, 20, 90, 0.6); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: rise 0.25s ease both; }
+.modal-body { position: relative; width: calc(100% - 36px); height: min(560px, 80dvh); display: flex; flex-direction: column; gap: 10px; }
+.modal-card { position: relative; flex: 1; min-height: 0; perspective: 1400px; }
+.modal-x { position: absolute; right: 4px; top: -46px; z-index: 5; width: 40px; height: 40px; border-radius: 50%; border: none; background: #fff; color: var(--ink); display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25); }
+.modal .front, .modal .back { background: linear-gradient(155deg, #ffffff 0%, #eef0ff 100%); }
+.modal-status { align-self: center; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 16px; border-radius: 16px; background: #fff; font-size: 12.5px; font-weight: 800; color: var(--ink); }

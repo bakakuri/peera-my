@@ -22,7 +22,7 @@ function exampleBlock(v, mode) {
   return `<div class="ex-box"><p>${highlight(ex.sentence || "", ex.highlight)}</p>${phon}${mode === "back" ? tr : ""}</div>`;
 }
 
-function frontHtml(v) {
+export function frontHtml(v) {
   const chips = v.ka
     .map(
       (k, i) =>
@@ -55,7 +55,7 @@ function frontHtml(v) {
   </div>`;
 }
 
-function backHtml(v) {
+export function backHtml(v) {
   const desc = v.defNative || v.defTarget;
   return `
   <div class="face back" data-act="flip">

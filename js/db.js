@@ -6,6 +6,7 @@ const SDK = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/
 
 let sb = null;
 let user = null;
+let noGradeCol = false;
 
 export const isCloud = () => !!sb;
 export const configured = () => !!(SUPABASE_URL && SUPABASE_ANON_KEY);
@@ -91,6 +92,7 @@ const cardFromRow = (r) => ({
   lapses: r.lapses,
   dueAt: r.due_at,
   updatedAt: r.updated_at,
+  lastGrade: r.last_grade ?? undefined,
 });
 const cardToRow = (c, uid) => ({
   user_id: uid,
@@ -101,6 +103,7 @@ const cardToRow = (c, uid) => ({
   lapses: c.lapses,
   due_at: c.dueAt,
   updated_at: c.updatedAt,
+  last_grade: c.lastGrade ?? null,
 });
 const statsFromRow = (r) => ({
   xp: r.xp,
@@ -141,7 +144,15 @@ export async function loadProgress() {
 
 export async function saveCard(card) {
   if (sb && user) {
-    const { error } = await sb.from("user_cards").upsert(cardToRow(card, user.id), { onConflict: "user_id,word_id" });
+    const row = cardToRow(card, user.id);
+    if (noGradeCol) delete row.last_grade;
+    let { error } = await sb.from("user_cards").upsert(row, { onConflict: "user_id,word_id" });
+    if (error && /last_grade/.test(error.message)) {
+      // ბაზაში ახალი სვეტი ჯერ არ არის (dictionary.sql არ გაშვებულა): ვინახავთ მის გარეშე
+      noGradeCol = true;
+      delete row.last_grade;
+      ({ error } = await sb.from("user_cards").upsert(row, { onConflict: "user_id,word_id" }));
+    }
     if (error) console.warn("saveCard:", error.message);
     return;
   }

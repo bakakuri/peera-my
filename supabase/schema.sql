@@ -27,6 +27,7 @@ create table if not exists public.user_cards (
   lapses        int  not null default 0,
   due_at        timestamptz not null default now(),
   updated_at    timestamptz not null default now(),
+  last_grade    smallint,
   primary key (user_id, word_id)
 );
 
