@@ -6,6 +6,7 @@ import cards from "./views/cards.js";
 import lesson from "./views/lesson.js";
 import progress from "./views/progress.js";
 import auth from "./views/auth.js";
+import admin from "./views/admin.js";
 
 const routes = {
   "/": { view: home, nav: "home" },
@@ -13,6 +14,7 @@ const routes = {
   "/lesson": { view: lesson, nav: "lesson" },
   "/progress": { view: progress, nav: "progress" },
   "/auth": { view: auth, nav: "progress" },
+  "/admin": { view: admin, nav: "progress" },
 };
 
 const app = document.getElementById("app");

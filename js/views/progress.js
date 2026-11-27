@@ -30,7 +30,7 @@ export default {
     const user = db.getUser();
     const account = db.isCloud()
       ? user
-        ? `<div class="account"><span>${esc(user.email || "")}</span><button class="link" data-act="signout">გასვლა</button></div>`
+        ? `<div class="account"><span>${esc(user.email || "")}</span><button class="link" data-act="signout">გასვლა</button></div><a class="account admin-link" id="admin-link" href="#/admin" hidden>ადმინ პანელი ${icon.arrow}</a>`
         : `<div class="account"><span>პროგრესი ამ მოწყობილობაზეა</span><a class="link" href="#/auth">შესვლა ან რეგისტრაცია</a></div>`
       : `<div class="account"><span>დემო რეჟიმი — პროგრესი ამ მოწყობილობაზე ინახება</span></div>`;
 
@@ -75,6 +75,8 @@ export default {
       }
     };
     root.addEventListener("click", onClick);
+    const link = root.querySelector("#admin-link");
+    if (link) db.isAdmin().then((ok) => { if (ok) link.hidden = false; });
     return () => root.removeEventListener("click", onClick);
   },
 };

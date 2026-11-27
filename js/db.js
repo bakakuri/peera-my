@@ -158,3 +158,35 @@ export async function saveStats(stats) {
   }
   lsSet(KEYS.stats, stats);
 }
+
+/* ---------- ადმინი ---------- */
+export async function isAdmin() {
+  if (!sb || !user) return false;
+  const { data, error } = await sb.from("admins").select("user_id").eq("user_id", user.id).maybeSingle();
+  return !error && !!data;
+}
+
+export async function wordCounts(codes = ["de", "en", "es"]) {
+  const out = {};
+  for (const code of codes) {
+    const { count, error } = await sb.from("words").select("id", { count: "exact", head: true }).eq("language_code", code);
+    if (error) throw error;
+    out[code] = count || 0;
+  }
+  return out;
+}
+
+export async function upsertWords(rows, onProgress, size = 25) {
+  for (let i = 0; i < rows.length; i += size) {
+    const chunk = rows.slice(i, i + size);
+    const { error } = await sb.from("words").upsert(chunk, { onConflict: "id" });
+    if (error) throw error;
+    onProgress?.(Math.min(i + size, rows.length), rows.length);
+  }
+}
+
+export async function clearLanguage(code) {
+  const { error, count } = await sb.from("words").delete({ count: "exact" }).eq("language_code", code);
+  if (error) throw error;
+  return count || 0;
+}
