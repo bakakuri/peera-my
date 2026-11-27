@@ -1,0 +1,866 @@
+[
+  {
+    "id": "de-n-001",
+    "slug": "fernweh",
+    "language": {
+      "code": "de-DE",
+      "name": "გერმანული",
+      "dialect": "Hochdeutsch"
+    },
+    "core": {
+      "term": "Fernweh",
+      "lemma": "Fernweh",
+      "phonetic": {
+        "ipa": "/ˈfɛʁnˌveː/",
+        "syllables": [
+          "Fern",
+          "weh"
+        ],
+        "stressIndex": 0,
+        "georgian": {
+          "transcription": "ფერნვე",
+          "syllables": [
+            "ფერნ",
+            "ვე"
+          ],
+          "stressIndex": 0
+        }
+      },
+      "partOfSpeech": {
+        "code": "noun",
+        "labelKa": "არსებითი სახელი",
+        "labelEn": "Noun",
+        "countability": "uncountable",
+        "gender": "neuter"
+      },
+      "level": {
+        "cefr": "B2",
+        "difficultyScore": 6,
+        "frequencyRank": 14200,
+        "register": "neutral / literary"
+      }
+    },
+    "semantics": {
+      "primaryTranslation": "შორეულისკენ ლტოლვა",
+      "alternativeTranslations": [
+        "მოგზაურობის წყურვილი",
+        "უცხო მხარეების მონატრება"
+      ],
+      "definition": {
+        "targetLang": "Die Sehnsucht nach fernen Orten.",
+        "nativeLang": "ლტოლვა შორეული, უცნობი ადგილებისკენ — Heimweh-ის (სახლის მონატრების) საპირისპირო."
+      },
+      "nuance": "Fernweh იმ ადგილის მონატრებაა, სადაც შესაძლოა არასდროს ყოფილხარ. ეს არ არის უბრალოდ დასასვენებლად წასვლის სურვილი.",
+      "categories": [
+        "მოგზაურობა",
+        "ემოციები"
+      ],
+      "tags": [
+        "abstract",
+        "emotion",
+        "untranslatable-feel"
+      ]
+    },
+    "morphology": {
+      "plural": null,
+      "wordFamily": [
+        {
+          "term": "fern",
+          "pos": "adjective",
+          "translation": "შორეული"
+        },
+        {
+          "term": "die Sehnsucht",
+          "pos": "noun",
+          "translation": "ლტოლვა"
+        }
+      ],
+      "etymology": "Fern (შორი) + Weh (ტკივილი). სიტყვა Heimweh-ის (Heim + Weh) მსგავსად არის აგებული."
+    },
+    "usage": {
+      "collocations": [
+        {
+          "text": "Fernweh haben",
+          "ka": "შორეულისკენ ლტოლვა გაქვს"
+        },
+        {
+          "text": "von Fernweh gepackt werden",
+          "ka": "ლტოლვამ შეგიპყრო"
+        }
+      ],
+      "examples": [
+        {
+          "id": "ex-001",
+          "context": "ყოველდღიური",
+          "sentence": "Im Winter bekomme ich immer Fernweh.",
+          "translation": "ზამთარში ყოველთვის შორეულისკენ ლტოლვა მეუფლება.",
+          "highlight": "Fernweh",
+          "phoneticKa": "იმ ვინტერ ბეკომე იხ იმერ ფერნვეე."
+        },
+        {
+          "id": "ex-002",
+          "context": "ლიტერატურა",
+          "sentence": "Sein Fernweh trieb ihn bis nach Patagonien.",
+          "translation": "შორეულისკენ ლტოლვამ პატაგონიამდე მიიყვანა.",
+          "highlight": "Fernweh",
+          "phoneticKa": "ზაინ ფერნვეე ტრიბ იჰნ ბის ნახ პატაგონიენ."
+        }
+      ],
+      "grammarTip": "საშუალო სქესის არსებითი სახელია (das Fernweh) და ჩვეულებრივ მხოლობითში გამოიყენება.",
+      "commonMistakes": [
+        {
+          "wrong": "Ich habe der Fernweh.",
+          "correct": "Ich habe Fernweh.",
+          "reason": "Fernweh არტიკლის გარეშე გამოიყენება, როცა ზოგად განცდაზეა საუბარი."
+        }
+      ]
+    },
+    "lexicalRelations": {
+      "synonyms": [
+        {
+          "term": "Reiselust",
+          "nuance": "მოგზაურობის სურვილი, ნაკლებად ემოციური"
+        },
+        {
+          "term": "Sehnsucht",
+          "nuance": "ზოგადი ლტოლვა"
+        }
+      ],
+      "antonyms": [
+        {
+          "term": "Heimweh",
+          "translation": "სახლის მონატრება"
+        }
+      ],
+      "confusables": [
+        {
+          "term": "Wanderlust",
+          "difference": "Wanderlust ინგლისურშიც გადავიდა და ხეტიალის სიყვარულს ნიშნავს; Fernweh უფრო ტკივილიანი ლტოლვაა."
+        }
+      ]
+    },
+    "exercises": {
+      "quizDistractors": [
+        "სახლის მონატრება",
+        "სამსახურის დასრულება",
+        "სწრაფი მოგზაურობა"
+      ],
+      "fillInTheBlank": {
+        "prompt": "Im Winter habe ich oft _______.",
+        "answer": "Fernweh",
+        "hint": "იწყება “Fern...”-ით და ნიშნავს შორეულისკენ ლტოლვას"
+      }
+    },
+    "mediaAndSystem": {
+      "audio": {
+        "ttsEngine": "WebSpeechAPI",
+        "speechRate": 0.9,
+        "customAudioUrl": null
+      },
+      "srsMetadata": {
+        "xpValue": 25,
+        "initialIntervalDays": 1,
+        "easeFactor": 2.5
+      },
+      "createdAt": "2026-11-26T09:00:00Z",
+      "author": "Peera.My demo"
+    }
+  },
+  {
+    "id": "de-n-002",
+    "slug": "feierabend",
+    "language": {
+      "code": "de-DE",
+      "name": "გერმანული",
+      "dialect": "Hochdeutsch"
+    },
+    "core": {
+      "term": "Feierabend",
+      "lemma": "Feierabend",
+      "phonetic": {
+        "ipa": "/ˈfaɪ̯ɐˌʔaːbn̩t/",
+        "syllables": [
+          "Fei",
+          "er",
+          "a",
+          "bend"
+        ],
+        "stressIndex": 0,
+        "georgian": {
+          "transcription": "ფაიერაბენდ",
+          "syllables": [
+            "ფაი",
+            "ერ",
+            "ა",
+            "ბენდ"
+          ],
+          "stressIndex": 0
+        }
+      },
+      "partOfSpeech": {
+        "code": "noun",
+        "labelKa": "არსებითი სახელი",
+        "labelEn": "Noun",
+        "countability": "uncountable",
+        "gender": "masculine"
+      },
+      "level": {
+        "cefr": "B1",
+        "difficultyScore": 4,
+        "frequencyRank": 9800,
+        "register": "everyday"
+      }
+    },
+    "semantics": {
+      "primaryTranslation": "სამუშაო დღის დასასრული",
+      "alternativeTranslations": [
+        "სამუშაოს შემდგომი თავისუფალი დრო",
+        "დასვენების დრო"
+      ],
+      "definition": {
+        "targetLang": "Das Ende der täglichen Arbeitszeit und die Freizeit danach.",
+        "nativeLang": "დღიური სამუშაო დროის დასრულება და მის შემდეგ თავისუფალი დრო."
+      },
+      "nuance": "ხშირად გამოიყენება როგორც მისალმება-გამოთხოვება: „Schönen Feierabend!“ — კარგ საღამოს გისურვებ სამუშაოს შემდეგ.",
+      "categories": [
+        "სამუშაო",
+        "ყოველდღიურობა"
+      ],
+      "tags": [
+        "daily-life",
+        "work"
+      ]
+    },
+    "morphology": {
+      "plural": null,
+      "wordFamily": [
+        {
+          "term": "die Feier",
+          "pos": "noun",
+          "translation": "დღესასწაული, ზეიმი"
+        },
+        {
+          "term": "der Abend",
+          "pos": "noun",
+          "translation": "საღამო"
+        }
+      ],
+      "etymology": "Feier (დღესასწაული, დასვენება) + Abend (საღამო): თავდაპირველად დღესასწაულის წინა საღამოს ნიშნავდა."
+    },
+    "usage": {
+      "collocations": [
+        {
+          "text": "Feierabend machen",
+          "ka": "სამუშაოს დასრულება"
+        },
+        {
+          "text": "Schönen Feierabend!",
+          "ka": "კარგ საღამოს სამუშაოს შემდეგ!"
+        }
+      ],
+      "examples": [
+        {
+          "id": "ex-001",
+          "context": "სამუშაო",
+          "sentence": "Um fünf Uhr ist Feierabend.",
+          "translation": "ხუთზე სამუშაო დღე მთავრდება.",
+          "highlight": "Feierabend",
+          "phoneticKa": "უმ ფუნფ უარ ისტ ფაირაბენდ."
+        },
+        {
+          "id": "ex-002",
+          "context": "ყოველდღიური",
+          "sentence": "Nach Feierabend gehen wir oft spazieren.",
+          "translation": "სამუშაოს შემდეგ ხშირად სასეირნოდ მივდივართ.",
+          "highlight": "Feierabend",
+          "phoneticKa": "ნახ ფაირაბენდ გეენ ვირ ოფტ შპაციერენ."
+        }
+      ],
+      "grammarTip": "მამრობითი სქესის არსებითი სახელია: der Feierabend.",
+      "commonMistakes": [
+        {
+          "wrong": "Ich habe die Feierabend.",
+          "correct": "Ich habe Feierabend.",
+          "reason": "ამ გამოთქმაში არტიკლი არ გამოიყენება: Feierabend haben."
+        }
+      ]
+    },
+    "lexicalRelations": {
+      "synonyms": [
+        {
+          "term": "Arbeitsende",
+          "nuance": "უფრო ოფიციალური"
+        },
+        {
+          "term": "Dienstschluss",
+          "nuance": "სამსახურებრივი, ოფიციალური"
+        }
+      ],
+      "antonyms": [
+        {
+          "term": "Arbeitsbeginn",
+          "translation": "სამუშაოს დაწყება"
+        }
+      ],
+      "confusables": [
+        {
+          "term": "Feiertag",
+          "difference": "Feiertag არის დასვენების დღე (დღესასწაული), Feierabend კი სამუშაო დღის დასასრული."
+        }
+      ]
+    },
+    "exercises": {
+      "quizDistractors": [
+        "სადილის დრო",
+        "დღესასწაულის დღე",
+        "სამუშაოს დაწყება"
+      ],
+      "fillInTheBlank": {
+        "prompt": "Um sechs Uhr habe ich endlich _______.",
+        "answer": "Feierabend",
+        "hint": "იწყება “Feier...”-ით"
+      }
+    },
+    "mediaAndSystem": {
+      "audio": {
+        "ttsEngine": "WebSpeechAPI",
+        "speechRate": 0.9,
+        "customAudioUrl": null
+      },
+      "srsMetadata": {
+        "xpValue": 20,
+        "initialIntervalDays": 1,
+        "easeFactor": 2.5
+      },
+      "createdAt": "2026-11-26T09:00:00Z",
+      "author": "Peera.My demo"
+    }
+  },
+  {
+    "id": "en-adv-001",
+    "slug": "serendipity",
+    "language": {
+      "code": "en-US",
+      "name": "ინგლისური",
+      "dialect": "American / British Universal"
+    },
+    "core": {
+      "term": "Serendipity",
+      "lemma": "serendipity",
+      "phonetic": {
+        "ipa": "/ˌser.ənˈdɪp.ə.ti/",
+        "syllables": [
+          "ser",
+          "en",
+          "dip",
+          "i",
+          "ty"
+        ],
+        "stressIndex": 2,
+        "georgian": {
+          "transcription": "სერენდიფითი",
+          "syllables": [
+            "სე",
+            "რენ",
+            "დიფ",
+            "ი",
+            "თი"
+          ],
+          "stressIndex": 2
+        }
+      },
+      "partOfSpeech": {
+        "code": "noun",
+        "labelKa": "არსებითი სახელი",
+        "labelEn": "Noun",
+        "countability": "uncountable",
+        "gender": null
+      },
+      "level": {
+        "cefr": "C1",
+        "difficultyScore": 8,
+        "frequencyRank": 4820,
+        "register": "literary / educated"
+      }
+    },
+    "semantics": {
+      "primaryTranslation": "ბედნიერი შემთხვევითობა",
+      "alternativeTranslations": [
+        "იღბლიანი აღმოჩენა",
+        "მოულოდნელი წარმატება"
+      ],
+      "definition": {
+        "targetLang": "The occurrence and development of events by chance in a happy or beneficial way.",
+        "nativeLang": "სასიამოვნო, ღირებული ან სასარგებლო რამის მოულოდნელად, დაუგეგმავად აღმოჩენის უნარი ან ფაქტი."
+      },
+      "nuance": "გამოიყენება მხოლოდ დადებითი და სასიამოვნო შემთხვევითობის აღსაწერად (განსხვავებით ნეიტრალური “coincidence”-სგან).",
+      "categories": [
+        "ემოციები და ფსიქოლოგია",
+        "ლიტერატურული ლექსიკა",
+        "ფილოსოფია"
+      ],
+      "tags": [
+        "abstract",
+        "positive",
+        "untranslatable-feel"
+      ]
+    },
+    "morphology": {
+      "plural": null,
+      "wordFamily": [
+        {
+          "term": "serendipitous",
+          "pos": "adjective",
+          "translation": "ბედნიერად შემთხვევითი"
+        },
+        {
+          "term": "serendipitously",
+          "pos": "adverb",
+          "translation": "ბედნიერი შემთხვევითობით"
+        }
+      ],
+      "etymology": "სიტყვა 1754 წელს შექმნა ინგლისელმა მწერალმა ჰორას უოლპოლმა სპარსული ზღაპრის — „სერენდიპის სამი პრინცის“ შთაგონებით."
+    },
+    "usage": {
+      "collocations": [
+        {
+          "text": "pure serendipity",
+          "ka": "სუფთა ბედნიერი შემთხვევითობა"
+        },
+        {
+          "text": "a stroke of serendipity",
+          "ka": "იღბლიანი შემთხვევის წყალობით"
+        },
+        {
+          "text": "happy serendipity",
+          "ka": "სასიამოვნო დამთხვევა"
+        }
+      ],
+      "examples": [
+        {
+          "id": "ex-001",
+          "context": "ყოველდღიური / ბიზნესი",
+          "sentence": "Meeting my co-founder at a delayed flight gate was pure serendipity.",
+          "translation": "გადადებული რეისის გასასვლელთან ჩემი თანადამფუძნებლის გაცნობა სუფთა ბედნიერი შემთხვევითობა იყო.",
+          "highlight": "pure serendipity",
+          "phoneticKa": "მითინგ მაი კოუფაუნდერ ეთ ა დილეიდ ფლაით გეით ვოზ პიუა სერენდიპიტი."
+        },
+        {
+          "id": "ex-002",
+          "context": "მეცნიერება",
+          "sentence": "Penicillin was discovered through scientific serendipity.",
+          "translation": "პენიცილინი მეცნიერული ბედნიერი შემთხვევითობის წყალობით აღმოაჩინეს.",
+          "highlight": "serendipity",
+          "phoneticKa": "პენისილინ ვოზ დისქავერდ თრუ საიენტიფიქ სერენდიპიტი."
+        }
+      ],
+      "grammarTip": "არათვლადი არსებითი სახელია — არასდროს დაურთოთ განუსაზღვრელი არტიკლი “a” (არასწორია: a serendipity) და არ გამოიყენოთ მრავლობით რიცხვში.",
+      "commonMistakes": [
+        {
+          "wrong": "It was a great serendipity to meet you.",
+          "correct": "It was pure serendipity to meet you.",
+          "reason": "არათვლად არსებით სახელთან არტიკლი “a” არ იწერება."
+        }
+      ]
+    },
+    "lexicalRelations": {
+      "synonyms": [
+        {
+          "term": "fluke",
+          "nuance": "უფრო სასაუბრო, მოულოდნელი იღბალი"
+        },
+        {
+          "term": "providence",
+          "nuance": "უფრო ამაღლებული, ბედისწერისეული"
+        },
+        {
+          "term": "good fortune",
+          "nuance": "ზოგადი იღბალი"
+        }
+      ],
+      "antonyms": [
+        {
+          "term": "misfortune",
+          "translation": "უიღბლობა"
+        },
+        {
+          "term": "premeditation",
+          "translation": "წინასწარი განზრახვა / დაგეგმვა"
+        }
+      ],
+      "confusables": [
+        {
+          "term": "Coincidence",
+          "difference": "Coincidence უბრალოდ დამთხვევაა (შეიძლება ცუდიც იყოს), Serendipity კი ყოველთვის სასიამოვნო აღმოჩენაა."
+        }
+      ]
+    },
+    "exercises": {
+      "quizDistractors": [
+        "წინასწარ დაგეგმილი შეხვედრა",
+        "ხანგრძლივი მარტოობის განცდა",
+        "გადაუჭრელი პრობლემა"
+      ],
+      "fillInTheBlank": {
+        "prompt": "Finding that rare book in a tiny village shop was pure _______.",
+        "answer": "serendipity",
+        "hint": "იწყება “ser...”-ით და ნიშნავს ბედნიერ შემთხვევითობას"
+      }
+    },
+    "mediaAndSystem": {
+      "audio": {
+        "ttsEngine": "WebSpeechAPI",
+        "speechRate": 0.9,
+        "customAudioUrl": null
+      },
+      "srsMetadata": {
+        "xpValue": 25,
+        "initialIntervalDays": 1,
+        "easeFactor": 2.5
+      },
+      "createdAt": "2026-11-25T11:30:00Z",
+      "author": "LexiFlow Editorial"
+    }
+  },
+  {
+    "id": "en-adj-002",
+    "slug": "reluctant",
+    "language": {
+      "code": "en-US",
+      "name": "ინგლისური",
+      "dialect": "American / British Universal"
+    },
+    "core": {
+      "term": "Reluctant",
+      "lemma": "reluctant",
+      "phonetic": {
+        "ipa": "/rɪˈlʌk.tənt/",
+        "syllables": [
+          "re",
+          "luc",
+          "tant"
+        ],
+        "stressIndex": 1,
+        "georgian": {
+          "transcription": "რილაქთენთ",
+          "syllables": [
+            "რი",
+            "ლაქ",
+            "თენთ"
+          ],
+          "stressIndex": 1
+        }
+      },
+      "partOfSpeech": {
+        "code": "adjective",
+        "labelKa": "ზედსართავი სახელი",
+        "labelEn": "Adjective",
+        "countability": null,
+        "gender": null
+      },
+      "level": {
+        "cefr": "B2",
+        "difficultyScore": 5,
+        "frequencyRank": 5100,
+        "register": "neutral"
+      }
+    },
+    "semantics": {
+      "primaryTranslation": "უხალისო",
+      "alternativeTranslations": [
+        "გაუბედავი",
+        "ყოყმანით მოქმედი"
+      ],
+      "definition": {
+        "targetLang": "Unwilling and hesitant; disinclined to do something.",
+        "nativeLang": "ვისაც არ უნდა რაიმეს გაკეთება და ყოყმანობს."
+      },
+      "nuance": "reluctant-ი ნიშნავს „არ მინდა, მაგრამ შეიძლება მაინც გავაკეთო“. unwilling უფრო კატეგორიულია.",
+      "categories": [
+        "ემოციები",
+        "ქცევა"
+      ],
+      "tags": [
+        "adjective",
+        "attitude"
+      ]
+    },
+    "morphology": {
+      "plural": null,
+      "wordFamily": [
+        {
+          "term": "reluctance",
+          "pos": "noun",
+          "translation": "უხალისობა"
+        },
+        {
+          "term": "reluctantly",
+          "pos": "adverb",
+          "translation": "უხალისოდ"
+        }
+      ],
+      "etymology": "ლათინური reluctari — „წინააღმდეგობის გაწევა, ბრძოლა“."
+    },
+    "usage": {
+      "collocations": [
+        {
+          "text": "reluctant to speak",
+          "ka": "ლაპარაკის უხალისობა"
+        },
+        {
+          "text": "a reluctant hero",
+          "ka": "უნებლიე გმირი"
+        }
+      ],
+      "examples": [
+        {
+          "id": "ex-001",
+          "context": "ყოველდღიური",
+          "sentence": "She was reluctant to speak first.",
+          "translation": "მას არ უნდოდა პირველს ეთქვა.",
+          "highlight": "reluctant",
+          "phoneticKa": "ში ვოზ რილაქთენთ თუ სპიქ ფესტ."
+        },
+        {
+          "id": "ex-002",
+          "context": "ყოველდღიური",
+          "sentence": "He gave a reluctant smile.",
+          "translation": "მან უხალისო ღიმილი გამოსცა.",
+          "highlight": "reluctant",
+          "phoneticKa": "ჰი გეივ ა რილაქთენთ სმაილ."
+        }
+      ],
+      "grammarTip": "ხშირად გამოიყენება კონსტრუქციით reluctant + to + ზმნა (reluctant to go).",
+      "commonMistakes": [
+        {
+          "wrong": "She was reluctant going.",
+          "correct": "She was reluctant to go.",
+          "reason": "reluctant-ის შემდეგ მოდის to + ზმნა, არა -ing ფორმა."
+        }
+      ]
+    },
+    "lexicalRelations": {
+      "synonyms": [
+        {
+          "term": "unwilling",
+          "nuance": "უფრო კატეგორიული"
+        },
+        {
+          "term": "hesitant",
+          "nuance": "უფრო მერყევი, ნაკლებ წინააღმდეგი"
+        }
+      ],
+      "antonyms": [
+        {
+          "term": "willing",
+          "translation": "მზად მყოფი"
+        },
+        {
+          "term": "eager",
+          "translation": "მოუთმენელი, მონდომებული"
+        }
+      ],
+      "confusables": [
+        {
+          "term": "Reticent",
+          "difference": "Reticent ნიშნავს ცოტა სასაუბროს, თავშეკავებულს; reluctant კი ნიშნავს რაიმეს გაკეთების უხალისობას."
+        }
+      ]
+    },
+    "exercises": {
+      "quizDistractors": [
+        "მონდომებული",
+        "გაბედული",
+        "ძალიან მხიარული"
+      ],
+      "fillInTheBlank": {
+        "prompt": "He was _______ to admit his mistake.",
+        "answer": "reluctant",
+        "hint": "იწყება “re...”-ით და ნიშნავს უხალისოს"
+      }
+    },
+    "mediaAndSystem": {
+      "audio": {
+        "ttsEngine": "WebSpeechAPI",
+        "speechRate": 0.9,
+        "customAudioUrl": null
+      },
+      "srsMetadata": {
+        "xpValue": 20,
+        "initialIntervalDays": 1,
+        "easeFactor": 2.5
+      },
+      "createdAt": "2026-11-26T09:00:00Z",
+      "author": "Peera.My demo"
+    }
+  },
+  {
+    "id": "en-adj-003",
+    "slug": "resilient",
+    "language": {
+      "code": "en-US",
+      "name": "ინგლისური",
+      "dialect": "American / British Universal"
+    },
+    "core": {
+      "term": "Resilient",
+      "lemma": "resilient",
+      "phonetic": {
+        "ipa": "/rɪˈzɪl.i.ənt/",
+        "syllables": [
+          "re",
+          "sil",
+          "i",
+          "ent"
+        ],
+        "stressIndex": 1,
+        "georgian": {
+          "transcription": "რიზილიენთ",
+          "syllables": [
+            "რი",
+            "ზილ",
+            "ი",
+            "ენთ"
+          ],
+          "stressIndex": 1
+        }
+      },
+      "partOfSpeech": {
+        "code": "adjective",
+        "labelKa": "ზედსართავი სახელი",
+        "labelEn": "Adjective",
+        "countability": null,
+        "gender": null
+      },
+      "level": {
+        "cefr": "C1",
+        "difficultyScore": 7,
+        "frequencyRank": 6300,
+        "register": "educated"
+      }
+    },
+    "semantics": {
+      "primaryTranslation": "მედეგი, გამძლე",
+      "alternativeTranslations": [
+        "სწრაფად აღმდგენი",
+        "სტრესისადმი გამძლე"
+      ],
+      "definition": {
+        "targetLang": "Able to recover quickly from difficulties; tough.",
+        "nativeLang": "ვინც სირთულეების შემდეგ სწრაფად იკრებს ძალებს და ძველ მდგომარეობას უბრუნდება."
+      },
+      "nuance": "ადამიანზეც ითქმის და ეკონომიკაზეც, სისტემაზეც, მასალაზეც. მთავარია დარტყმის შემდეგ აღდგენის უნარი.",
+      "categories": [
+        "ფსიქოლოგია",
+        "პიროვნება"
+      ],
+      "tags": [
+        "adjective",
+        "positive"
+      ]
+    },
+    "morphology": {
+      "plural": null,
+      "wordFamily": [
+        {
+          "term": "resilience",
+          "pos": "noun",
+          "translation": "მედეგობა, გამძლეობა"
+        }
+      ],
+      "etymology": "ლათინური resilire — „უკან გადახტომა, უკან გამოხტომა“."
+    },
+    "usage": {
+      "collocations": [
+        {
+          "text": "remarkably resilient",
+          "ka": "გასაკვირად მედეგი"
+        },
+        {
+          "text": "a resilient economy",
+          "ka": "მედეგი ეკონომიკა"
+        }
+      ],
+      "examples": [
+        {
+          "id": "ex-001",
+          "context": "ყოველდღიური",
+          "sentence": "Children are often more resilient than adults expect.",
+          "translation": "ბავშვები ხშირად უფრო მედეგები არიან, ვიდრე უფროსებს ჰგონიათ.",
+          "highlight": "resilient",
+          "phoneticKa": "ჩილდრენ არ ოფენ მორ რიზილიენთ დან ადალთს იქსპექთ."
+        },
+        {
+          "id": "ex-002",
+          "context": "ბიზნესი",
+          "sentence": "The economy proved resilient during the crisis.",
+          "translation": "კრიზისის დროს ეკონომიკა მედეგი აღმოჩნდა.",
+          "highlight": "resilient",
+          "phoneticKa": "დი იკონომი პრუვდ რიზილიენთ დიურინგ დე კრაისის."
+        }
+      ],
+      "grammarTip": "ზედსართავია resilient; არსებითი სახელია resilience.",
+      "commonMistakes": [
+        {
+          "wrong": "She has a great resilient.",
+          "correct": "She has great resilience.",
+          "reason": "არსებითი სახელი საჭიროა: resilience, არა resilient."
+        }
+      ]
+    },
+    "lexicalRelations": {
+      "synonyms": [
+        {
+          "term": "tough",
+          "nuance": "უფრო სასაუბრო, ძლიერი"
+        },
+        {
+          "term": "adaptable",
+          "nuance": "ახალ პირობებს ეგუება"
+        }
+      ],
+      "antonyms": [
+        {
+          "term": "fragile",
+          "translation": "მყიფე"
+        },
+        {
+          "term": "vulnerable",
+          "translation": "მოწყვლადი"
+        }
+      ],
+      "confusables": [
+        {
+          "term": "Resistant",
+          "difference": "Resistant ნიშნავს წინააღმდეგობის გაწევას (მაგ. წყალგაუმტარი); resilient კი ნიშნავს დარტყმის შემდეგ აღდგენას."
+        }
+      ]
+    },
+    "exercises": {
+      "quizDistractors": [
+        "უმწეო",
+        "ძალიან სწრაფი",
+        "ძველი"
+      ],
+      "fillInTheBlank": {
+        "prompt": "After the setback, she proved remarkably _______.",
+        "answer": "resilient",
+        "hint": "იწყება “res...”-ით"
+      }
+    },
+    "mediaAndSystem": {
+      "audio": {
+        "ttsEngine": "WebSpeechAPI",
+        "speechRate": 0.9,
+        "customAudioUrl": null
+      },
+      "srsMetadata": {
+        "xpValue": 25,
+        "initialIntervalDays": 1,
+        "easeFactor": 2.5
+      },
+      "createdAt": "2026-11-26T09:00:00Z",
+      "author": "Peera.My demo"
+    }
+  }
+]
