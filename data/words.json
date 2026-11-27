@@ -1,866 +1,3610 @@
 [
   {
-    "id": "de-n-001",
-    "slug": "fernweh",
-    "language": {
-      "code": "de-DE",
-      "name": "გერმანული",
-      "dialect": "Hochdeutsch"
-    },
-    "core": {
-      "term": "Fernweh",
-      "lemma": "Fernweh",
-      "phonetic": {
-        "ipa": "/ˈfɛʁnˌveː/",
-        "syllables": [
-          "Fern",
-          "weh"
-        ],
-        "stressIndex": 0,
-        "georgian": {
-          "transcription": "ფერნვე",
-          "syllables": [
-            "ფერნ",
-            "ვე"
-          ],
-          "stressIndex": 0
-        }
-      },
-      "partOfSpeech": {
-        "code": "noun",
-        "labelKa": "არსებითი სახელი",
-        "labelEn": "Noun",
-        "countability": "uncountable",
-        "gender": "neuter"
-      },
-      "level": {
-        "cefr": "B2",
-        "difficultyScore": 6,
-        "frequencyRank": 14200,
-        "register": "neutral / literary"
+    "id": "de-0001",
+    "language": "de",
+    "term": "Hallo",
+    "phonetic": "ჰალო",
+    "translation": "გამარჯობა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Hallo, Anna!",
+        "translation": "გამარჯობა, ანა!"
       }
+    ],
+    "media": {
+      "icon": "book"
     },
-    "semantics": {
-      "primaryTranslation": "შორეულისკენ ლტოლვა",
-      "alternativeTranslations": [
-        "მოგზაურობის წყურვილი",
-        "უცხო მხარეების მონატრება"
-      ],
-      "definition": {
-        "targetLang": "Die Sehnsucht nach fernen Orten.",
-        "nativeLang": "ლტოლვა შორეული, უცნობი ადგილებისკენ — Heimweh-ის (სახლის მონატრების) საპირისპირო."
-      },
-      "nuance": "Fernweh იმ ადგილის მონატრებაა, სადაც შესაძლოა არასდროს ყოფილხარ. ეს არ არის უბრალოდ დასასვენებლად წასვლის სურვილი.",
-      "categories": [
-        "მოგზაურობა",
-        "ემოციები"
-      ],
-      "tags": [
-        "abstract",
-        "emotion",
-        "untranslatable-feel"
-      ]
+    "audio": {
+      "lang": "de-DE"
     },
-    "morphology": {
-      "plural": null,
-      "wordFamily": [
-        {
-          "term": "fern",
-          "pos": "adjective",
-          "translation": "შორეული"
-        },
-        {
-          "term": "die Sehnsucht",
-          "pos": "noun",
-          "translation": "ლტოლვა"
-        }
-      ],
-      "etymology": "Fern (შორი) + Weh (ტკივილი). სიტყვა Heimweh-ის (Heim + Weh) მსგავსად არის აგებული."
-    },
-    "usage": {
-      "collocations": [
-        {
-          "text": "Fernweh haben",
-          "ka": "შორეულისკენ ლტოლვა გაქვს"
-        },
-        {
-          "text": "von Fernweh gepackt werden",
-          "ka": "ლტოლვამ შეგიპყრო"
-        }
-      ],
-      "examples": [
-        {
-          "id": "ex-001",
-          "context": "ყოველდღიური",
-          "sentence": "Im Winter bekomme ich immer Fernweh.",
-          "translation": "ზამთარში ყოველთვის შორეულისკენ ლტოლვა მეუფლება.",
-          "highlight": "Fernweh",
-          "phoneticKa": "იმ ვინტერ ბეკომე იხ იმერ ფერნვეე."
-        },
-        {
-          "id": "ex-002",
-          "context": "ლიტერატურა",
-          "sentence": "Sein Fernweh trieb ihn bis nach Patagonien.",
-          "translation": "შორეულისკენ ლტოლვამ პატაგონიამდე მიიყვანა.",
-          "highlight": "Fernweh",
-          "phoneticKa": "ზაინ ფერნვეე ტრიბ იჰნ ბის ნახ პატაგონიენ."
-        }
-      ],
-      "grammarTip": "საშუალო სქესის არსებითი სახელია (das Fernweh) და ჩვეულებრივ მხოლობითში გამოიყენება.",
-      "commonMistakes": [
-        {
-          "wrong": "Ich habe der Fernweh.",
-          "correct": "Ich habe Fernweh.",
-          "reason": "Fernweh არტიკლის გარეშე გამოიყენება, როცა ზოგად განცდაზეა საუბარი."
-        }
-      ]
-    },
-    "lexicalRelations": {
-      "synonyms": [
-        {
-          "term": "Reiselust",
-          "nuance": "მოგზაურობის სურვილი, ნაკლებად ემოციური"
-        },
-        {
-          "term": "Sehnsucht",
-          "nuance": "ზოგადი ლტოლვა"
-        }
-      ],
-      "antonyms": [
-        {
-          "term": "Heimweh",
-          "translation": "სახლის მონატრება"
-        }
-      ],
-      "confusables": [
-        {
-          "term": "Wanderlust",
-          "difference": "Wanderlust ინგლისურშიც გადავიდა და ხეტიალის სიყვარულს ნიშნავს; Fernweh უფრო ტკივილიანი ლტოლვაა."
-        }
-      ]
-    },
-    "exercises": {
-      "quizDistractors": [
-        "სახლის მონატრება",
-        "სამსახურის დასრულება",
-        "სწრაფი მოგზაურობა"
-      ],
-      "fillInTheBlank": {
-        "prompt": "Im Winter habe ich oft _______.",
-        "answer": "Fernweh",
-        "hint": "იწყება “Fern...”-ით და ნიშნავს შორეულისკენ ლტოლვას"
-      }
-    },
-    "mediaAndSystem": {
-      "audio": {
-        "ttsEngine": "WebSpeechAPI",
-        "speechRate": 0.9,
-        "customAudioUrl": null
-      },
-      "srsMetadata": {
-        "xpValue": 25,
-        "initialIntervalDays": 1,
-        "easeFactor": 2.5
-      },
-      "createdAt": "2026-11-26T09:00:00Z",
-      "author": "Peera.My demo"
-    }
+    "position": 1
   },
   {
-    "id": "de-n-002",
-    "slug": "feierabend",
-    "language": {
-      "code": "de-DE",
-      "name": "გერმანული",
-      "dialect": "Hochdeutsch"
-    },
-    "core": {
-      "term": "Feierabend",
-      "lemma": "Feierabend",
-      "phonetic": {
-        "ipa": "/ˈfaɪ̯ɐˌʔaːbn̩t/",
-        "syllables": [
-          "Fei",
-          "er",
-          "a",
-          "bend"
-        ],
-        "stressIndex": 0,
-        "georgian": {
-          "transcription": "ფაიერაბენდ",
-          "syllables": [
-            "ფაი",
-            "ერ",
-            "ა",
-            "ბენდ"
-          ],
-          "stressIndex": 0
-        }
-      },
-      "partOfSpeech": {
-        "code": "noun",
-        "labelKa": "არსებითი სახელი",
-        "labelEn": "Noun",
-        "countability": "uncountable",
-        "gender": "masculine"
-      },
-      "level": {
-        "cefr": "B1",
-        "difficultyScore": 4,
-        "frequencyRank": 9800,
-        "register": "everyday"
+    "id": "de-0002",
+    "language": "de",
+    "term": "Guten Morgen",
+    "phonetic": "გუტენ მორგენ",
+    "translation": "დილა მშვიდობისა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Guten Morgen, Anna!",
+        "translation": "დილა მშვიდობისა, ანა!"
       }
+    ],
+    "media": {
+      "icon": "bubbles"
     },
-    "semantics": {
-      "primaryTranslation": "სამუშაო დღის დასასრული",
-      "alternativeTranslations": [
-        "სამუშაოს შემდგომი თავისუფალი დრო",
-        "დასვენების დრო"
-      ],
-      "definition": {
-        "targetLang": "Das Ende der täglichen Arbeitszeit und die Freizeit danach.",
-        "nativeLang": "დღიური სამუშაო დროის დასრულება და მის შემდეგ თავისუფალი დრო."
-      },
-      "nuance": "ხშირად გამოიყენება როგორც მისალმება-გამოთხოვება: „Schönen Feierabend!“ — კარგ საღამოს გისურვებ სამუშაოს შემდეგ.",
-      "categories": [
-        "სამუშაო",
-        "ყოველდღიურობა"
-      ],
-      "tags": [
-        "daily-life",
-        "work"
-      ]
+    "audio": {
+      "lang": "de-DE"
     },
-    "morphology": {
-      "plural": null,
-      "wordFamily": [
-        {
-          "term": "die Feier",
-          "pos": "noun",
-          "translation": "დღესასწაული, ზეიმი"
-        },
-        {
-          "term": "der Abend",
-          "pos": "noun",
-          "translation": "საღამო"
-        }
-      ],
-      "etymology": "Feier (დღესასწაული, დასვენება) + Abend (საღამო): თავდაპირველად დღესასწაულის წინა საღამოს ნიშნავდა."
-    },
-    "usage": {
-      "collocations": [
-        {
-          "text": "Feierabend machen",
-          "ka": "სამუშაოს დასრულება"
-        },
-        {
-          "text": "Schönen Feierabend!",
-          "ka": "კარგ საღამოს სამუშაოს შემდეგ!"
-        }
-      ],
-      "examples": [
-        {
-          "id": "ex-001",
-          "context": "სამუშაო",
-          "sentence": "Um fünf Uhr ist Feierabend.",
-          "translation": "ხუთზე სამუშაო დღე მთავრდება.",
-          "highlight": "Feierabend",
-          "phoneticKa": "უმ ფუნფ უარ ისტ ფაირაბენდ."
-        },
-        {
-          "id": "ex-002",
-          "context": "ყოველდღიური",
-          "sentence": "Nach Feierabend gehen wir oft spazieren.",
-          "translation": "სამუშაოს შემდეგ ხშირად სასეირნოდ მივდივართ.",
-          "highlight": "Feierabend",
-          "phoneticKa": "ნახ ფაირაბენდ გეენ ვირ ოფტ შპაციერენ."
-        }
-      ],
-      "grammarTip": "მამრობითი სქესის არსებითი სახელია: der Feierabend.",
-      "commonMistakes": [
-        {
-          "wrong": "Ich habe die Feierabend.",
-          "correct": "Ich habe Feierabend.",
-          "reason": "ამ გამოთქმაში არტიკლი არ გამოიყენება: Feierabend haben."
-        }
-      ]
-    },
-    "lexicalRelations": {
-      "synonyms": [
-        {
-          "term": "Arbeitsende",
-          "nuance": "უფრო ოფიციალური"
-        },
-        {
-          "term": "Dienstschluss",
-          "nuance": "სამსახურებრივი, ოფიციალური"
-        }
-      ],
-      "antonyms": [
-        {
-          "term": "Arbeitsbeginn",
-          "translation": "სამუშაოს დაწყება"
-        }
-      ],
-      "confusables": [
-        {
-          "term": "Feiertag",
-          "difference": "Feiertag არის დასვენების დღე (დღესასწაული), Feierabend კი სამუშაო დღის დასასრული."
-        }
-      ]
-    },
-    "exercises": {
-      "quizDistractors": [
-        "სადილის დრო",
-        "დღესასწაულის დღე",
-        "სამუშაოს დაწყება"
-      ],
-      "fillInTheBlank": {
-        "prompt": "Um sechs Uhr habe ich endlich _______.",
-        "answer": "Feierabend",
-        "hint": "იწყება “Feier...”-ით"
-      }
-    },
-    "mediaAndSystem": {
-      "audio": {
-        "ttsEngine": "WebSpeechAPI",
-        "speechRate": 0.9,
-        "customAudioUrl": null
-      },
-      "srsMetadata": {
-        "xpValue": 20,
-        "initialIntervalDays": 1,
-        "easeFactor": 2.5
-      },
-      "createdAt": "2026-11-26T09:00:00Z",
-      "author": "Peera.My demo"
-    }
+    "position": 2
   },
   {
-    "id": "en-adv-001",
-    "slug": "serendipity",
-    "language": {
-      "code": "en-US",
-      "name": "ინგლისური",
-      "dialect": "American / British Universal"
-    },
-    "core": {
-      "term": "Serendipity",
-      "lemma": "serendipity",
-      "phonetic": {
-        "ipa": "/ˌser.ənˈdɪp.ə.ti/",
-        "syllables": [
-          "ser",
-          "en",
-          "dip",
-          "i",
-          "ty"
-        ],
-        "stressIndex": 2,
-        "georgian": {
-          "transcription": "სერენდიფითი",
-          "syllables": [
-            "სე",
-            "რენ",
-            "დიფ",
-            "ი",
-            "თი"
-          ],
-          "stressIndex": 2
-        }
-      },
-      "partOfSpeech": {
-        "code": "noun",
-        "labelKa": "არსებითი სახელი",
-        "labelEn": "Noun",
-        "countability": "uncountable",
-        "gender": null
-      },
-      "level": {
-        "cefr": "C1",
-        "difficultyScore": 8,
-        "frequencyRank": 4820,
-        "register": "literary / educated"
+    "id": "de-0003",
+    "language": "de",
+    "term": "Guten Abend",
+    "phonetic": "გუტენ აბენტ",
+    "translation": "საღამო მშვიდობისა",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Guten Abend, Herr Müller!",
+        "translation": "საღამო მშვიდობისა, ბატონო მიულერ!"
       }
+    ],
+    "media": {
+      "icon": "cap"
     },
-    "semantics": {
-      "primaryTranslation": "ბედნიერი შემთხვევითობა",
-      "alternativeTranslations": [
-        "იღბლიანი აღმოჩენა",
-        "მოულოდნელი წარმატება"
-      ],
-      "definition": {
-        "targetLang": "The occurrence and development of events by chance in a happy or beneficial way.",
-        "nativeLang": "სასიამოვნო, ღირებული ან სასარგებლო რამის მოულოდნელად, დაუგეგმავად აღმოჩენის უნარი ან ფაქტი."
-      },
-      "nuance": "გამოიყენება მხოლოდ დადებითი და სასიამოვნო შემთხვევითობის აღსაწერად (განსხვავებით ნეიტრალური “coincidence”-სგან).",
-      "categories": [
-        "ემოციები და ფსიქოლოგია",
-        "ლიტერატურული ლექსიკა",
-        "ფილოსოფია"
-      ],
-      "tags": [
-        "abstract",
-        "positive",
-        "untranslatable-feel"
-      ]
+    "audio": {
+      "lang": "de-DE"
     },
-    "morphology": {
-      "plural": null,
-      "wordFamily": [
-        {
-          "term": "serendipitous",
-          "pos": "adjective",
-          "translation": "ბედნიერად შემთხვევითი"
-        },
-        {
-          "term": "serendipitously",
-          "pos": "adverb",
-          "translation": "ბედნიერი შემთხვევითობით"
-        }
-      ],
-      "etymology": "სიტყვა 1754 წელს შექმნა ინგლისელმა მწერალმა ჰორას უოლპოლმა სპარსული ზღაპრის — „სერენდიპის სამი პრინცის“ შთაგონებით."
-    },
-    "usage": {
-      "collocations": [
-        {
-          "text": "pure serendipity",
-          "ka": "სუფთა ბედნიერი შემთხვევითობა"
-        },
-        {
-          "text": "a stroke of serendipity",
-          "ka": "იღბლიანი შემთხვევის წყალობით"
-        },
-        {
-          "text": "happy serendipity",
-          "ka": "სასიამოვნო დამთხვევა"
-        }
-      ],
-      "examples": [
-        {
-          "id": "ex-001",
-          "context": "ყოველდღიური / ბიზნესი",
-          "sentence": "Meeting my co-founder at a delayed flight gate was pure serendipity.",
-          "translation": "გადადებული რეისის გასასვლელთან ჩემი თანადამფუძნებლის გაცნობა სუფთა ბედნიერი შემთხვევითობა იყო.",
-          "highlight": "pure serendipity",
-          "phoneticKa": "მითინგ მაი კოუფაუნდერ ეთ ა დილეიდ ფლაით გეით ვოზ პიუა სერენდიპიტი."
-        },
-        {
-          "id": "ex-002",
-          "context": "მეცნიერება",
-          "sentence": "Penicillin was discovered through scientific serendipity.",
-          "translation": "პენიცილინი მეცნიერული ბედნიერი შემთხვევითობის წყალობით აღმოაჩინეს.",
-          "highlight": "serendipity",
-          "phoneticKa": "პენისილინ ვოზ დისქავერდ თრუ საიენტიფიქ სერენდიპიტი."
-        }
-      ],
-      "grammarTip": "არათვლადი არსებითი სახელია — არასდროს დაურთოთ განუსაზღვრელი არტიკლი “a” (არასწორია: a serendipity) და არ გამოიყენოთ მრავლობით რიცხვში.",
-      "commonMistakes": [
-        {
-          "wrong": "It was a great serendipity to meet you.",
-          "correct": "It was pure serendipity to meet you.",
-          "reason": "არათვლად არსებით სახელთან არტიკლი “a” არ იწერება."
-        }
-      ]
-    },
-    "lexicalRelations": {
-      "synonyms": [
-        {
-          "term": "fluke",
-          "nuance": "უფრო სასაუბრო, მოულოდნელი იღბალი"
-        },
-        {
-          "term": "providence",
-          "nuance": "უფრო ამაღლებული, ბედისწერისეული"
-        },
-        {
-          "term": "good fortune",
-          "nuance": "ზოგადი იღბალი"
-        }
-      ],
-      "antonyms": [
-        {
-          "term": "misfortune",
-          "translation": "უიღბლობა"
-        },
-        {
-          "term": "premeditation",
-          "translation": "წინასწარი განზრახვა / დაგეგმვა"
-        }
-      ],
-      "confusables": [
-        {
-          "term": "Coincidence",
-          "difference": "Coincidence უბრალოდ დამთხვევაა (შეიძლება ცუდიც იყოს), Serendipity კი ყოველთვის სასიამოვნო აღმოჩენაა."
-        }
-      ]
-    },
-    "exercises": {
-      "quizDistractors": [
-        "წინასწარ დაგეგმილი შეხვედრა",
-        "ხანგრძლივი მარტოობის განცდა",
-        "გადაუჭრელი პრობლემა"
-      ],
-      "fillInTheBlank": {
-        "prompt": "Finding that rare book in a tiny village shop was pure _______.",
-        "answer": "serendipity",
-        "hint": "იწყება “ser...”-ით და ნიშნავს ბედნიერ შემთხვევითობას"
-      }
-    },
-    "mediaAndSystem": {
-      "audio": {
-        "ttsEngine": "WebSpeechAPI",
-        "speechRate": 0.9,
-        "customAudioUrl": null
-      },
-      "srsMetadata": {
-        "xpValue": 25,
-        "initialIntervalDays": 1,
-        "easeFactor": 2.5
-      },
-      "createdAt": "2026-11-25T11:30:00Z",
-      "author": "LexiFlow Editorial"
-    }
+    "position": 3
   },
   {
-    "id": "en-adj-002",
-    "slug": "reluctant",
-    "language": {
-      "code": "en-US",
-      "name": "ინგლისური",
-      "dialect": "American / British Universal"
-    },
-    "core": {
-      "term": "Reluctant",
-      "lemma": "reluctant",
-      "phonetic": {
-        "ipa": "/rɪˈlʌk.tənt/",
-        "syllables": [
-          "re",
-          "luc",
-          "tant"
-        ],
-        "stressIndex": 1,
-        "georgian": {
-          "transcription": "რილაქთენთ",
-          "syllables": [
-            "რი",
-            "ლაქ",
-            "თენთ"
-          ],
-          "stressIndex": 1
-        }
-      },
-      "partOfSpeech": {
-        "code": "adjective",
-        "labelKa": "ზედსართავი სახელი",
-        "labelEn": "Adjective",
-        "countability": null,
-        "gender": null
-      },
-      "level": {
-        "cefr": "B2",
-        "difficultyScore": 5,
-        "frequencyRank": 5100,
-        "register": "neutral"
+    "id": "de-0004",
+    "language": "de",
+    "term": "Tschüss",
+    "phonetic": "ჩიუს",
+    "translation": "ნახვამდის",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Tschüss, bis morgen!",
+        "translation": "ნახვამდის, ხვალამდე!"
       }
+    ],
+    "media": {
+      "icon": "calendar"
     },
-    "semantics": {
-      "primaryTranslation": "უხალისო",
-      "alternativeTranslations": [
-        "გაუბედავი",
-        "ყოყმანით მოქმედი"
-      ],
-      "definition": {
-        "targetLang": "Unwilling and hesitant; disinclined to do something.",
-        "nativeLang": "ვისაც არ უნდა რაიმეს გაკეთება და ყოყმანობს."
-      },
-      "nuance": "reluctant-ი ნიშნავს „არ მინდა, მაგრამ შეიძლება მაინც გავაკეთო“. unwilling უფრო კატეგორიულია.",
-      "categories": [
-        "ემოციები",
-        "ქცევა"
-      ],
-      "tags": [
-        "adjective",
-        "attitude"
-      ]
+    "audio": {
+      "lang": "de-DE"
     },
-    "morphology": {
-      "plural": null,
-      "wordFamily": [
-        {
-          "term": "reluctance",
-          "pos": "noun",
-          "translation": "უხალისობა"
-        },
-        {
-          "term": "reluctantly",
-          "pos": "adverb",
-          "translation": "უხალისოდ"
-        }
-      ],
-      "etymology": "ლათინური reluctari — „წინააღმდეგობის გაწევა, ბრძოლა“."
-    },
-    "usage": {
-      "collocations": [
-        {
-          "text": "reluctant to speak",
-          "ka": "ლაპარაკის უხალისობა"
-        },
-        {
-          "text": "a reluctant hero",
-          "ka": "უნებლიე გმირი"
-        }
-      ],
-      "examples": [
-        {
-          "id": "ex-001",
-          "context": "ყოველდღიური",
-          "sentence": "She was reluctant to speak first.",
-          "translation": "მას არ უნდოდა პირველს ეთქვა.",
-          "highlight": "reluctant",
-          "phoneticKa": "ში ვოზ რილაქთენთ თუ სპიქ ფესტ."
-        },
-        {
-          "id": "ex-002",
-          "context": "ყოველდღიური",
-          "sentence": "He gave a reluctant smile.",
-          "translation": "მან უხალისო ღიმილი გამოსცა.",
-          "highlight": "reluctant",
-          "phoneticKa": "ჰი გეივ ა რილაქთენთ სმაილ."
-        }
-      ],
-      "grammarTip": "ხშირად გამოიყენება კონსტრუქციით reluctant + to + ზმნა (reluctant to go).",
-      "commonMistakes": [
-        {
-          "wrong": "She was reluctant going.",
-          "correct": "She was reluctant to go.",
-          "reason": "reluctant-ის შემდეგ მოდის to + ზმნა, არა -ing ფორმა."
-        }
-      ]
-    },
-    "lexicalRelations": {
-      "synonyms": [
-        {
-          "term": "unwilling",
-          "nuance": "უფრო კატეგორიული"
-        },
-        {
-          "term": "hesitant",
-          "nuance": "უფრო მერყევი, ნაკლებ წინააღმდეგი"
-        }
-      ],
-      "antonyms": [
-        {
-          "term": "willing",
-          "translation": "მზად მყოფი"
-        },
-        {
-          "term": "eager",
-          "translation": "მოუთმენელი, მონდომებული"
-        }
-      ],
-      "confusables": [
-        {
-          "term": "Reticent",
-          "difference": "Reticent ნიშნავს ცოტა სასაუბროს, თავშეკავებულს; reluctant კი ნიშნავს რაიმეს გაკეთების უხალისობას."
-        }
-      ]
-    },
-    "exercises": {
-      "quizDistractors": [
-        "მონდომებული",
-        "გაბედული",
-        "ძალიან მხიარული"
-      ],
-      "fillInTheBlank": {
-        "prompt": "He was _______ to admit his mistake.",
-        "answer": "reluctant",
-        "hint": "იწყება “re...”-ით და ნიშნავს უხალისოს"
-      }
-    },
-    "mediaAndSystem": {
-      "audio": {
-        "ttsEngine": "WebSpeechAPI",
-        "speechRate": 0.9,
-        "customAudioUrl": null
-      },
-      "srsMetadata": {
-        "xpValue": 20,
-        "initialIntervalDays": 1,
-        "easeFactor": 2.5
-      },
-      "createdAt": "2026-11-26T09:00:00Z",
-      "author": "Peera.My demo"
-    }
+    "position": 4
   },
   {
-    "id": "en-adj-003",
-    "slug": "resilient",
-    "language": {
-      "code": "en-US",
-      "name": "ინგლისური",
-      "dialect": "American / British Universal"
-    },
-    "core": {
-      "term": "Resilient",
-      "lemma": "resilient",
-      "phonetic": {
-        "ipa": "/rɪˈzɪl.i.ənt/",
-        "syllables": [
-          "re",
-          "sil",
-          "i",
-          "ent"
-        ],
-        "stressIndex": 1,
-        "georgian": {
-          "transcription": "რიზილიენთ",
-          "syllables": [
-            "რი",
-            "ზილ",
-            "ი",
-            "ენთ"
-          ],
-          "stressIndex": 1
-        }
-      },
-      "partOfSpeech": {
-        "code": "adjective",
-        "labelKa": "ზედსართავი სახელი",
-        "labelEn": "Adjective",
-        "countability": null,
-        "gender": null
-      },
-      "level": {
-        "cefr": "C1",
-        "difficultyScore": 7,
-        "frequencyRank": 6300,
-        "register": "educated"
+    "id": "de-0005",
+    "language": "de",
+    "term": "Danke",
+    "phonetic": "დანქე",
+    "translation": "მადლობა",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Danke für deine Hilfe.",
+        "translation": "მადლობა დახმარებისთვის."
       }
+    ],
+    "media": {
+      "icon": "gamepad"
     },
-    "semantics": {
-      "primaryTranslation": "მედეგი, გამძლე",
-      "alternativeTranslations": [
-        "სწრაფად აღმდგენი",
-        "სტრესისადმი გამძლე"
-      ],
-      "definition": {
-        "targetLang": "Able to recover quickly from difficulties; tough.",
-        "nativeLang": "ვინც სირთულეების შემდეგ სწრაფად იკრებს ძალებს და ძველ მდგომარეობას უბრუნდება."
-      },
-      "nuance": "ადამიანზეც ითქმის და ეკონომიკაზეც, სისტემაზეც, მასალაზეც. მთავარია დარტყმის შემდეგ აღდგენის უნარი.",
-      "categories": [
-        "ფსიქოლოგია",
-        "პიროვნება"
-      ],
-      "tags": [
-        "adjective",
-        "positive"
-      ]
+    "audio": {
+      "lang": "de-DE"
     },
-    "morphology": {
-      "plural": null,
-      "wordFamily": [
-        {
-          "term": "resilience",
-          "pos": "noun",
-          "translation": "მედეგობა, გამძლეობა"
-        }
-      ],
-      "etymology": "ლათინური resilire — „უკან გადახტომა, უკან გამოხტომა“."
-    },
-    "usage": {
-      "collocations": [
-        {
-          "text": "remarkably resilient",
-          "ka": "გასაკვირად მედეგი"
-        },
-        {
-          "text": "a resilient economy",
-          "ka": "მედეგი ეკონომიკა"
-        }
-      ],
-      "examples": [
-        {
-          "id": "ex-001",
-          "context": "ყოველდღიური",
-          "sentence": "Children are often more resilient than adults expect.",
-          "translation": "ბავშვები ხშირად უფრო მედეგები არიან, ვიდრე უფროსებს ჰგონიათ.",
-          "highlight": "resilient",
-          "phoneticKa": "ჩილდრენ არ ოფენ მორ რიზილიენთ დან ადალთს იქსპექთ."
-        },
-        {
-          "id": "ex-002",
-          "context": "ბიზნესი",
-          "sentence": "The economy proved resilient during the crisis.",
-          "translation": "კრიზისის დროს ეკონომიკა მედეგი აღმოჩნდა.",
-          "highlight": "resilient",
-          "phoneticKa": "დი იკონომი პრუვდ რიზილიენთ დიურინგ დე კრაისის."
-        }
-      ],
-      "grammarTip": "ზედსართავია resilient; არსებითი სახელია resilience.",
-      "commonMistakes": [
-        {
-          "wrong": "She has a great resilient.",
-          "correct": "She has great resilience.",
-          "reason": "არსებითი სახელი საჭიროა: resilience, არა resilient."
-        }
-      ]
-    },
-    "lexicalRelations": {
-      "synonyms": [
-        {
-          "term": "tough",
-          "nuance": "უფრო სასაუბრო, ძლიერი"
-        },
-        {
-          "term": "adaptable",
-          "nuance": "ახალ პირობებს ეგუება"
-        }
-      ],
-      "antonyms": [
-        {
-          "term": "fragile",
-          "translation": "მყიფე"
-        },
-        {
-          "term": "vulnerable",
-          "translation": "მოწყვლადი"
-        }
-      ],
-      "confusables": [
-        {
-          "term": "Resistant",
-          "difference": "Resistant ნიშნავს წინააღმდეგობის გაწევას (მაგ. წყალგაუმტარი); resilient კი ნიშნავს დარტყმის შემდეგ აღდგენას."
-        }
-      ]
-    },
-    "exercises": {
-      "quizDistractors": [
-        "უმწეო",
-        "ძალიან სწრაფი",
-        "ძველი"
-      ],
-      "fillInTheBlank": {
-        "prompt": "After the setback, she proved remarkably _______.",
-        "answer": "resilient",
-        "hint": "იწყება “res...”-ით"
+    "position": 5
+  },
+  {
+    "id": "de-0006",
+    "language": "de",
+    "term": "Bitte",
+    "phonetic": "ბიტე",
+    "translation": "გთხოვთ / არაფრის",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Bitte, kommen Sie herein.",
+        "translation": "გთხოვთ, შემოდით."
       }
+    ],
+    "media": {
+      "icon": "book"
     },
-    "mediaAndSystem": {
-      "audio": {
-        "ttsEngine": "WebSpeechAPI",
-        "speechRate": 0.9,
-        "customAudioUrl": null
-      },
-      "srsMetadata": {
-        "xpValue": 25,
-        "initialIntervalDays": 1,
-        "easeFactor": 2.5
-      },
-      "createdAt": "2026-11-26T09:00:00Z",
-      "author": "Peera.My demo"
-    }
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 6
+  },
+  {
+    "id": "de-0007",
+    "language": "de",
+    "term": "Ja",
+    "phonetic": "ია",
+    "translation": "დიახ",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Ja, ich bin hier.",
+        "translation": "დიახ, აქ ვარ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 7
+  },
+  {
+    "id": "de-0008",
+    "language": "de",
+    "term": "Nein",
+    "phonetic": "ნაინ",
+    "translation": "არა",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Nein, das ist falsch.",
+        "translation": "არა, ეს არასწორია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 8
+  },
+  {
+    "id": "de-0009",
+    "language": "de",
+    "term": "ich",
+    "phonetic": "იხ",
+    "translation": "მე",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich lerne Deutsch.",
+        "translation": "მე გერმანულს ვსწავლობ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 9
+  },
+  {
+    "id": "de-0010",
+    "language": "de",
+    "term": "du",
+    "phonetic": "დუ",
+    "translation": "შენ",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Du bist nett.",
+        "translation": "შენ კეთილი ხარ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 10
+  },
+  {
+    "id": "de-0011",
+    "language": "de",
+    "term": "er",
+    "phonetic": "ეა",
+    "translation": "ის (მამრ.)",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Er ist mein Bruder.",
+        "translation": "ის ჩემი ძმაა."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 11
+  },
+  {
+    "id": "de-0012",
+    "language": "de",
+    "term": "sie",
+    "phonetic": "ზი",
+    "translation": "ის (მდედრ.) / ისინი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Sie lernt Deutsch.",
+        "translation": "ის გერმანულს სწავლობს."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 12
+  },
+  {
+    "id": "de-0013",
+    "language": "de",
+    "term": "wir",
+    "phonetic": "ვია",
+    "translation": "ჩვენ",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Wir sind Freunde.",
+        "translation": "ჩვენ მეგობრები ვართ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 13
+  },
+  {
+    "id": "de-0014",
+    "language": "de",
+    "term": "sein",
+    "phonetic": "ზაინ",
+    "translation": "ყოფნა",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich will Lehrer sein.",
+        "translation": "მინდა მასწავლებელი ვიყო."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 14
+  },
+  {
+    "id": "de-0015",
+    "language": "de",
+    "term": "haben",
+    "phonetic": "ჰაბენ",
+    "translation": "ქონა",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Ich habe ein Buch.",
+        "translation": "მე წიგნი მაქვს."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 15
+  },
+  {
+    "id": "de-0016",
+    "language": "de",
+    "term": "heißen",
+    "phonetic": "ჰაისენ",
+    "translation": "რქმევა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich heiße Nino.",
+        "translation": "მე მქვია ნინო."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 16
+  },
+  {
+    "id": "de-0017",
+    "language": "de",
+    "term": "kommen",
+    "phonetic": "კომენ",
+    "translation": "მოსვლა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Ich komme aus Georgien.",
+        "translation": "მე საქართველოდან ვარ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 17
+  },
+  {
+    "id": "de-0018",
+    "language": "de",
+    "term": "wohnen",
+    "phonetic": "ვონენ",
+    "translation": "ცხოვრება",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Ich wohne in Berlin.",
+        "translation": "მე ბერლინში ვცხოვრობ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 18
+  },
+  {
+    "id": "de-0019",
+    "language": "de",
+    "term": "sprechen",
+    "phonetic": "შპრეხენ",
+    "translation": "საუბარი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich spreche Deutsch.",
+        "translation": "მე გერმანულად ვსაუბრობ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 19
+  },
+  {
+    "id": "de-0020",
+    "language": "de",
+    "term": "lernen",
+    "phonetic": "ლერნენ",
+    "translation": "სწავლა",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Wir lernen jeden Tag.",
+        "translation": "ჩვენ ყოველდღე ვსწავლობთ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 20
+  },
+  {
+    "id": "de-0021",
+    "language": "de",
+    "term": "das Buch",
+    "phonetic": "დას ბუხ",
+    "translation": "წიგნი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Das Buch ist interessant.",
+        "translation": "წიგნი საინტერესოა."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 21
+  },
+  {
+    "id": "de-0022",
+    "language": "de",
+    "term": "der Tisch",
+    "phonetic": "დეა ტიშ",
+    "translation": "მაგიდა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Der Tisch ist groß.",
+        "translation": "მაგიდა დიდია."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 22
+  },
+  {
+    "id": "de-0023",
+    "language": "de",
+    "term": "der Stuhl",
+    "phonetic": "დეა შტულ",
+    "translation": "სკამი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Der Stuhl ist bequem.",
+        "translation": "სკამი კომფორტულია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 23
+  },
+  {
+    "id": "de-0024",
+    "language": "de",
+    "term": "die Schule",
+    "phonetic": "დი შულე",
+    "translation": "სკოლა",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Die Schule ist neu.",
+        "translation": "სკოლა ახალია."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 24
+  },
+  {
+    "id": "de-0025",
+    "language": "de",
+    "term": "der Lehrer",
+    "phonetic": "დეა ლერერ",
+    "translation": "მასწავლებელი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Der Lehrer erklärt die Regel.",
+        "translation": "მასწავლებელი წესს ხსნის."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 25
+  },
+  {
+    "id": "de-0026",
+    "language": "de",
+    "term": "die Lehrerin",
+    "phonetic": "დი ლერერინ",
+    "translation": "მასწავლებელი (ქალი)",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Die Lehrerin ist freundlich.",
+        "translation": "მასწავლებელი კეთილია."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 26
+  },
+  {
+    "id": "de-0027",
+    "language": "de",
+    "term": "die Familie",
+    "phonetic": "დი ფამილიე",
+    "translation": "ოჯახი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Meine Familie ist groß.",
+        "translation": "ჩემი ოჯახი დიდია."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 27
+  },
+  {
+    "id": "de-0028",
+    "language": "de",
+    "term": "die Mutter",
+    "phonetic": "დი მუტერ",
+    "translation": "დედა",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Meine Mutter kocht.",
+        "translation": "დედაჩემი ამზადებს."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 28
+  },
+  {
+    "id": "de-0029",
+    "language": "de",
+    "term": "der Vater",
+    "phonetic": "დეა ფატერ",
+    "translation": "მამა",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Mein Vater arbeitet.",
+        "translation": "მამაჩემი მუშაობს."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 29
+  },
+  {
+    "id": "de-0030",
+    "language": "de",
+    "term": "das Kind",
+    "phonetic": "დას კინდ",
+    "translation": "ბავშვი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Das Kind spielt.",
+        "translation": "ბავშვი თამაშობს."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 30
+  },
+  {
+    "id": "de-0031",
+    "language": "de",
+    "term": "das Wasser",
+    "phonetic": "დას ვასერ",
+    "translation": "წყალი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich trinke Wasser.",
+        "translation": "მე წყალს ვსვამ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 31
+  },
+  {
+    "id": "de-0032",
+    "language": "de",
+    "term": "das Brot",
+    "phonetic": "დას ბროტ",
+    "translation": "პური",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Ich esse Brot.",
+        "translation": "მე პურს ვჭამ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 32
+  },
+  {
+    "id": "de-0033",
+    "language": "de",
+    "term": "der Apfel",
+    "phonetic": "დეა აფელ",
+    "translation": "ვაშლი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Der Apfel ist rot.",
+        "translation": "ვაშლი წითელია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 33
+  },
+  {
+    "id": "de-0034",
+    "language": "de",
+    "term": "der Kaffee",
+    "phonetic": "დეა კაფე",
+    "translation": "ყავა",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich trinke Kaffee.",
+        "translation": "მე ყავას ვსვამ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 34
+  },
+  {
+    "id": "de-0035",
+    "language": "de",
+    "term": "die Milch",
+    "phonetic": "დი მილხ",
+    "translation": "რძე",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Die Milch ist frisch.",
+        "translation": "რძე ახალია."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 35
+  },
+  {
+    "id": "de-0036",
+    "language": "de",
+    "term": "essen",
+    "phonetic": "ესენ",
+    "translation": "ჭამა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Wir essen zusammen.",
+        "translation": "ჩვენ ერთად ვჭამთ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 36
+  },
+  {
+    "id": "de-0037",
+    "language": "de",
+    "term": "trinken",
+    "phonetic": "ტრინკენ",
+    "translation": "სმა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Sie trinkt Tee.",
+        "translation": "ის ჩაის სვამს."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 37
+  },
+  {
+    "id": "de-0038",
+    "language": "de",
+    "term": "kaufen",
+    "phonetic": "კაუფენ",
+    "translation": "ყიდვა",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Ich kaufe Obst.",
+        "translation": "მე ხილს ვყიდულობ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 38
+  },
+  {
+    "id": "de-0039",
+    "language": "de",
+    "term": "kosten",
+    "phonetic": "კოსტენ",
+    "translation": "ფასის ქონა",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Wie viel kostet das?",
+        "translation": "რა ღირს ეს?"
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 39
+  },
+  {
+    "id": "de-0040",
+    "language": "de",
+    "term": "gut",
+    "phonetic": "გუტ",
+    "translation": "კარგი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Das Essen ist gut.",
+        "translation": "საჭმელი კარგია."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 40
+  },
+  {
+    "id": "de-0041",
+    "language": "de",
+    "term": "schön",
+    "phonetic": "შიონ",
+    "translation": "ლამაზი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Der Park ist schön.",
+        "translation": "პარკი ლამაზია."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 41
+  },
+  {
+    "id": "de-0042",
+    "language": "de",
+    "term": "klein",
+    "phonetic": "კლაინ",
+    "translation": "პატარა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Das Haus ist klein.",
+        "translation": "სახლი პატარაა."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 42
+  },
+  {
+    "id": "de-0043",
+    "language": "de",
+    "term": "groß",
+    "phonetic": "გროს",
+    "translation": "დიდი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Die Stadt ist groß.",
+        "translation": "ქალაქი დიდია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 43
+  },
+  {
+    "id": "de-0044",
+    "language": "de",
+    "term": "neu",
+    "phonetic": "ნოი",
+    "translation": "ახალი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Mein Handy ist neu.",
+        "translation": "ჩემი ტელეფონი ახალია."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 44
+  },
+  {
+    "id": "de-0045",
+    "language": "de",
+    "term": "alt",
+    "phonetic": "ალტ",
+    "translation": "ძველი / ასაკოვანი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Das Haus ist alt.",
+        "translation": "სახლი ძველია."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 45
+  },
+  {
+    "id": "de-0046",
+    "language": "de",
+    "term": "schnell",
+    "phonetic": "შნელ",
+    "translation": "სწრაფი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Der Zug ist schnell.",
+        "translation": "მატარებელი სწრაფია."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 46
+  },
+  {
+    "id": "de-0047",
+    "language": "de",
+    "term": "langsam",
+    "phonetic": "ლანგზამ",
+    "translation": "ნელი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Bitte, sprich langsam.",
+        "translation": "გთხოვ, ნელა ისაუბრე."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 47
+  },
+  {
+    "id": "de-0048",
+    "language": "de",
+    "term": "heute",
+    "phonetic": "ჰოიტე",
+    "translation": "დღეს",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Heute ist Montag.",
+        "translation": "დღეს ორშაბათია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 48
+  },
+  {
+    "id": "de-0049",
+    "language": "de",
+    "term": "morgen",
+    "phonetic": "მორგენ",
+    "translation": "ხვალ",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Morgen arbeite ich.",
+        "translation": "ხვალ ვმუშაობ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 49
+  },
+  {
+    "id": "de-0050",
+    "language": "de",
+    "term": "gestern",
+    "phonetic": "გესტერნ",
+    "translation": "გუშინ",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Gestern war Sonntag.",
+        "translation": "გუშინ კვირა იყო."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 50
+  },
+  {
+    "id": "de-0051",
+    "language": "de",
+    "term": "die Zeit",
+    "phonetic": "დი ცაიტ",
+    "translation": "დრო",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich habe keine Zeit.",
+        "translation": "დრო არ მაქვს."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 51
+  },
+  {
+    "id": "de-0052",
+    "language": "de",
+    "term": "die Uhr",
+    "phonetic": "დი ურ",
+    "translation": "საათი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Wie spät ist es?",
+        "translation": "რომელი საათია?"
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 52
+  },
+  {
+    "id": "de-0053",
+    "language": "de",
+    "term": "der Tag",
+    "phonetic": "დეა ტაგ",
+    "translation": "დღე",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Heute ist ein guter Tag.",
+        "translation": "დღეს კარგი დღეა."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 53
+  },
+  {
+    "id": "de-0054",
+    "language": "de",
+    "term": "die Woche",
+    "phonetic": "დი ვოხე",
+    "translation": "კვირა",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Die Woche hat sieben Tage.",
+        "translation": "კვირაში შვიდი დღეა."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 54
+  },
+  {
+    "id": "de-0055",
+    "language": "de",
+    "term": "der Monat",
+    "phonetic": "დეა მონატ",
+    "translation": "თვე",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Ein Monat hat vier Wochen.",
+        "translation": "თვეს დაახლოებით ოთხი კვირა აქვს."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 55
+  },
+  {
+    "id": "de-0056",
+    "language": "de",
+    "term": "Montag",
+    "phonetic": "მონტაგ",
+    "translation": "ორშაბათი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Am Montag habe ich frei.",
+        "translation": "ორშაბათს თავისუფალი ვარ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 56
+  },
+  {
+    "id": "de-0057",
+    "language": "de",
+    "term": "Dienstag",
+    "phonetic": "დინსტაგ",
+    "translation": "სამშაბათი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Am Dienstag lerne ich.",
+        "translation": "სამშაბათს ვსწავლობ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 57
+  },
+  {
+    "id": "de-0058",
+    "language": "de",
+    "term": "Mittwoch",
+    "phonetic": "მიტვოხ",
+    "translation": "ოთხშაბათი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Heute ist Mittwoch.",
+        "translation": "დღეს ოთხშაბათია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 58
+  },
+  {
+    "id": "de-0059",
+    "language": "de",
+    "term": "Donnerstag",
+    "phonetic": "დონერსტაგ",
+    "translation": "ხუთშაბათი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Am Donnerstag komme ich.",
+        "translation": "ხუთშაბათს მოვალ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 59
+  },
+  {
+    "id": "de-0060",
+    "language": "de",
+    "term": "Freitag",
+    "phonetic": "ფრაიტაგ",
+    "translation": "პარასკევი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Am Freitag gehen wir aus.",
+        "translation": "პარასკევს გარეთ გავდივართ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 60
+  },
+  {
+    "id": "de-0061",
+    "language": "de",
+    "term": "Samstag",
+    "phonetic": "ზამსტაგ",
+    "translation": "შაბათი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Am Samstag spiele ich.",
+        "translation": "შაბათს ვთამაშობ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 61
+  },
+  {
+    "id": "de-0062",
+    "language": "de",
+    "term": "Sonntag",
+    "phonetic": "ზონტაგ",
+    "translation": "კვირა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Sonntag ist Ruhetag.",
+        "translation": "კვირა დასვენების დღეა."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 62
+  },
+  {
+    "id": "de-0063",
+    "language": "de",
+    "term": "die Stadt",
+    "phonetic": "დი შტატ",
+    "translation": "ქალაქი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Die Stadt ist schön.",
+        "translation": "ქალაქი ლამაზია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 63
+  },
+  {
+    "id": "de-0064",
+    "language": "de",
+    "term": "der Bahnhof",
+    "phonetic": "დეა ბანჰოფ",
+    "translation": "სადგური",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Wo ist der Bahnhof?",
+        "translation": "სად არის სადგური?"
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 64
+  },
+  {
+    "id": "de-0065",
+    "language": "de",
+    "term": "der Bus",
+    "phonetic": "დეა ბუს",
+    "translation": "ავტობუსი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Der Bus kommt jetzt.",
+        "translation": "ავტობუსი ახლა მოდის."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 65
+  },
+  {
+    "id": "de-0066",
+    "language": "de",
+    "term": "der Zug",
+    "phonetic": "დეა ცუგ",
+    "translation": "მატარებელი",
+    "level": "A2",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Der Zug fährt pünktlich.",
+        "translation": "მატარებელი დროზე მიდის."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 66
+  },
+  {
+    "id": "de-0067",
+    "language": "de",
+    "term": "die Straße",
+    "phonetic": "დი შტრასე",
+    "translation": "ქუჩა",
+    "level": "A2",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Die Straße ist lang.",
+        "translation": "ქუჩა გრძელია."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 67
+  },
+  {
+    "id": "de-0068",
+    "language": "de",
+    "term": "links",
+    "phonetic": "ლინქს",
+    "translation": "მარცხნივ",
+    "level": "A2",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Biegen Sie links ab.",
+        "translation": "მარცხნივ მოუხვიეთ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 68
+  },
+  {
+    "id": "de-0069",
+    "language": "de",
+    "term": "rechts",
+    "phonetic": "რეხტს",
+    "translation": "მარჯვნივ",
+    "level": "A2",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Biegen Sie rechts ab.",
+        "translation": "მარჯვნივ მოუხვიეთ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 69
+  },
+  {
+    "id": "de-0070",
+    "language": "de",
+    "term": "geradeaus",
+    "phonetic": "გერადეაუს",
+    "translation": "პირდაპირ",
+    "level": "A2",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Gehen Sie geradeaus.",
+        "translation": "პირდაპირ იარეთ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 70
+  },
+  {
+    "id": "de-0071",
+    "language": "de",
+    "term": "fahren",
+    "phonetic": "ფარენ",
+    "translation": "ტრანსპორტით წასვლა",
+    "level": "A2",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich fahre nach Berlin.",
+        "translation": "ბერლინში მივდივარ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 71
+  },
+  {
+    "id": "de-0072",
+    "language": "de",
+    "term": "reisen",
+    "phonetic": "რაიზენ",
+    "translation": "მოგზაურობა",
+    "level": "A2",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Wir reisen im Sommer.",
+        "translation": "ზაფხულში ვმოგზაურობთ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 72
+  },
+  {
+    "id": "de-0073",
+    "language": "de",
+    "term": "die Reise",
+    "phonetic": "დი რაიზე",
+    "translation": "მოგზაურობა",
+    "level": "A2",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Die Reise war schön.",
+        "translation": "მოგზაურობა სასიამოვნო იყო."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 73
+  },
+  {
+    "id": "de-0074",
+    "language": "de",
+    "term": "das Hotel",
+    "phonetic": "დას ჰოტელ",
+    "translation": "სასტუმრო",
+    "level": "A2",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Das Hotel ist zentral.",
+        "translation": "სასტუმრო ცენტრშია."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 74
+  },
+  {
+    "id": "de-0075",
+    "language": "de",
+    "term": "das Zimmer",
+    "phonetic": "დას ციმერ",
+    "translation": "ოთახი",
+    "level": "A2",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Das Zimmer ist hell.",
+        "translation": "ოთახი ნათელია."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 75
+  },
+  {
+    "id": "de-0076",
+    "language": "de",
+    "term": "die Reservierung",
+    "phonetic": "დი რეზერვირუნგ",
+    "translation": "ჯავშანი",
+    "level": "A2",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich habe eine Reservierung.",
+        "translation": "ჯავშანი მაქვს."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 76
+  },
+  {
+    "id": "de-0077",
+    "language": "de",
+    "term": "die Rechnung",
+    "phonetic": "დი რეხნუნგ",
+    "translation": "ანგარიში",
+    "level": "A2",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Die Rechnung, bitte.",
+        "translation": "ანგარიში, გთხოვთ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 77
+  },
+  {
+    "id": "de-0078",
+    "language": "de",
+    "term": "der Preis",
+    "phonetic": "დეა პრაის",
+    "translation": "ფასი",
+    "level": "A2",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Der Preis ist günstig.",
+        "translation": "ფასი ხელსაყრელია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 78
+  },
+  {
+    "id": "de-0079",
+    "language": "de",
+    "term": "das Geld",
+    "phonetic": "დას გელტ",
+    "translation": "ფული",
+    "level": "A2",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich brauche Geld.",
+        "translation": "ფული მჭირდება."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 79
+  },
+  {
+    "id": "de-0080",
+    "language": "de",
+    "term": "die Arbeit",
+    "phonetic": "დი არბაიტ",
+    "translation": "სამუშაო",
+    "level": "A2",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Meine Arbeit ist interessant.",
+        "translation": "ჩემი სამუშაო საინტერესოა."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 80
+  },
+  {
+    "id": "de-0081",
+    "language": "de",
+    "term": "arbeiten",
+    "phonetic": "არბაიტენ",
+    "translation": "მუშაობა",
+    "level": "A2",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich arbeite von Montag bis Freitag.",
+        "translation": "ორშაბათიდან პარასკევამდე ვმუშაობ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 81
+  },
+  {
+    "id": "de-0082",
+    "language": "de",
+    "term": "die Freizeit",
+    "phonetic": "დი ფრაიცაიტ",
+    "translation": "თავისუფალი დრო",
+    "level": "A2",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "In meiner Freizeit lese ich.",
+        "translation": "თავისუფალ დროს ვკითხულობ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 82
+  },
+  {
+    "id": "de-0083",
+    "language": "de",
+    "term": "spielen",
+    "phonetic": "შპილენ",
+    "translation": "თამაში",
+    "level": "A2",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Die Kinder spielen.",
+        "translation": "ბავშვები თამაშობენ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 83
+  },
+  {
+    "id": "de-0084",
+    "language": "de",
+    "term": "lesen",
+    "phonetic": "ლეზენ",
+    "translation": "კითხვა",
+    "level": "A2",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich lese ein Buch.",
+        "translation": "წიგნს ვკითხულობ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 84
+  },
+  {
+    "id": "de-0085",
+    "language": "de",
+    "term": "schreiben",
+    "phonetic": "შრაიბენ",
+    "translation": "წერა",
+    "level": "A2",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Sie schreibt einen Brief.",
+        "translation": "ის წერილს წერს."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 85
+  },
+  {
+    "id": "de-0086",
+    "language": "de",
+    "term": "hören",
+    "phonetic": "ჰიორენ",
+    "translation": "მოსმენა",
+    "level": "A2",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich höre Musik.",
+        "translation": "მე მუსიკას ვუსმენ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 86
+  },
+  {
+    "id": "de-0087",
+    "language": "de",
+    "term": "sehen",
+    "phonetic": "ზეენ",
+    "translation": "დანახვა",
+    "level": "A2",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Wir sehen den Film.",
+        "translation": "ფილმს ვუყურებთ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 87
+  },
+  {
+    "id": "de-0088",
+    "language": "de",
+    "term": "verstehen",
+    "phonetic": "ფერშტეენ",
+    "translation": "გაგება",
+    "level": "A2",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Ich verstehe die Frage.",
+        "translation": "კითხვა მესმის."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 88
+  },
+  {
+    "id": "de-0089",
+    "language": "de",
+    "term": "fragen",
+    "phonetic": "ფრაგენ",
+    "translation": "კითხვა",
+    "level": "A2",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Darf ich etwas fragen?",
+        "translation": "შეიძლება რაღაც ვიკითხო?"
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 89
+  },
+  {
+    "id": "de-0090",
+    "language": "de",
+    "term": "antworten",
+    "phonetic": "ანტვორტენ",
+    "translation": "პასუხის გაცემა",
+    "level": "A2",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Bitte antworte jetzt.",
+        "translation": "გთხოვ, ახლა მიპასუხე."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 90
+  },
+  {
+    "id": "de-0091",
+    "language": "de",
+    "term": "wichtig",
+    "phonetic": "ვიხტიგ",
+    "translation": "მნიშვნელოვანი",
+    "level": "A2",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Das ist wichtig.",
+        "translation": "ეს მნიშვნელოვანია."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 91
+  },
+  {
+    "id": "de-0092",
+    "language": "de",
+    "term": "möglich",
+    "phonetic": "მიოგლიხ",
+    "translation": "შესაძლებელი",
+    "level": "A2",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Ist das möglich?",
+        "translation": "ეს შესაძლებელია?"
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 92
+  },
+  {
+    "id": "de-0093",
+    "language": "de",
+    "term": "zusammen",
+    "phonetic": "ცუზამენ",
+    "translation": "ერთად",
+    "level": "A2",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Wir lernen zusammen.",
+        "translation": "ჩვენ ერთად ვსწავლობთ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 93
+  },
+  {
+    "id": "de-0094",
+    "language": "de",
+    "term": "immer",
+    "phonetic": "იმერ",
+    "translation": "ყოველთვის",
+    "level": "B1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich komme immer pünktlich.",
+        "translation": "ყოველთვის დროზე მოვდივარ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 94
+  },
+  {
+    "id": "de-0095",
+    "language": "de",
+    "term": "manchmal",
+    "phonetic": "მანხმალ",
+    "translation": "ხანდახან",
+    "level": "B1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Manchmal gehe ich schwimmen.",
+        "translation": "ხანდახან საცურაოდ დავდივარ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 95
+  },
+  {
+    "id": "de-0096",
+    "language": "de",
+    "term": "nie",
+    "phonetic": "ნი",
+    "translation": "არასოდეს",
+    "level": "B1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Ich komme nie zu spät.",
+        "translation": "არასოდეს ვაგვიანებ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 96
+  },
+  {
+    "id": "de-0097",
+    "language": "de",
+    "term": "weil",
+    "phonetic": "ვაილ",
+    "translation": "რადგან",
+    "level": "B1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Ich lerne, weil ich reisen will.",
+        "translation": "ვსწავლობ, რადგან მოგზაურობა მინდა."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 97
+  },
+  {
+    "id": "de-0098",
+    "language": "de",
+    "term": "aber",
+    "phonetic": "აბერ",
+    "translation": "მაგრამ",
+    "level": "B1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Ich möchte kommen, aber ich kann nicht.",
+        "translation": "მინდა მოსვლა, მაგრამ არ შემიძლია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 98
+  },
+  {
+    "id": "de-0099",
+    "language": "de",
+    "term": "deshalb",
+    "phonetic": "დესჰალბ",
+    "translation": "ამიტომ",
+    "level": "B1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Ich bin krank, deshalb bleibe ich zu Hause.",
+        "translation": "ავად ვარ, ამიტომ სახლში ვრჩები."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 99
+  },
+  {
+    "id": "de-0100",
+    "language": "de",
+    "term": "trotzdem",
+    "phonetic": "ტროცდემ",
+    "translation": "მიუხედავად ამისა",
+    "level": "B1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Es regnet, trotzdem gehen wir.",
+        "translation": "წვიმს, მაგრამ მაინც მივდივართ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 100
+  },
+  {
+    "id": "de-0101",
+    "language": "de",
+    "term": "die Erfahrung",
+    "phonetic": "დი ერფარუნგ",
+    "translation": "გამოცდილება",
+    "level": "B1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Das war eine gute Erfahrung.",
+        "translation": "ეს კარგი გამოცდილება იყო."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 101
+  },
+  {
+    "id": "de-0102",
+    "language": "de",
+    "term": "die Möglichkeit",
+    "phonetic": "დი მიოგლიხქაიტ",
+    "translation": "შესაძლებლობა",
+    "level": "B1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Ich habe eine Möglichkeit.",
+        "translation": "შესაძლებლობა მაქვს."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 102
+  },
+  {
+    "id": "de-0103",
+    "language": "de",
+    "term": "die Entscheidung",
+    "phonetic": "დი ენტშაიდუნგ",
+    "translation": "გადაწყვეტილება",
+    "level": "B1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Das ist eine schwere Entscheidung.",
+        "translation": "ეს რთული გადაწყვეტილებაა."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 103
+  },
+  {
+    "id": "de-0104",
+    "language": "de",
+    "term": "wahrscheinlich",
+    "phonetic": "ვარშაინლიხ",
+    "translation": "სავარაუდოდ",
+    "level": "B1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Er kommt wahrscheinlich morgen.",
+        "translation": "ალბათ ხვალ მოვა."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 104
+  },
+  {
+    "id": "de-0105",
+    "language": "de",
+    "term": "besonders",
+    "phonetic": "ბეზონდერს",
+    "translation": "განსაკუთრებით",
+    "level": "B1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Das ist besonders schön.",
+        "translation": "ეს განსაკუთრებით ლამაზია."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 105
+  },
+  {
+    "id": "de-0106",
+    "language": "de",
+    "term": "obwohl",
+    "phonetic": "ობვოლ",
+    "translation": "მიუხედავად იმისა, რომ",
+    "level": "B1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Obwohl es regnet, gehe ich raus.",
+        "translation": "მიუხედავად წვიმისა, გარეთ გავდივარ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 106
+  },
+  {
+    "id": "de-0107",
+    "language": "de",
+    "term": "während",
+    "phonetic": "ვერენტ",
+    "translation": "მაშინ როდესაც",
+    "level": "B1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Während ich lerne, hört er Musik.",
+        "translation": "სანამ მე ვსწავლობ, ის მუსიკას უსმენს."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "de-DE"
+    },
+    "position": 107
+  },
+  {
+    "id": "en-0001",
+    "language": "en",
+    "term": "hello",
+    "phonetic": "ჰელოუ",
+    "translation": "გამარჯობა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Hello, my friend!",
+        "translation": "გამარჯობა, მეგობარო!"
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 1
+  },
+  {
+    "id": "en-0002",
+    "language": "en",
+    "term": "good morning",
+    "phonetic": "გუდ მორნინგ",
+    "translation": "დილა მშვიდობისა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Good morning, Anna!",
+        "translation": "დილა მშვიდობისა, ანა!"
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 2
+  },
+  {
+    "id": "en-0003",
+    "language": "en",
+    "term": "thank you",
+    "phonetic": "სენქ იუ",
+    "translation": "მადლობა",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Thank you very much.",
+        "translation": "დიდი მადლობა."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 3
+  },
+  {
+    "id": "en-0004",
+    "language": "en",
+    "term": "please",
+    "phonetic": "ფლიზ",
+    "translation": "გთხოვთ",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Please sit down.",
+        "translation": "გთხოვთ, დაჯექით."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 4
+  },
+  {
+    "id": "en-0005",
+    "language": "en",
+    "term": "yes",
+    "phonetic": "იეს",
+    "translation": "დიახ",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Yes, I can help.",
+        "translation": "დიახ, შემიძლია დახმარება."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 5
+  },
+  {
+    "id": "en-0006",
+    "language": "en",
+    "term": "no",
+    "phonetic": "ნოუ",
+    "translation": "არა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "No, thank you.",
+        "translation": "არა, მადლობა."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 6
+  },
+  {
+    "id": "en-0007",
+    "language": "en",
+    "term": "my",
+    "phonetic": "მაი",
+    "translation": "ჩემი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "This is my book.",
+        "translation": "ეს ჩემი წიგნია."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 7
+  },
+  {
+    "id": "en-0008",
+    "language": "en",
+    "term": "your",
+    "phonetic": "იორ",
+    "translation": "შენი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "What is your name?",
+        "translation": "რა გქვია?"
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 8
+  },
+  {
+    "id": "en-0009",
+    "language": "en",
+    "term": "name",
+    "phonetic": "ნეიმ",
+    "translation": "სახელი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "My name is David.",
+        "translation": "მე მქვია დავითი."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 9
+  },
+  {
+    "id": "en-0010",
+    "language": "en",
+    "term": "learn",
+    "phonetic": "ლერნ",
+    "translation": "სწავლა",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "I learn English every day.",
+        "translation": "ყოველდღე ინგლისურს ვსწავლობ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 10
+  },
+  {
+    "id": "en-0011",
+    "language": "en",
+    "term": "study",
+    "phonetic": "სტადი",
+    "translation": "სწავლა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "I study at home.",
+        "translation": "მე სახლში ვსწავლობ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 11
+  },
+  {
+    "id": "en-0012",
+    "language": "en",
+    "term": "language",
+    "phonetic": "ლენგვიჯ",
+    "translation": "ენა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "English is a useful language.",
+        "translation": "ინგლისური სასარგებლო ენაა."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 12
+  },
+  {
+    "id": "en-0013",
+    "language": "en",
+    "term": "dictionary",
+    "phonetic": "დიქშენერი",
+    "translation": "ლექსიკონი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "This dictionary is helpful.",
+        "translation": "ეს ლექსიკონი სასარგებლოა."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 13
+  },
+  {
+    "id": "en-0014",
+    "language": "en",
+    "term": "book",
+    "phonetic": "ბუქ",
+    "translation": "წიგნი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "I read a book.",
+        "translation": "წიგნს ვკითხულობ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 14
+  },
+  {
+    "id": "en-0015",
+    "language": "en",
+    "term": "family",
+    "phonetic": "ფემილი",
+    "translation": "ოჯახი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "I love my family.",
+        "translation": "მე მიყვარს ჩემი ოჯახი."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 15
+  },
+  {
+    "id": "en-0016",
+    "language": "en",
+    "term": "mother",
+    "phonetic": "მადერ",
+    "translation": "დედა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "My mother is kind.",
+        "translation": "დედაჩემი კეთილია."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 16
+  },
+  {
+    "id": "en-0017",
+    "language": "en",
+    "term": "father",
+    "phonetic": "ფადერ",
+    "translation": "მამა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "My father is here.",
+        "translation": "მამაჩემი აქ არის."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 17
+  },
+  {
+    "id": "en-0018",
+    "language": "en",
+    "term": "friend",
+    "phonetic": "ფრენდ",
+    "translation": "მეგობარი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "She is my friend.",
+        "translation": "ის ჩემი მეგობარია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 18
+  },
+  {
+    "id": "en-0019",
+    "language": "en",
+    "term": "water",
+    "phonetic": "უოთერ",
+    "translation": "წყალი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "I drink water.",
+        "translation": "მე წყალს ვსვამ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 19
+  },
+  {
+    "id": "en-0020",
+    "language": "en",
+    "term": "bread",
+    "phonetic": "ბრედ",
+    "translation": "პური",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "I eat bread.",
+        "translation": "მე პურს ვჭამ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 20
+  },
+  {
+    "id": "en-0021",
+    "language": "en",
+    "term": "apple",
+    "phonetic": "ეფლ",
+    "translation": "ვაშლი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "The apple is red.",
+        "translation": "ვაშლი წითელია."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 21
+  },
+  {
+    "id": "en-0022",
+    "language": "en",
+    "term": "coffee",
+    "phonetic": "ქოფი",
+    "translation": "ყავა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "I need a coffee.",
+        "translation": "ყავა მჭირდება."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 22
+  },
+  {
+    "id": "en-0023",
+    "language": "en",
+    "term": "city",
+    "phonetic": "სითი",
+    "translation": "ქალაქი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "London is a big city.",
+        "translation": "ლონდონი დიდი ქალაქია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 23
+  },
+  {
+    "id": "en-0024",
+    "language": "en",
+    "term": "bus",
+    "phonetic": "ბას",
+    "translation": "ავტობუსი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "The bus is coming.",
+        "translation": "ავტობუსი მოდის."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 24
+  },
+  {
+    "id": "en-0025",
+    "language": "en",
+    "term": "train",
+    "phonetic": "თრეინ",
+    "translation": "მატარებელი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "The train is late.",
+        "translation": "მატარებელი აგვიანებს."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 25
+  },
+  {
+    "id": "en-0026",
+    "language": "en",
+    "term": "travel",
+    "phonetic": "თრეველ",
+    "translation": "მოგზაურობა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "I want to travel.",
+        "translation": "მოგზაურობა მინდა."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 26
+  },
+  {
+    "id": "en-0027",
+    "language": "en",
+    "term": "work",
+    "phonetic": "უორქ",
+    "translation": "სამუშაო / მუშაობა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "I work every day.",
+        "translation": "ყოველდღე ვმუშაობ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 27
+  },
+  {
+    "id": "en-0028",
+    "language": "en",
+    "term": "home",
+    "phonetic": "ჰოუმ",
+    "translation": "სახლი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "I am at home.",
+        "translation": "სახლში ვარ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 28
+  },
+  {
+    "id": "en-0029",
+    "language": "en",
+    "term": "today",
+    "phonetic": "თუდეი",
+    "translation": "დღეს",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Today is Friday.",
+        "translation": "დღეს პარასკევია."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 29
+  },
+  {
+    "id": "en-0030",
+    "language": "en",
+    "term": "tomorrow",
+    "phonetic": "თუმოროუ",
+    "translation": "ხვალ",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "See you tomorrow.",
+        "translation": "ხვალამდე."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 30
+  },
+  {
+    "id": "en-0031",
+    "language": "en",
+    "term": "yesterday",
+    "phonetic": "იესთერდეი",
+    "translation": "გუშინ",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Yesterday was sunny.",
+        "translation": "გუშინ მზიანი ამინდი იყო."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 31
+  },
+  {
+    "id": "en-0032",
+    "language": "en",
+    "term": "good",
+    "phonetic": "გუდ",
+    "translation": "კარგი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "This is good.",
+        "translation": "ეს კარგია."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 32
+  },
+  {
+    "id": "en-0033",
+    "language": "en",
+    "term": "beautiful",
+    "phonetic": "ბიუთიფულ",
+    "translation": "ლამაზი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "The garden is beautiful.",
+        "translation": "ბაღი ლამაზია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 33
+  },
+  {
+    "id": "en-0034",
+    "language": "en",
+    "term": "small",
+    "phonetic": "სმოლ",
+    "translation": "პატარა",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "The room is small.",
+        "translation": "ოთახი პატარაა."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 34
+  },
+  {
+    "id": "en-0035",
+    "language": "en",
+    "term": "big",
+    "phonetic": "ბიგ",
+    "translation": "დიდი",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "The house is big.",
+        "translation": "სახლი დიდია."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 35
+  },
+  {
+    "id": "en-0036",
+    "language": "en",
+    "term": "read",
+    "phonetic": "რიდ",
+    "translation": "კითხვა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "I read at night.",
+        "translation": "ღამით ვკითხულობ."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 36
+  },
+  {
+    "id": "en-0037",
+    "language": "en",
+    "term": "write",
+    "phonetic": "რაით",
+    "translation": "წერა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Please write your name.",
+        "translation": "გთხოვ, დაწერე შენი სახელი."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 37
+  },
+  {
+    "id": "en-0038",
+    "language": "en",
+    "term": "listen",
+    "phonetic": "ლისენ",
+    "translation": "მოსმენა",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Listen to the lesson.",
+        "translation": "გაკვეთილს მოუსმინე."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 38
+  },
+  {
+    "id": "en-0039",
+    "language": "en",
+    "term": "speak",
+    "phonetic": "სფიქ",
+    "translation": "საუბარი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "I speak English.",
+        "translation": "ინგლისურად ვსაუბრობ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 39
+  },
+  {
+    "id": "en-0040",
+    "language": "en",
+    "term": "understand",
+    "phonetic": "ანდერსთენდ",
+    "translation": "გაგება",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "I understand you.",
+        "translation": "შენი მესმის."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 40
+  },
+  {
+    "id": "en-0041",
+    "language": "en",
+    "term": "question",
+    "phonetic": "ქუესჩენ",
+    "translation": "კითხვა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "I have a question.",
+        "translation": "კითხვა მაქვს."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 41
+  },
+  {
+    "id": "en-0042",
+    "language": "en",
+    "term": "answer",
+    "phonetic": "ანსერ",
+    "translation": "პასუხი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Please give an answer.",
+        "translation": "გთხოვ, მიპასუხე."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 42
+  },
+  {
+    "id": "en-0043",
+    "language": "en",
+    "term": "important",
+    "phonetic": "იმფორთენთ",
+    "translation": "მნიშვნელოვანი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "This is important.",
+        "translation": "ეს მნიშვნელოვანია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 43
+  },
+  {
+    "id": "en-0044",
+    "language": "en",
+    "term": "possible",
+    "phonetic": "ფოსიბლ",
+    "translation": "შესაძლებელი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Everything is possible.",
+        "translation": "ყველაფერი შესაძლებელია."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 44
+  },
+  {
+    "id": "en-0045",
+    "language": "en",
+    "term": "together",
+    "phonetic": "თუგეზერ",
+    "translation": "ერთად",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "We learn together.",
+        "translation": "ჩვენ ერთად ვსწავლობთ."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "en-GB"
+    },
+    "position": 45
+  },
+  {
+    "id": "es-0001",
+    "language": "es",
+    "term": "hola",
+    "phonetic": "ოლა",
+    "translation": "გამარჯობა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Hola, amigo.",
+        "translation": "გამარჯობა, მეგობარო!"
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 1
+  },
+  {
+    "id": "es-0002",
+    "language": "es",
+    "term": "gracias",
+    "phonetic": "გრასიას",
+    "translation": "მადლობა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Muchas gracias.",
+        "translation": "დიდი მადლობა."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 2
+  },
+  {
+    "id": "es-0003",
+    "language": "es",
+    "term": "por favor",
+    "phonetic": "პორ ფავორ",
+    "translation": "გთხოვთ",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Agua, por favor.",
+        "translation": "წყალი, გთხოვთ."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 3
+  },
+  {
+    "id": "es-0004",
+    "language": "es",
+    "term": "sí",
+    "phonetic": "სი",
+    "translation": "დიახ",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Sí, entiendo.",
+        "translation": "დიახ, მესმის."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 4
+  },
+  {
+    "id": "es-0005",
+    "language": "es",
+    "term": "no",
+    "phonetic": "ნო",
+    "translation": "არა",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "No, gracias.",
+        "translation": "არა, მადლობა."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 5
+  },
+  {
+    "id": "es-0006",
+    "language": "es",
+    "term": "amigo",
+    "phonetic": "ამიგო",
+    "translation": "მეგობარი",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Mi amigo es bueno.",
+        "translation": "ჩემი მეგობარი კარგია."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 6
+  },
+  {
+    "id": "es-0007",
+    "language": "es",
+    "term": "agua",
+    "phonetic": "აგუა",
+    "translation": "წყალი",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Bebo agua.",
+        "translation": "წყალს ვსვამ."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 7
+  },
+  {
+    "id": "es-0008",
+    "language": "es",
+    "term": "casa",
+    "phonetic": "კასა",
+    "translation": "სახლი",
+    "level": "A1",
+    "category": "ყოველდღიურობა",
+    "examples": [
+      {
+        "sentence": "Mi casa es grande.",
+        "translation": "ჩემი სახლი დიდია."
+      }
+    ],
+    "media": {
+      "icon": "cap"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 8
+  },
+  {
+    "id": "es-0009",
+    "language": "es",
+    "term": "libro",
+    "phonetic": "ლიბრო",
+    "translation": "წიგნი",
+    "level": "A1",
+    "category": "მოგზაურობა",
+    "examples": [
+      {
+        "sentence": "Leo un libro.",
+        "translation": "წიგნს ვკითხულობ."
+      }
+    ],
+    "media": {
+      "icon": "calendar"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 9
+  },
+  {
+    "id": "es-0010",
+    "language": "es",
+    "term": "comer",
+    "phonetic": "კომერ",
+    "translation": "ჭამა",
+    "level": "A1",
+    "category": "გრამატიკა",
+    "examples": [
+      {
+        "sentence": "Quiero comer.",
+        "translation": "ჭამა მინდა."
+      }
+    ],
+    "media": {
+      "icon": "gamepad"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 10
+  },
+  {
+    "id": "es-0011",
+    "language": "es",
+    "term": "aprender",
+    "phonetic": "აპრენდერ",
+    "translation": "სწავლა",
+    "level": "A1",
+    "category": "საუბარი",
+    "examples": [
+      {
+        "sentence": "Quiero aprender.",
+        "translation": "სწავლა მინდა."
+      }
+    ],
+    "media": {
+      "icon": "book"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 11
+  },
+  {
+    "id": "es-0012",
+    "language": "es",
+    "term": "viajar",
+    "phonetic": "ვიახარ",
+    "translation": "მოგზაურობა",
+    "level": "A1",
+    "category": "ოჯახი",
+    "examples": [
+      {
+        "sentence": "Me gusta viajar.",
+        "translation": "მოგზაურობა მომწონს."
+      }
+    ],
+    "media": {
+      "icon": "bubbles"
+    },
+    "audio": {
+      "lang": "es-ES"
+    },
+    "position": 12
   }
 ]

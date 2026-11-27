@@ -1,80 +1,35 @@
-import { state } from "../state.js";
-import { header, icon } from "../ui.js";
-import { esc, toast } from "../util.js";
-
-const lockIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
-const checkIcon = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`;
-function pathHtml(list, nextId) {
-  if (!list.length) return "";
-  return `<div class="v3-lesson-map">${list.map((l,i) => {
-    const done = state.lessonDone(l.id);
-    const unlocked = i === 0 || state.lessonDone(list[i - 1].id) || done;
-    const current = l.id === nextId;
-    const res = state.lessonResults()[l.id];
-    const cls = done ? "done" : current ? "current" : unlocked ? "open" : "locked";
-    return `<button type="button" class="v3-lesson-tile ${cls}" data-lesson="${esc(l.id)}" data-locked="${unlocked ? "" : "1"}" aria-label="${esc(l.title)}">
-      <span class="v3-lesson-node">${done ? checkIcon : unlocked ? `<b>${l.number}</b>` : lockIcon}</span>
-      <span class="v3-lesson-info"><small>გაკვეთილი ${l.number} ${current ? "· დაიწყე" : done ? "· დასრულებულია" : ""}</small><b>${esc(l.title)}</b><em>${esc(l.sub || "")}</em><span class="v3-lesson-stars">${done ? "⭐⭐⭐" : "☆☆☆"} <i>+${l.level === "A1" ? 50 : 100} XP</i></span></span>
-      <span class="v3-lesson-status">${done ? "✓" : current ? "▶" : unlocked ? "›" : "🔒"}</span>
-    </button>`;
-  }).join("")}</div>`;
-}
-
+import {store} from '../core/store.js';
+import {esc,img,icon,pill,meter,number} from '../core/utils.js';
+import {pageTop} from '../components/chrome.js';
+import {speak} from '../core/audio.js';
+let currentId='',step=0,wordIndex=0,answers={},saved=false,earnedXp=0;
+const stages=['სიტყვები','დიალოგი','ტესტი','შედეგი'];
+function wordBlock(lesson){const word=store.word(lesson.wordIds[wordIndex])||store.words[0],example=word.examples[0];return `<div class="lesson-banner glass"><div class="copy">${pill(`🇩🇪 სიტყვა ${wordIndex+1}/${lesson.wordIds.length}`,'purple')}<h2>${esc(word.term)}</h2><p class="trans">${esc(word.translation)}</p><button class="btn btn-purple" data-action="speak" data-id="${word.id}">🔊 ${esc(word.phonetic)}</button><div class="lesson-ex"><b>${esc(example.sentence)}</b><br>${esc(example.translation)}</div></div>${img('girl-point.png','girl')}</div><div class="lesson-actions"><button class="btn btn-light" data-action="prev-word">‹ წინა</button><button class="btn btn-purple" data-action="next-word">შემდეგი სიტყვა ›</button></div>`}
+function dialogueBlock(lesson){return `<section class="glass dialogue-panel"><h2>💬 მინი დიალოგი</h2><p class="muted text-small">მოუსმინე დიალოგის თითოეულ ნაწილს</p>${lesson.dialogue.map((d,i)=>`<div class="bubble ${i?'alt':''}"><b>${esc(d.speaker)}:</b> ${esc(d.text)}<button class="icon-btn" style="width:29px;height:29px;float:right" data-action="say-line" data-index="${i}" aria-label="მოსმენა">🔊</button><p>${esc(d.translation)}</p></div>`).join('')}</section>`}
+function quizBlock(lesson){const pool=lesson.wordIds.slice(0,4).map(id=>store.word(id)).filter(Boolean);return `<section class="glass quiz-panel"><h2>🎮 სასწავლო ტესტი</h2><p class="muted text-small">თითოეულ სიტყვას შეარჩიე სწორი თარგმანი</p>${pool.map((w,idx)=>{const wrong=store.wordsFor(w.language).filter(x=>x.id!==w.id).slice(idx+8,idx+11).map(x=>x.translation),options=[...wrong.slice(0,3),w.translation].sort((a,b)=>a.localeCompare(b,'ka'));return `<div style="margin-top:17px"><b style="font-size:.8rem">${idx+1}. რას ნიშნავს „${esc(w.term)}“?</b><div class="quiz-grid">${options.map(op=>`<button class="answer ${answers[idx]===op?'picked':''}" data-action="answer" data-index="${idx}" data-answer="${esc(op)}" aria-pressed="${answers[idx]===op}">${esc(op)}</button>`).join('')}</div></div>`}).join('')}</section>`}
+function scoreOf(lesson){const pool=lesson.wordIds.slice(0,4).map(id=>store.word(id));return pool.filter((w,i)=>answers[i]===w?.translation).length}
+function resultBlock(lesson){const score=scoreOf(lesson),total=Math.min(4,lesson.wordIds.length);return `<section class="glass done-banner">${img('girl-cheer.png')}<h2>გაკვეთილი დასრულდა! 🎉</h2><p style="margin:10px 0">სწორი პასუხები: <b>${score}/${total}</b></p>${meter(Math.round(100*score/total))}<p style="margin:12px 0">+${saved?earnedXp:score*5+(store.user.completed[lesson.id]?0:20)} XP</p>${pill(saved?'შედეგი შენახულია':'მზადაა შესანახად',saved?'green':'gold')}</section>`}
 export default {
-  render() {
-    const lang = state.langInfo();
-    const list = state.lessonsFor();
-    const done = list.filter((l) => state.lessonDone(l.id)).length;
-    const next = state.nextLesson();
-    const levels = [...new Set(list.map((l) => l.level))];
-
-    const head = `
-    <section class="hero hero-sm"><div class="deco hd1"></div><div class="deco hd2"></div>${header()}
-      <div class="hero-title">
-        <span class="pill yellow rise">${esc(lang.name)} · ${done} / ${list.length}</span>
-        <h1 class="rise" style="animation-delay:.1s">გაკვეთილები</h1>
-      </div>
-    </section>`;
-
-    if (!list.length) {
-      return `${head}
-      <div class="finish rise">
-        <img src="assets/girl-cheer.png" alt="" width="170" height="233">
-        <h2>${esc(lang.name)} გაკვეთილები მალე</h2>
-        <p>ამ ენაზე გაკვეთილები ჯერ არ არის. ჯერჯერობით სცადე ბარათები.</p>
-        <a class="cta" href="#/cards">ბარათებზე გადასვლა ${icon.arrow}</a>
-      </div>`;
-    }
-
-    const today = next
-      ? `<section class="card today rise" style="animation-delay:.2s">
-          <span class="pill dark">დღევანდელი გაკვეთილი</span>
-          <h2>${esc(next.title)}</h2>
-          <p>${esc(next.sub || "")}</p>
-          <div class="today-meta"><span>${esc(next.level)}</span><span>${next.words.length} სიტყვა</span><span>დიალოგი</span><span>ვარჯიში</span></div>
-          <a class="cta cta-primary" href="#/lesson/${esc(next.id)}">დაიწყე გაკვეთილი ${icon.arrow}</a>
-        </section>`
-      : `<section class="card today rise" style="animation-delay:.2s">
-          <span class="pill mint">ყველა დასრულებულია</span>
-          <h2>მოლოცვა!</h2>
-          <p>ამ ენის ყველა გაკვეთილი გაიარე. ნებისმიერი შეგიძლია თავიდან გაიმეორო.</p>
-        </section>`;
-
-    const sections = levels
-      .map((lv) => `<div class="level-head"><span class="pill blue">${esc(lv)}</span></div>${pathHtml(list.filter((l) => l.level === lv), next?.id)}`)
-      .join("");
-
-    return `${head}${today}<section class="lpath-wrap">${sections}</section>`;
-  },
-
-  mount(root) {
-    const onClick = (e) => {
-      const n = e.target.closest("[data-lesson]");
-      if (!n) return;
-      if (n.dataset.locked) return toast("ჯერ წინა გაკვეთილი დაასრულე");
-      location.hash = "#/lesson/" + n.dataset.lesson;
-    };
-    root.addEventListener("click", onClick);
-    return () => root.removeEventListener("click", onClick);
-  },
+ render(route){const id=route.split('/')[1]||'de-01',lesson=store.lesson(id);if(!lesson)return `<div class="empty-state"><h3>გაკვეთილი ვერ მოიძებნა</h3><a href="#/learn" class="btn btn-purple">კურსებში დაბრუნება</a></div>`;
+ if(currentId!==id){currentId=id;step=route.startsWith('quiz/')?2:0;wordIndex=0;answers={};saved=false;earnedXp=0;}
+ const unlocked=store.isUnlocked(lesson);if(!unlocked)return `<div class="empty-state"><h3>🔒 ეს გაკვეთილი ჯერ ჩაკეტილია</h3><a href="#/learn" class="btn btn-purple">გაკვეთილების გზა</a></div>`;
+ const content=step===0?wordBlock(lesson):step===1?dialogueBlock(lesson):step===2?quizBlock(lesson):resultBlock(lesson);
+ return `${pageTop(`გაკვეთილი ${lesson.number}`,'📖','#/learn')}<div class="lesson-stepper">${stages.map((s,i)=>`<button class="step ${i===step?'active':''}" data-action="stage" data-index="${i}" ${i>2||i>step&&!saved?'':' '}><span class="icon-btn">${['📖','💬','🎮','🏆'][i]}</span><span>${s}</span></button>`).join('')}</div><div class="lesson-progress">${meter(((step+1)/4)*100)}</div><div class="lesson-stage">${content}</div><div class="lesson-actions">${step>0?`<button class="btn btn-light" data-action="prev-stage">← უკან</button>`:''}<button class="btn btn-green btn-large" data-action="next-stage">${step===3?'მზადაა ✓':step===2?'შედეგის ნახვა':'შემდეგი ❯'}</button></div>`;
+ },
+ async handle(action,el,refresh){const lesson=store.lesson(currentId);if(!lesson)return false;
+ if(action==='speak'){const w=store.word(el.dataset.id);speak(w.term,w.language);return true;}
+ if(action==='say-line'){speak(lesson.dialogue[Number(el.dataset.index)].text,lesson.language);return true;}
+ if(action==='next-word'){wordIndex=Math.min(lesson.wordIds.length-1,wordIndex+1);refresh();return true;}
+ if(action==='prev-word'){wordIndex=Math.max(0,wordIndex-1);refresh();return true;}
+ if(action==='answer'){answers[el.dataset.index]=el.dataset.answer;refresh();return true;}
+ if(action==='stage'){const i=Number(el.dataset.index);if(i<=2||i===3&&saved){step=i;refresh();}return true;}
+ if(action==='prev-stage'){step=Math.max(0,step-1);refresh();return true;}
+ if(action==='next-stage'){
+   if(step===2&&Object.keys(answers).length<4){window.peeraToast('უპასუხე ოთხივე კითხვას');return true;}
+   if(step===2&&!saved){earnedXp=await store.completeLesson(lesson,scoreOf(lesson),4);saved=true;}
+   if(step===3){location.hash='#/learn';return true;}
+   step++;refresh();return true;
+ }
+ return false;
+ }
 };

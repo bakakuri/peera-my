@@ -1,0 +1,72 @@
+[
+  {
+    "id": "demo-0",
+    "name": "ნინო ა.",
+    "avatar": "👩🏻",
+    "xp": 12480,
+    "streak": 32
+  },
+  {
+    "id": "demo-1",
+    "name": "ლუკა ბ.",
+    "avatar": "👨🏻",
+    "xp": 11960,
+    "streak": 30
+  },
+  {
+    "id": "demo-2",
+    "name": "მარიამ მ.",
+    "avatar": "👩🏼",
+    "xp": 10875,
+    "streak": 28
+  },
+  {
+    "id": "demo-3",
+    "name": "გიორგი დ.",
+    "avatar": "👨🏽",
+    "xp": 10420,
+    "streak": 26
+  },
+  {
+    "id": "demo-4",
+    "name": "ანი ს.",
+    "avatar": "👩🏻‍🦰",
+    "xp": 9980,
+    "streak": 24
+  },
+  {
+    "id": "demo-5",
+    "name": "დავით გ.",
+    "avatar": "👨🏻‍🦱",
+    "xp": 9760,
+    "streak": 22
+  },
+  {
+    "id": "demo-6",
+    "name": "თამარ ბ.",
+    "avatar": "👩🏼‍🦰",
+    "xp": 9520,
+    "streak": 20
+  },
+  {
+    "id": "demo-7",
+    "name": "ეკატერინე ბ.",
+    "avatar": "👩🏻‍🦳",
+    "xp": 9310,
+    "streak": 18
+  },
+  {
+    "id": "demo-8",
+    "name": "ირაკლი ნ.",
+    "avatar": "🧑🏻",
+    "xp": 8940,
+    "streak": 16
+  },
+  {
+    "id": "demo-9",
+    "name": "სოფო კ.",
+    "avatar": "👩🏽",
+    "xp": 8760,
+    "streak": 14
+  }
+]

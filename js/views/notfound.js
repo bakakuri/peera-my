@@ -1,0 +1,1 @@
+export default {render(){return `<div class="glass empty-state"><h2>გვერდი ვერ მოიძებნა</h2><p>გადადით მთავარ გვერდზე და აირჩიეთ სასურველი განყოფილება.</p><a class="btn btn-green" href="#/home">მთავარი</a></div>`;}}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "de",
+    "name": "გერმანული ენა",
+    "flag": "🇩🇪",
+    "level": "A1",
+    "image": "berlin.png",
+    "description": "პირველი ნაბიჯები, მისალმება და საუბარი"
+  },
+  {
+    "id": "en",
+    "name": "ინგლისური ენა",
+    "flag": "🇬🇧",
+    "level": "A1",
+    "image": "bigben.png",
+    "description": "ყოველდღიური ინგლისური ნულიდან"
+  },
+  {
+    "id": "es",
+    "name": "ესპანური ენა",
+    "flag": "🇪🇸",
+    "level": "A1",
+    "image": "sagrada.png",
+    "description": "სასაუბრო ესპანურის საფუძვლები"
+  }
+]

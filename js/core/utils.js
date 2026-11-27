@@ -1,0 +1,16 @@
+export const A = '/assets/';
+export const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+export const clamp = (n,a=0,b=100) => Math.max(a,Math.min(b,Number(n)||0));
+export const pct = (a,b) => b ? clamp(Math.round(100*a/b)) : 0;
+export const number = n => new Intl.NumberFormat('en-US').format(Number(n)||0);
+export const dateKey = (d=new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+export const langName = code => ({de:'გერმანული',en:'ინგლისური',es:'ესპანური'}[code]||code);
+export const flag = code => ({de:'🇩🇪',en:'🇬🇧',es:'🇪🇸'}[code]||'🌍');
+export const img = (name, cls='', alt='') => `<img src="assets/${esc(name)}" ${cls ? `class="${cls}"`:''} alt="${esc(alt)}" loading="lazy">`;
+export const icon = (name,cls='') => img(`icons/${name}.png`,cls);
+export const art = (name,cls='') => img(`3d/${name}.png`,cls);
+export const pill = (text,extra='') => `<span class="pill ${extra}">${text}</span>`;
+export const meter = (value,color='') => `<div class="meter ${color}" role="progressbar" aria-valuenow="${clamp(value)}" aria-valuemin="0" aria-valuemax="100"><span style="width:${clamp(value)}%"></span></div>`;
+export const btn = (label,href,variant='btn-green',extra='') => `<a class="btn ${variant} ${extra}" href="${href}">${label}</a>`;
+export const heading = (title,imgName,sub='') => `<div class="section-heading"><h2>${imgName?img(imgName):''}${title}</h2>${sub}</div>`;
+export const safeUrl = str => /^#\/[a-z\d-]+(?:\/[\w-]+)?$/.test(str) ? str : '#/home';

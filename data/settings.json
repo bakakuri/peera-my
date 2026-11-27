@@ -1,0 +1,30 @@
+{
+  "languages": [
+    "de",
+    "en",
+    "es"
+  ],
+  "reviewGrades": [
+    {
+      "id": 0,
+      "name": "ისევ",
+      "intervalMinutes": 1
+    },
+    {
+      "id": 1,
+      "name": "რთული",
+      "intervalMinutes": 1440
+    },
+    {
+      "id": 2,
+      "name": "კარგი",
+      "intervalMinutes": 4320
+    },
+    {
+      "id": 3,
+      "name": "ადვილი",
+      "intervalMinutes": 10080
+    }
+  ],
+  "dataMode": "local-json-and-indexeddb"
+}

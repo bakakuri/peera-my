@@ -1,83 +1,13 @@
-import { state } from "../state.js";
-import * as db from "../db.js";
-import { header, icon, badgeIcon } from "../ui.js";
-import { esc } from "../util.js";
-
-export default {
-  render() {
-    const s = state.stats;
-    const list = state.wordsOf();
-    const learned = state.learnedOf();
-    const total = list.length;
-    const pct = total ? Math.round((learned / total) * 100) : 0;
-    const week = state.week();
-    const max = Math.max(5, ...week.map((d) => d.value));
-    const bars = week
-      .map(
-        (d, i) => `<div class="wk${d.today ? " today" : ""}"><i class="${d.value ? "has" : ""}" style="height:${d.value ? Math.max(10, Math.round((d.value / max) * 70)) : 6}px;animation-delay:${0.2 + i * 0.07}s"></i><span>${d.label}</span></div>`
-      )
-      .join("");
-    const badges = state
-      .achievements()
-      .map(
-        (a) => `<div class="badge${a.done ? " done" : ""}" title="${esc(a.hint)}">
-          <span class="b-ico">${a.done ? badgeIcon(a.id) : icon.lock}</span>
-          <b>${esc(a.title)}</b>
-          <small>${esc(a.hint)}</small>
-        </div>`
-      )
-      .join("");
-    const user = db.getUser();
-    const account = db.isCloud()
-      ? user
-        ? `<div class="account"><span>${esc(user.email || "")}</span><button class="link" data-act="signout">გასვლა</button></div><a class="account admin-link" id="admin-link" href="#/admin" hidden>ადმინ პანელი ${icon.arrow}</a>`
-        : `<div class="account"><span>პროგრესი ამ მოწყობილობაზეა</span><a class="link" href="#/auth">შესვლა ან რეგისტრაცია</a></div>`
-      : `<div class="account"><span>დემო რეჟიმი — პროგრესი ამ მოწყობილობაზე ინახება</span></div>`;
-
-    return `
-    <section class="hero hero-sm hero-progress">
-      <div class="deco hd1"></div>
-      ${header()}
-      <div class="hero-title"><h1>ჩემი პროგრესი</h1><p class="page-sub">ყოველი პატარა ნაბიჯი დიდ შედეგამდე მიდის</p></div>
-    </section>
-
-    <section class="hero-card rise">
-      <i class="deco hc1"></i><i class="deco hc2"></i>
-      <img class="hero-cheer" src="assets/girl-cheer.png" alt="" width="110" height="150">
-      <div class="big">${learned}</div>
-      <p>ნასწავლი სიტყვა · ${esc(state.langInfo().name)}</p>
-      <small>სულ ${total} სიტყვა</small>
-      <div class="lvl"><div class="lvl-bar"><i style="width:${pct}%"></i></div><span>${pct}%</span></div>
-    </section>
-
-    <section class="card rise" style="animation-delay:.12s">
-      <div class="card-head plain"><h3>ბოლო 7 დღე</h3><small>გამეორებები</small></div>
-      <div class="week">${bars}</div>
-    </section>
-
-    <section class="tiles2 rise" style="animation-delay:.2s">
-      <div class="big-tile coral"><b>${state.retention()}%</b><span>დამახსოვრება</span></div>
-      <div class="big-tile mint"><b>${s.streak}</b><span>დღე ზედიზედ</span></div>
-      <div class="big-tile blue"><b>${s.xp}</b><span>XP სულ</span></div>
-    </section>
-
-    <section class="block rise" style="animation-delay:.28s">
-      <div class="card-head plain"><h3>მიღწევები</h3><a href="#/awards">ყველა და რეიტინგი ${icon.arrow}</a></div>
-      <div class="badges">${badges}</div>
-    </section>
-
-    <section class="pad-x rise" style="animation-delay:.34s">${account}</section>`;
-  },
-
-  mount(root) {
-    const onClick = async (e) => {
-      if (e.target.closest('[data-act="signout"]')) {
-        await db.signOut();
-      }
-    };
-    root.addEventListener("click", onClick);
-    const link = root.querySelector("#admin-link");
-    if (link) db.isAdmin().then((ok) => { if (ok) link.hidden = false; });
-    return () => root.removeEventListener("click", onClick);
-  },
-};
+import {store} from '../core/store.js';
+import {esc,art,icon,img,number,meter,pct,pill} from '../core/utils.js';
+import {pageTop,footer} from '../components/chrome.js';
+function weekly(){const labels=['ორშ','სამ','ოთხ','ხუთ','პარ','შაბ','კვი'];const week=store.stats.weekly||[0,0,0,0,0,0,0];const max=Math.max(...week,1);return `<div class="glass chart-box"><h3>📊 კვირის პროგრესი</h3><div class="weekly-bars">${week.map((n,i)=>`<div class="bar-group ${i===6?'today':''}"><b>${n}</b><div class="bar-visual" style="--h:${Math.round(n/max*100)}"></div><small>${labels[i]}</small></div>`).join('')}</div></div>`}
+function heatmap(){const activity=store.stats.activity;return `<div class="glass activity-box"><h3>🗓️ აქტივობის კალენდარი</h3><p class="text-small muted">ბოლო 14 დღის საჩვენებელი აქტივობა</p><div class="activity-grid">${Array.from({length:98},(_,i)=>`<span class="activity-cell l${((activity[i%activity.length]+i*7)%5)}" title="აქტივობა"></span>`).join('')}</div></div>`}
+export default {render(){const s=store.stats,learned=store.learned(),success=pct(s.correct,s.reviews),all=store.wordsFor().length,completion=pct(learned,all);
+return `${pageTop('პროგრესი','📈')}<div class="glass progress-banner">${img('girl-dict.png')}<h2>შენი პროგრესი</h2><p>ყოველდღე ერთი ნაბიჯით წინ! 🎉</p></div>
+<div class="metric-grid">${[['star',`${number(s.xp)} XP`,'სულ ქულა'],['flame',`${s.streak} დღე`,'სერია'],['dictionary-3d',number(learned),'სიტყვა'],['calendar',number(s.lessons),'გაკვეთილი'],['awards-3d',`${success}%`,'სიზუსტე']].map(([ico,n,label])=>`<div class="metric">${icon(ico)}<strong>${n}</strong><small>${label}</small></div>`).join('')}</div>
+<div class="chart-grid"><div class="glass chart-box"><h3>🎓 სწავლის პროგრესი</h3><div class="ring" style="--pct:${completion}%"><div>${art('cap')}<strong>${completion}%</strong><small>სწავლილი</small></div></div></div>${weekly()}</div>
+<div class="section-heading"><h2>📅 აქტივობა</h2></div>${heatmap()}
+<div class="section-heading"><h2>📚 პროგრესი ენების მიხედვით</h2></div>${store.data.courses.map(c=>{const prog=store.courseProgress(c.id);return `<a href="#/learn?lang=${c.id}" class="glass course-progress-card"><span class="course-flag">${c.flag}</span><div><strong>${esc(c.name)}</strong><small> · ${prog.done}/${prog.total} გაკვეთილი</small>${meter(prog.percent,c.id==='en'?'blue':'')}</div><b>${prog.percent}%</b></a>`}).join('')}
+<div class="glass daily-success">${icon('calendar')}<div><strong>დღიური მიზანი</strong><p>${store.profile.dailyGoal} XP დღეში · დღევანდელი პროგრესი ${store.user.daily[new Date().toISOString().slice(0,10)]||0} XP</p>${meter(pct(store.user.daily[new Date().toISOString().slice(0,10)]||0,store.profile.dailyGoal))}</div></div>
+${footer()}`}}
