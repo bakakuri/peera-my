@@ -1,0 +1,48 @@
+import fs from 'node:fs';
+import {store} from '../js/core/store.js';
+import {sidebar,nav,extras,primary} from '../js/components/chrome.js';
+import home from '../js/views/home.js';
+import learn from '../js/views/learn.js';
+import cards from '../js/views/cards.js';
+import dictionary from '../js/views/dictionary.js';
+import progress from '../js/views/progress.js';
+import achievements from '../js/views/achievements.js';
+import leaderboard from '../js/views/leaderboard.js';
+import profile from '../js/views/profile.js';
+import lesson from '../js/views/lesson.js';
+import grammar from '../js/views/grammar.js';
+import listening from '../js/views/listening.js';
+import plan from '../js/views/plan.js';
+import games from '../js/views/games.js';
+import auth from '../js/views/auth.js';
+const base=new URL('../',import.meta.url);
+for(const name of ['courses','words','lessons','achievements','leaderboard','profile','settings','stats','grammar','listening'])
+ store.data[name]=JSON.parse(fs.readFileSync(new URL('data/'+name+'.json',base),'utf8'));
+store.user=store.newUser();store.ready=true;
+store.save=async()=>true;
+globalThis.window={peeraToast:()=>{},peeraSoundEnabled:false};
+globalThis.location={hash:'#/home'};
+const modules={home,learn,cards,dictionary,progress,achievements,leaderboard,profile,grammar,listening,plan,games,auth};
+for(const [name,v] of Object.entries(modules)){
+ const html=v.render();if(!html||html.length<40||html.includes('undefined</'))throw Error('Failed render '+name);
+ console.log('PASS route '+name+' '+html.length);
+}
+for(const [id] of [...primary,...extras])if(!(id in modules))throw Error('Missing navigation route '+id);
+if(!nav('home').includes('მეტი')||!sidebar('home').includes('სასწავლო გეგმა'))throw Error('Navigation missing links');
+await learn.handle('choose-course',{dataset:{id:'en'}},()=>{});
+if(!learn.render().includes('ინგლისური'))throw Error('Language switch broken');
+let detail=false;
+await dictionary.handle('word-detail',{dataset:{id:store.words[0].id}},()=>{detail=true});
+if(!detail||!dictionary.render().includes('word-detail-card'))throw Error('Dictionary details failed');
+await dictionary.handle('close-word',{},()=>{});
+const wasFav=store.user.favorites.includes(store.words[0].id);
+await dictionary.handle('fav',{dataset:{id:store.words[0].id}},()=>{});
+if(wasFav===store.user.favorites.includes(store.words[0].id))throw Error('Favorites not saved');
+const before=store.stats.reviews;
+cards.render();await cards.handle('flip-card',{},()=>{});
+await cards.handle('grade',{dataset:{grade:'2'}},()=>{});
+if(store.stats.reviews<=before)throw Error('Flashcard grade did not record');
+const selected=store.lessonsFor().find(l=>!store.user.completed[l.id]&&store.isUnlocked(l));
+if(!selected||!lesson.render(`lesson/${selected.id}`).includes('გაკვეთილი'))throw Error('Lesson missing');
+if(!progress.render().includes('ბოლო 7 დღის ქულები'))throw Error('Progress not updated');
+console.log('PASS interactive module smoke tests');

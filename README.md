@@ -1,106 +1,51 @@
-# Peera.My — Supabase + JSON Language Learning Web App
+# Peera.My — V6 Practical UX
 
-**ვერსია:** 5.0 — V4 დიზაინი + Supabase ინტეგრაცია, 2026-11-27
+A mobile-first language-learning website in Georgian, built with plain HTML, CSS, and JavaScript. The V6 update simplifies the interface and navigation without replacing its Supabase/IndexedDB integration.
 
-Peera.My არის მობილურზე ორიენტირებული სასწავლო ვებსაიტი ქართულ ენაზე. დიზაინი შექმნილია მომხმარებლის მიერ მოწოდებული 9 ვიზუალური ეტალონის საფუძველზე: იისფერი/ლილაქისფერი ფონი, შუშისებრი ბარათები, სამგანზომილებიანი გამჭვირვალე PNG გამოსახულებები, მოცულობითი ჩრდილები, მწვანე CTA და მობილური სანავიგაციო ზოლი. **ეს არის კოდით აწყობილი ინტერფეისი და არა სურათი ან სკრინშოტი**, ამიტომ არ უნდა ჩაითვალოს ეტალონის პიქსელურად 100%-ით იდენტურ ასლად.
+## Run locally
 
-## ტექნოლოგიები
-
-- HTML5 + CSS3 + Vanilla JavaScript / ES Modules
-- კონტენტის მთავარი წყარო: Supabase `public.peera_catalog`; გათიშვისას გამოიყენება `data/*.json`
-- ავტორიზებულის პროგრესი: Supabase `public.peera_progress`; სტუმრის პროგრესი: **IndexedDB**
-- გერმანული/ინგლისური/ესპანური გამოთქმა: **Web Speech API / SpeechSynthesis**
-- `localStorage`, React, Vue, Angular, Tailwind, Bootstrap და SVG **არ გამოიყენება**. Supabase Auth-ის სესიაც IndexedDB-შია შენახული.
-- Supabase Auth-ით მუშაობს რეგისტრაცია/შესვლა; თუ ელფოსტის დადასტურებაა ჩართული, ახალი ანგარიში საჭიროა დაადასტურო.
-
-## გაშვება
-
-### კომპიუტერზე
 ```bash
-cd peera-my
 python -m http.server 8080
 ```
-გახსენი <http://127.0.0.1:8080/#/home>.
 
-### Android / Termux
+Open `http://127.0.0.1:8080/`. Do not launch `index.html` from `file://` because the app uses ES modules and `fetch()`.
+
+## Navigation
+
+Mobile: **მთავარი**, **გაკვეთილები**, **ბარათები**, **ლექსიკონი**, **მეტი**. The **მეტი** sheet provides access to progress, achievements, leaderboard, grammar, listening, study plan, games, profile, and authentication. Desktop: the complete sidebar is always visible.
+
+The home page prioritizes **გაგრძელება**, followed by today's goal/reviews, study tools, courses, and an account-sync link.
+
+## Core screens
+
+- `#/home` — resume next unlocked lesson and access study tools
+- `#/learn` — select language and scan a linear, labelled lesson list
+- `#/lesson/<id>` — word study, dialogue, quiz, and results
+- `#/cards` — graded flashcards, spaced repetition, text/audio actions
+- `#/dictionary` — live search, filters, favorites, spoken words, example details
+- `#/progress` — XP, streak, learning metrics and actual daily activity
+- `#/achievements`, `#/leaderboard`, `#/profile`, `#/auth`
+- `#/grammar`, `#/listening`, `#/plan`, `#/games`
+
+## Data and persistence
+
+The client loads initial JSON from `data/`, then attempts the read-only Supabase catalog (`peera_catalog`). When Supabase is unavailable, it falls back to JSON. Authenticated users' `peera_progress` writes use RLS-restricted Supabase access. Guest progress stays in IndexedDB. No `localStorage` is used by this application code.
+
+The Supabase project is `peeramy-learn` (`jgsorwixqrvgbhxmfspq`). **No database migration is required for the V6 UI redesign.** The prior archive and existing account records remain unchanged.
+
+## Important limits
+
+- The original demo catalog contains 164 words and 20 lessons, not a complete A1–C2 course.
+- Guest accounts begin with sample achievements, XP, and streak to demonstrate the interface; they are explicitly labelled as demo. New authenticated users start without demo progress.
+- Leaderboard remains sample JSON data, not an authoritative public user ranking.
+- Push notifications are not implemented; the setting is cosmetic.
+- XP is calculated client-side and is not suitable for a fraud-resistant competitive ranking.
+- Full authenticated-browser E2E testing against live Supabase is still required; the dev environment blocks Chromium navigation to localhost and external webpages.
+
+## Verification
+
 ```bash
-pkg install python unzip
-unzip peera-my-v4-json.zip -d ~/peera-v4
-cd ~/peera-v4/peera-my
-python -m http.server 8080
+node scripts/test-v6.mjs
 ```
-გახსენი Chrome-ში <http://127.0.0.1:8080/#/home>.
 
-### GitHub Pages
-`index.html` დევს რეპოზიტორიის root-ში; Repository → Settings → Pages → Deploy from a branch (`main`/root). GitHub-ზე push არ ნიშნავს Pages-ის ავტომატურ ჩართვას.
-
-## გვერდები და ფუნქციები
-
-| მისამართი | ფუნქციები |
-|---|---|
-| `#/home` | მთავარი ბანერი, კურსები, სტატისტიკა, სწრაფი გადასვლები |
-| `#/learn` | ენის არჩევა, გაკვეთილების ბილიკი, დასრულება/ჩაკეტვა |
-| `#/lesson/de-03` | სიტყვის, დიალოგის, ტესტის და შედეგის ეტაპები |
-| `#/lesson-play/de-03` | იგივე ინტერაქტიული გაკვეთილის სრული სვლა |
-| `#/quiz/de-03` | გაკვეთილის ტესტის სვლა |
-| `#/cards` | ბარათის გადაბრუნება და SRS-ის 4 შეფასება |
-| `#/dictionary` | ძებნა, ენის/დონის/კატეგორიის ფილტრები, ხმა, რჩეულები, გვერდები |
-| `#/progress` | XP, სწავლის სერია, აქტივობა, კურსების პროგრესი |
-| `#/achievements` | რეალური პროგრესით გამოთვლილი 12 მიღწევა |
-| `#/leaderboard` | მხოლოდ **დემო** რეიტინგი, დროის სამი ფილტრი |
-| `#/profile` | სახელი, ყოველდღიური მიზანი, ხმა, Supabase ანგარიშის კავშირი, ექსპორტი/განულება |
-| `#/auth` | რეგისტრაცია/შესვლა/გამოსვლა Supabase Auth-ით |
-| `#/grammar` | 3 ახსნილი გრამატიკული თემა და ინტერაქტიული კითხვები |
-| `#/listening` | ხმოვანი მაგალითები, ტესტები და მხარდაჭერილ ბრაუზერში მიკროფონი |
-| `#/plan` | ყოველდღიური გეგმა და დავალებების ნავიგაცია |
-| `#/games` | მეხსიერების თამაში (სიტყვების და თარგმანების წყვილები) |
-
-ქვედა ნავიგაცია მოიცავს 5 მთავარ გვერდს. „+“ ღილაკი ხსნის **ყველა დანარჩენ გვერდს**; ამგვარად არცერთი გვერდი არ რჩება ხელმიუწვდომელი.
-
-## მონაცემების სტრუქტურა
-
-- `data/courses.json` — ენები/კურსები
-- `data/words.json` — 164 საცდელი სიტყვა, ფონეტიკით, ქართული თარგმანითა და მაგალითებით
-- `data/lessons.json` — 20 საცდელი გაკვეთილი (გერმანული 12, ინგლისური 6, ესპანური 2)
-- `data/achievements.json` — 12 ჯილდოს ლოგიკა/მიზნები
-- `data/leaderboard.json` — ფიქციური პროფილები **მხოლოდ UI-ის საჩვენებლად**
-- `data/profile.json` — საწყისი, ფიქციური პროფილი
-- `data/stats.json` — საწყისი, ფიქციური პროგრესის მაგალითი
-- `data/settings.json` — ენები/გამეორების ინტერვალები
-- `data/grammar.json` — გრამატიკული ახსნები
-- `data/listening.json` — მოსასმენი ფრაზები და ტესტი
-
-**მნიშვნელოვანი:** `data/*.json` არის fallback. ჩვეულებრივ კატალოგი იტვირთება Supabase-იდან. შესულ მომხმარებელზე პროგრესის ყოველი ცვლილება იწერება `peera_progress` ცხრილში (RLS მომხმარებლის ID-ზე). სტუმარი რჩება IndexedDB-ზე. პროფილის „JSON“ ღილაკი მიმდინარე პროგრესს ექსპორტს უკეთებს. სტუმრის დემო პროგრესი ავტომატურად არ ერწყმის ავტორიზებულ ანგარიშს.
-
-## ცნობილი შეზღუდვები
-
-1. ეს არის **საინტერესო, სამუშაო დემო MVP** და არა გრაფიკული მაკეტების პიქსელურად იდენტური ასლი.
-2. მოცემული 164 სიტყვა და 20 გაკვეთილი სრულ A1–C2 ლექსიკონს/კურსს არ წარმოადგენს.
-3. AI/რეალური ვიდეო-ხმის შეფასება, email/push შეტყობინებები და ცოცხალი მრავალმომხმარებლიანი რეიტინგი არ არსებობს.
-4. ხმის სინთეზის ხარისხი და მიკროფონი დამოკიდებულია მოწყობილობაზე/ბრაუზერზე.
-5. Supabase Auth და ანგარიშზე პროგრესის სინქრონიზაცია ჩართულია; **XP ჯერ კლიენტში ითვლება** და კონკურენტული რეიტინგისთვის უსაფრთხო სერვერული ვალიდაცია სჭირდება. რეიტინგი ისევ დემოა.
-6. გამოყენებული ვიზუალური PNG ფაილები ინახება `assets`-ში, არ არის გადმოწერილი სხვა სერვერიდან.
-7. HTTPS ვებსაიტზე IndexedDB იმუშავებს; ზოგ ბრაუზერში private/incognito რეჟიმში ჩანაწერის შენახვა შეზღუდულია.
-
-## უსაფრთხოება
-
-პროექტში აღარ შედის Supabase-თან კავშირი ან გასაღებები. JSON მონაცემები ღიაა და საჯაროდ იკითხება. რეალური მომხმარებლების მონაცემები არ ინახება სერვერზე. არ გამოიყენო ეს სტატიკური დემო რეალურ ფინანსურ/ანგარიშის სენსიტიურ მონაცემებთან.
-
-## ტესტირება
-
-იხილე [QA-REPORT.md](QA-REPORT.md). Chromium-ის უსაფრთხოების შეზღუდვების გამო ტესტი შესრულდა ხელოვნური static-asset პასუხებით გვერდის კონტექსტში; სრული hosted HTTP E2E და IndexedDB-ის ხელახალი ჩატვირთვის შემოწმება საჭიროა შემდგომ.
-
-## Supabase V5 პროექტის ფაქტობრივი მდგომარეობა
-
-- პროექტი: `peeramy-learn` (`jgsorwixqrvgbhxmfspq`), client-safe legacy anon JWT: `js/core/cloud-config.js` (secret/service_role არსად გამოიყენება; SDK-ის განახლებისას საჭიროა publishable key-ზე გადასვლა).
-- ცოცხალი კატალოგი: `public.peera_catalog` — 164 სიტყვა, 20 გაკვეთილი, 3 კურსი და დანარჩენი 7 კატეგორია.
-- პერსონალური პროგრესი: `public.peera_progress` — მომხმარებლის `user_id` და სრული სასწავლო JSON. წვდომა მხოლოდ მფლობელს აქვს.
-- ძველი ბაზის სარეზერვო ასლები: `peera_archive_20261127` არაპუბლიკურ სქემაში. ძველი `auth.users` ანგარიში შენარჩუნებულია, მაგრამ ძველი XP ახალ პროგრესში არ დაბრუნებულა.
-- `#/auth` გვერდი: შესვლა, რეგისტრაცია, გამოსვლა. შესვლისას ცარიელი ახალი პროგრესი იქმნება; სტუმრის დემო სტატისტიკა ანგარიშზე არ გადადის.
-- Auth-ის სესიის შენახვა: `js/core/db.js`-ის IndexedDB storage adapter. `localStorage` არ გამოიყენება.
-- უსაფრთხოების დარჩენილი სამუშაო: Supabase Dashboard-ში Leaked Password Protection; XP-ის სერვერული დათვლა; რეალურ ჰოსტინგზე ავტორიზაციისა და ჩაწერის E2E ტესტი.
-- რეალურ ჰოსტინგზე გატანამდე Auth URL Configuration-ში საიტის URL და საჭირო redirect მისამართები შეამოწმე.
-
-### Cloud ტესტის სტატუსი
-
-Node.js ინტერაქციულ სტუბ-ტესტში წარმატებით შემოწმდა 217 კატალოგის ჩანაწერის ჩატვირთვა, შესვლა/გასვლა, სასწავლო ბარათის ცვლილების ჩაწერა, გაკვეთილის დასრულებისა და 14 გვერდის რენდერი. რეალური Supabase სესიის E2E ვერ გავუშვით ტესტის გარემოს ქსელური შეზღუდვის გამო.
+This runs route rendering and module interaction smoke tests without changing the real database. See `QA-REPORT.md` for tested limits.

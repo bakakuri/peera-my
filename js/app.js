@@ -1,5 +1,5 @@
 import {store} from './core/store.js';
-import {header,nav,drawer} from './components/chrome.js';
+import {header,nav,drawer,sidebar} from './components/chrome.js';
 import home from './views/home.js';
 import learn from './views/learn.js';
 import lesson from './views/lesson.js';
@@ -27,7 +27,7 @@ function render(keepFocus=false){
  const name=keepFocus?active?.dataset?.input:null;const sel=keepFocus&&name&&active.selectionStart!=null?active.selectionStart:null;
  window.peeraSoundEnabled=store.profile.sound;
  document.body.classList.toggle('reduce-motion',!store.profile.motion);
- root.innerHTML=`<div class="shell">${header()}<main class="page page--${esc(route.split('/')[0])}" id="page-content">${v.render(route)}</main></div>${nav(currentNav(route))}${isDrawer?drawer():''}`;
+ root.innerHTML=`<div class="shell">${sidebar(currentNav(route))}<div class="main-column">${header()}<main class="page page--${esc(route.split('/')[0])}" id="page-content">${v.render(route)}</main></div></div>${nav(currentNav(route))}${isDrawer?drawer():''}`;
  document.body.classList.toggle('no-scroll',isDrawer);
  if(name){const next=root.querySelector(`[data-input="${name}"]`);if(next){next.focus();try{next.setSelectionRange(sel,sel)}catch{}}}
  if(lastRoute!==route){window.scrollTo({top:0,behavior:'instant'});lastRoute=route;}
@@ -39,6 +39,7 @@ window.peeraToast=message=>{
  toastTimer=setTimeout(()=>el.remove(),3500);
 };
 root.addEventListener('click',async e=>{
+ if(e.target.closest('.drawer-item')){isDrawer=false;setTimeout(()=>render(),0);return;}
  const el=e.target.closest('[data-action]');if(!el)return;
  if(el.dataset.action==='cancel-edit'&&e.target.closest('[data-stop]')&&!e.target.closest('button'))return;
  e.preventDefault();const action=el.dataset.action;

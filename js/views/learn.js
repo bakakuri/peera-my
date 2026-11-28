@@ -1,21 +1,26 @@
 import {store} from '../core/store.js';
-import {esc,icon,img,pill,meter,number} from '../core/utils.js';
+import {esc,meter} from '../core/utils.js';
 import {pageTop,footer} from '../components/chrome.js';
 let chosen=null;
-const title='გაკვეთილები';
-function levelBlock(level,lessons){return `<div class="level-mark"><div class="level-island ${level.toLowerCase()}"><span class="level-flag">${level}</span></div><span class="level-caption">${level} საფეხური</span></div>${Array.from({length:Math.ceil(lessons.length/2)},(_,idx)=>{
- const pair=lessons.slice(idx*2,idx*2+2);
- return `<div class="roadmap-row">${pair.map(l=>{const done=store.user.completed[l.id],locked=!store.isUnlocked(l),current=!done&&!locked;return `<a class="lesson-node ${done?'complete':current?'current':'locked'}" href="${locked?'#/learn':'#/lesson/'+l.id}" data-locked="${locked?'true':'false'}"><span class="node-icon">${done?'✓':locked?'🔒':'▶'}</span><span class="node-copy"><b>გაკვეთილი ${l.number}<br>${esc(l.title)}</b><small>📚 +${l.xp} XP</small><span class="node-stars">${done?'★★★':current?'★★☆':'☆☆☆'}</span></span></a>`}).join('')}</div>`
- }).join('')}`}
+function lessonRow(l){const done=!!store.user.completed[l.id];const locked=!store.isUnlocked(l);
+ const status=done?'დასრულებულია':locked?'ჩაკეტილია':'დასაწყებია';const icon=done?'✓':locked?'🔒':'▶';
+ const inner=`<span class="lesson-index">${icon}</span><span class="lesson-text"><strong>${esc(l.title)}</strong>
+ <small>გაკვეთილი ${l.number} · ${l.wordIds?.length||0} სიტყვა · ${l.xp} XP</small></span><span class="lesson-status ${done?'is-done':locked?'is-locked':'is-ready'}">${status}</span><span class="lesson-arrow">${locked?'':'→'}</span>`;
+ return locked?`<div class="lesson-list-item locked" aria-label="${esc(l.title)} — ჩაკეტილია">${inner}</div>`:
+ `<a href="#/lesson/${l.id}" class="lesson-list-item ${done?'done':'ready'}">${inner}</a>`;
+}
 export default {
- render(){const code=chosen||store.lang;const course=store.data.courses.find(c=>c.id===code)||store.data.courses[0], lessons=store.lessonsFor(code),prog=store.courseProgress(code),next=lessons.find(l=>!store.user.completed[l.id]);
- return `${pageTop(title,'📚','#/home')}
- <div class="tab-row">${store.data.courses.map(c=>`<button class="tab ${code===c.id?'active':''}" data-action="choose-course" data-id="${c.id}">${c.flag} ${esc(c.name)}</button>`).join('')}</div>
- <div class="glass course-hero">${img('girl-dict.png','girl')}<div class="course-hero-info">${pill(`${course.flag} ${course.level} · ეტაპი 1`,'purple')}<h2>${esc(course.name)}ს დასაწყისი</h2><p>${esc(course.description)}</p><a class="btn btn-green" href="${next?'#/lesson/'+next.id:'#/cards'}">▶ ${next?'გაგრძელება':'გამეორება'}</a></div></div>
- <div class="glass goal-card">${icon('star')}<div><strong>კვირის მიზანი</strong><p>დაასრულე 5 გაკვეთილი</p>${meter(Math.min(100,Math.round(100*prog.done/5)))}</div><span>${prog.done}/5</span></div>
- <section class="roadmap">${['A1','A2','B1'].map(level=>{const arr=lessons.filter(l=>l.level===level);return arr.length?levelBlock(level,arr):''}).join('')}</section>
- <div class="notice">🔒 გაკვეთილები იხსნება თანმიმდევრობით. პროგრესი ინახება მხოლოდ ამ ბრაუზერში, IndexedDB-ში.</div>
- ${footer()}`},
- handle(action,el,refresh){if(action==='choose-course'){chosen=el.dataset.id;refresh();return true;}return false;},
- setCourse(code){chosen=code}
+ render(){const code=chosen||store.lang;const c=store.data.courses.find(x=>x.id===code)||store.data.courses[0];
+ const lessons=store.lessonsFor(code),p=store.courseProgress(code),next=lessons.find(l=>!store.user.completed[l.id]&&store.isUnlocked(l));
+ return `${pageTop('გაკვეთილები','','#/home')}<p class="page-description">აირჩიე ენა და მიჰყევი გაკვეთილებს თანმიმდევრობით.</p>
+ <div class="course-selector" aria-label="სასწავლო ენა">${store.data.courses.map(x=>`<button class="course-choice ${code===x.id?'active':''}" data-action="choose-course" data-id="${x.id}" aria-pressed="${code===x.id}">${x.flag} ${esc(x.name)}</button>`).join('')}</div>
+ <section class="course-overview"><div class="course-overview-body"><span class="tiny-kicker">${c.flag} ${esc(c.name)} · ${esc(c.level)}</span>
+ <h2>${esc(c.name)} — შენი კურსი</h2><p>${esc(c.description)}</p>
+ <div class="overview-progress"><span>${p.done} / ${p.total} გაკვეთილი დასრულდა</span><strong>${p.percent}%</strong></div>${meter(p.percent)}
+ <a class="action-primary" href="${next?'#/lesson/'+next.id:'#/cards'}">${next?'შემდეგი გაკვეთილი':'სიტყვების გამეორება'} <span>→</span></a></div>
+ <img src="${code==='en'?'assets/bigben.png':code==='es'?'assets/sagrada.png':'assets/berlin.png'}" alt="" loading="lazy"></section>
+ <div class="section-heading"><h2>გაკვეთილების სია</h2><span class="helper-text">${lessons.length} გაკვეთილი</span></div>
+ ${['A1','A2','B1','B2','C1','C2'].map(level=>{const arr=lessons.filter(l=>l.level===level);return !arr.length?'':`<section class="lesson-group"><div class="lesson-group-head"><span class="level-chip">${level}</span><div><h3>${level} დონე</h3><p>${arr.filter(l=>store.user.completed[l.id]).length}/${arr.length} დასრულებული</p></div></div><div class="lesson-list">${arr.map(lessonRow).join('')}</div></section>`}).join('')}
+ <p class="explanation">🔒 ჩაკეტილი გაკვეთილი გაიხსნება წინა გაკვეთილის დასრულების შემდეგ.</p>${footer()}`;
+ },handle(action,el,refresh){if(action==='choose-course'){chosen=el.dataset.id;refresh();return true;}return false;},setCourse(code){chosen=code}
 };

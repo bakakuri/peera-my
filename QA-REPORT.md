@@ -1,27 +1,20 @@
-# Peera.My v4 — QA ანგარიში (2026-11-27)
+# Peera.My V6 — UX and source checks
 
-## ავტომატური შემოწმება
+- Reworked the navigation into 4 direct learning destinations plus a labelled More sheet on mobile; a persistent complete sidebar on desktop.
+- Simplified home around one action, a next-lesson CTA, accurate course progress, and straightforward shortcuts.
+- Replaced the decorative roadmap with a linear, scannable lesson list, retaining the unlocked/completed rules.
+- Added a dictionary term-details modal and kept live search, pagination, favorites, and speech controls.
+- Corrected progress visualizations to use real saved `user.daily` values instead of a fabricated random activity heatmap. Guest initial XP/streak are labelled demo.
+- Left Supabase connection and `peera_catalog` / `peera_progress` unchanged.
 
-- ES module JavaScript: `node --check` **20/20 წარმატებით**.
-- JSON: **10/10 იკითხება** Python JSON parser-ით.
-- 13 გვერდის Chromium HTML+CSS+ES Modules static render smoke test: **წარმატებით**.
-- რენდერში `pageerror`: **0**; სტატიკური რესურსების HTTP error: **0**.
-- 390px viewport-ზე document horizontal overflow: **0**.
-- არარსებული PNG resource: **0**.
-- ლექსიკონის ძებნა (`wasser`), რჩეულები, ბარათის flip + grade, გაკვეთილის ტესტის შენახვა, პროფილის სახელის შეცვლა და switch, ნავიგაციის გაფართოება და თამაშის ბარათები: **ინტერაქტიულ smoke test-ში წარმატებით**.
+## Tests performed
 
-## სატესტო გარემოს ზღვარი
+- `node --check` for all ES modules: passed.
+- `node scripts/test-v6.mjs`: 13 route-render smoke tests, course switching, vocabulary details, favorites, card-flip/review persistence calculations: passed.
+- Chromium offline static HTML rendering at 390px and 1280px for the dashboard and lessons, plus 7 further mobile screens: passed with zero document horizontal overflow.
+- Exact JS rendering/click handlers tested in Node via simulated app data. Screenshots are actual Chromium static rendering of those components, with local PNG assets embedded in the test page.
+- **Not tested:** the full browser app startup and live Supabase login/writes; Chromium refuses navigation to `localhost` (`ERR_BLOCKED_BY_ADMINISTRATOR`) in this execution environment.
 
-Chromium-ის პირდაპირი ნავიგაცია localhost-ზე/გარე URL-ზე ინფრასტრუქტურის პოლიტიკით იბლოკება (`ERR_BLOCKED_BY_ADMINISTRATOR`). ავტომატური ტესტისთვის გვერდი ჩაიტვირთა `page.set_content()`-ით და მისი CSS/JS/JSON/PNG მოთხოვნები ხელოვნურმა network route-მა უპასუხა ადგილობრივი ფაილებიდან. ამიტომ დადასტურებულია UI-ის მუშაობა **იმ კონტექსტში**, მაგრამ არა სრული production-domain E2E, საჯარო ჰოსტინგი ან სერვერზე persist.
+## No backend changes
 
-## ჯერ შესამოწმებელი რეალურ მოწყობილობაზე
-
-- Android Chrome / Safari-ზე ბარათების გადაბრუნების ანიმაცია, ბარათების ბოლო რიგი და უსაფრთხო ქვედა ზოლი.
-- IndexedDB-ში ცვლილებების შენახვა და refresh-ის შემდეგ აღდგენა.
-- ტექსტის ხმოვანი წარმოთქმა და SpeechRecognition-ის ნებართვები.
-- პროფილის არჩევანი, ლოკალური JSON export-ის ბმული და სხვადასხვა საათობრივი სარტყელი.
-- Vercel/GitHub Pages-ში სწორად განთავსება.
-
-## მონაცემების სტატუსი
-
-ყველა მოსწავლე და რეიტინგის ქულა საჩვენებელია. Supabase, ქსელური AI ან მონაცემთა რეალური backend არ გამოიყენება. სერვერზე მომხმარებლის პირადი მონაცემები არ იტვირთება.
+This is a UX/frontend-only redesign. The prior user data, Supabase catalog, RLS rules, authentication accounts, and cloud progress are not modified here.
