@@ -61,6 +61,28 @@ export const cloud={
   },{onConflict:'user_id'});
   if(error)throw error;
  },
+ async readLeaderboard(){
+  if(!client||!account)throw Error('შესვლა აუცილებელია');
+  const {data,error}=await client.rpc('peera_read_leaderboard');
+  if(error)throw error;
+  return data||[];
+ },
+ async setLeaderboardProfile(name,visible){
+  if(!client||!account)throw Error('შესვლა აუცილებელია');
+  const {error}=await client.from('peera_ranking_profiles').upsert({user_id:account.id,display_name:String(name||'მოსწავლე').slice(0,40),visible:!!visible,updated_at:new Date().toISOString()},{onConflict:'user_id'});
+  if(error)throw error;
+ },
+ async submitQuiz(lessonId,answers){
+  if(!client||!account)throw Error('შესვლა აუცილებელია');
+  const {data,error}=await client.rpc('peera_score_lesson',{p_lesson_id:lessonId,p_answers:answers});
+  if(error)throw error;
+  return data;
+ },
+ async submitFeedback(category,message){
+  if(!client||!account)throw Error('შესვლა აუცილებელია');
+  const {error}=await client.from('peera_feedback').insert({user_id:account.id,category,message});
+  if(error)throw error;
+ },
  async signIn(email,password){
   if(!client)throw Error(lastError||'Supabase მიუწვდომელია');
   const {data,error}=await client.auth.signInWithPassword({email,password});

@@ -1,6 +1,6 @@
-# Peera.My — V6 Practical UX
+# Peera.My V7 — Premium Learning UX
 
-A mobile-first language-learning website in Georgian, built with plain HTML, CSS, and JavaScript. The V6 update simplifies the interface and navigation without replacing its Supabase/IndexedDB integration.
+A Georgian-language learning web app with a mobile-first, accessible interface, built with **plain HTML, CSS, JavaScript ES modules** and a Supabase backend. No React, Vue, Tailwind, Bootstrap or localStorage.
 
 ## Run locally
 
@@ -8,44 +8,53 @@ A mobile-first language-learning website in Georgian, built with plain HTML, CSS
 python -m http.server 8080
 ```
 
-Open `http://127.0.0.1:8080/`. Do not launch `index.html` from `file://` because the app uses ES modules and `fetch()`.
+Open http://127.0.0.1:8080 (not `file://`). The app starts in guest mode (IndexedDB), loads JSON seeds, and uses the connected Supabase catalog when available. To sync progress, sign in with Supabase Auth in the profile screen.
 
 ## Navigation
 
-Mobile: **მთავარი**, **გაკვეთილები**, **ბარათები**, **ლექსიკონი**, **მეტი**. The **მეტი** sheet provides access to progress, achievements, leaderboard, grammar, listening, study plan, games, profile, and authentication. Desktop: the complete sidebar is always visible.
+- **Main five tabs:** Home `#/home`, Courses `#/learn`, Practice `#/practice`, Dictionary `#/dictionary`, Results `#/results`
+- **Courses:** `#/lesson/<id>`, `#/grammar`
+- **Practice:** `#/cards`, `#/listening`, `#/games`, `#/plan`
+- **Results:** `#/progress`, `#/achievements`, `#/leaderboard`
+- **Avatar:** `#/profile`, `#/auth`, `#/support`
 
-The home page prioritizes **გაგრძელება**, followed by today's goal/reviews, study tools, courses, and an account-sync link.
+All routes are reachable by an intuitive parent section; no ambiguous “More” menu.
 
-## Core screens
+## Features
 
-- `#/home` — resume next unlocked lesson and access study tools
-- `#/learn` — select language and scan a linear, labelled lesson list
-- `#/lesson/<id>` — word study, dialogue, quiz, and results
-- `#/cards` — graded flashcards, spaced repetition, text/audio actions
-- `#/dictionary` — live search, filters, favorites, spoken words, example details
-- `#/progress` — XP, streak, learning metrics and actual daily activity
-- `#/achievements`, `#/leaderboard`, `#/profile`, `#/auth`
-- `#/grammar`, `#/listening`, `#/plan`, `#/games`
+- Lessons have vocabulary, spoken dialogue, a four-question quiz, a **75% pass threshold**, error feedback and saved in-progress draft; returning to the same lesson resumes the draft.
+- Flashcards schedule spaced repetition, retain learning state locally or in the signed-in user's cloud JSON progress.
+- Dictionary supports search, filters, examples, audio, favorites and recently viewed words.
+- Progress and achievements are computed from stored user activity; **new guests have zero fabricated XP/streak**. Existing saved demo accounts are not reset without the user's action.
+- Ranking is no longer invented JSON. Signed-in users may opt into a public display name; leaderboard XP comes only from validated server-side lesson completions. An empty list is shown when nobody opts in.
+- Account-only support form inserts private messages into Supabase with row-level security.
+- Cloud progress remains the user's original `peera_progress` JSON payload; there is no destructive data migration.
 
-## Data and persistence
+## Files
 
-The client loads initial JSON from `data/`, then attempts the read-only Supabase catalog (`peera_catalog`). When Supabase is unavailable, it falls back to JSON. Authenticated users' `peera_progress` writes use RLS-restricted Supabase access. Guest progress stays in IndexedDB. No `localStorage` is used by this application code.
+- `css/v7-product.css`: the new product UI, layout overrides and accessibility rules
+- `js/views/home.js`, `practice.js`, `results.js`, `lesson.js`, `leaderboard.js`, `support.js`: the new and revised screens
+- `js/components/chrome.js`: unified mobile navigation and desktop sidebar
+- `js/core/cloud.js`: authentication, content and verified RPC integrations
+- `js/core/store.js`: learning and draft state
+- `supabase/20261128_v7_learning.sql`: backend migration
+- `scripts/test-v7.mjs`: module smoke tests
+- `scripts/qa-v7.py`: intercepted-browser route, layout and interaction tests
 
-The Supabase project is `peeramy-learn` (`jgsorwixqrvgbhxmfspq`). **No database migration is required for the V6 UI redesign.** The prior archive and existing account records remain unchanged.
-
-## Important limits
-
-- The original demo catalog contains 164 words and 20 lessons, not a complete A1–C2 course.
-- Guest accounts begin with sample achievements, XP, and streak to demonstrate the interface; they are explicitly labelled as demo. New authenticated users start without demo progress.
-- Leaderboard remains sample JSON data, not an authoritative public user ranking.
-- Push notifications are not implemented; the setting is cosmetic.
-- XP is calculated client-side and is not suitable for a fraud-resistant competitive ranking.
-- Full authenticated-browser E2E testing against live Supabase is still required; the dev environment blocks Chromium navigation to localhost and external webpages.
-
-## Verification
+## Tests
 
 ```bash
-node scripts/test-v6.mjs
+node scripts/test-v7.mjs
+python scripts/qa-v7.py
 ```
 
-This runs route rendering and module interaction smoke tests without changing the real database. See `QA-REPORT.md` for tested limits.
+Browser test uses an intercepted offline domain and stubs Supabase network access. It verifies real rendered HTML/JS interactions, **not actual login, SMTP delivery, live network latency or multi-device sync**.
+
+## Product boundaries
+
+- Catalog currently contains 164 sample words and 20 sample lessons; not complete CEFR A1–C2 content.
+- Live voice recognition is browser/device dependent; audio uses browser speech synthesis.
+- Push reminders do not send notifications yet. The profile UI labels these preferences as demo.
+- The backend accepts one verified lesson reward per user and lesson; clients cannot directly insert leaderboard XP. The answers are published in lesson material and a determined user can automate submissions, so the score system is not cheat-proof or appropriate for prizes.
+- Review XP is still locally tracked in `peera_progress` and **does not count toward the verified public ranking**.
+- External deployment and authenticated Supabase end-to-end testing must still be completed.

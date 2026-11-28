@@ -1,7 +1,7 @@
 import * as db from './db.js';
 import {cloud} from './cloud.js';
 import {dateKey,flag} from './utils.js';
-const FILES=['courses','words','lessons','achievements','leaderboard','profile','settings','stats','grammar','listening'];
+const FILES=['courses','words','lessons','achievements','profile','settings','stats','grammar','listening'];
 const today=()=>new Date().toISOString();
 const defaultCard=id=>({id,reps:0,interval:0,ease:2.5,dueAt:today(),lastGrade:null});
 export const store={
@@ -45,21 +45,21 @@ export const store={
     return {profile,stats,cards:{},completed:{},favorites:[],recent:[],daily:{},preferences:{},createdAt:today()};
   },
   newUser(){
-    const profile=structuredClone(this.data.profile);
-    const stats=structuredClone(this.data.stats);
-    const cards={};
-    for(let i=0;i<48;i++){
-      const w=this.data.words.filter(x=>x.language==='de')[i];
-      if(!w)break;
-      cards[w.id]={id:w.id,reps:i<32?2:0,interval:i<32?5:0,ease:2.5,dueAt:i<32?'2030-01-01T00:00:00.000Z':today(),lastGrade:i<32?2:null};
-    }
-    return {profile,stats,cards,completed:{'de-01':{score:4},'de-02':{score:3}},favorites:[],recent:[],daily:{},preferences:{},createdAt:today()};
+    const user=this.newSignedUser();
+    user.profile.name='მოსწავლე';
+    user.profile.demo=false;
+    return user;
   },
   async save(){
     if(cloud.user){
       await db.set('cloud-progress:'+cloud.user.id,this.user);
       await cloud.writeProgress(this.user);
     }else await db.set('user',this.user);
+  },
+  async draftLesson(id,draft){
+    if(!this.user.drafts)this.user.drafts={};
+    this.user.drafts[id]=draft;
+    await this.save();
   },
   get profile(){return this.user.profile},get stats(){return this.user.stats},
   get words(){return this.data.words},get lessons(){return this.data.lessons},
@@ -86,12 +86,15 @@ export const store={
     const xp=grade>=2?10:grade===1?3:0;this.addXp(xp);await this.save();return xp;
   },
   addXp(n){const k=dateKey();if(this.user.lastActive!==k){const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);this.stats.streak=this.user.lastActive===dateKey(yesterday)?this.stats.streak+1:1;this.stats.bestStreak=Math.max(this.stats.bestStreak,this.stats.streak);this.user.lastActive=k;}this.stats.xp+=n;this.user.daily[k]=(this.user.daily[k]||0)+n},
-  async completeLesson(lesson,score,total){
+  async completeLesson(lesson,score,total,answers={}){
+    const verified=cloud.user?await cloud.submitQuiz(lesson.id,answers):null;
+    if(verified && !verified.passed)throw Error('ტესტი ვერ ჩაიბარა. სცადე თავიდან.');
+    if(verified){score=verified.score;total=verified.total;}
     const old=this.user.completed[lesson.id];const isNew=!old;
     this.user.completed[lesson.id]={score:Math.max(score,old?.score||0),total,finishedAt:today()};
     if(isNew)this.stats.lessons+=1;
-    if(total&&score===total)this.stats.perfect+=1;
-    const xp=isNew?(score*5+20):0;this.addXp(xp);await this.save();return xp;
+    if(total&&score===total&&(!old||old.score<total))this.stats.perfect+=1;
+    const xp=verified?verified.xp:isNew?(score*5+20):0;this.addXp(xp);await this.save();return xp;
   },
   metric(stat){return ({xp:this.stats.xp,streak:this.stats.streak,lessons:Object.keys(this.user.completed).length,reviews:this.stats.reviews,learned:this.learned(),perfect:this.stats.perfect})[stat]||0},
   achievement(a){return {current:Math.min(a.goal,this.metric(a.stat)),done:this.metric(a.stat)>=a.goal}},

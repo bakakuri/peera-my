@@ -1,20 +1,19 @@
-# Peera.My V6 — UX and source checks
+# Peera.My V7 — QA report
 
-- Reworked the navigation into 4 direct learning destinations plus a labelled More sheet on mobile; a persistent complete sidebar on desktop.
-- Simplified home around one action, a next-lesson CTA, accurate course progress, and straightforward shortcuts.
-- Replaced the decorative roadmap with a linear, scannable lesson list, retaining the unlocked/completed rules.
-- Added a dictionary term-details modal and kept live search, pagination, favorites, and speech controls.
-- Corrected progress visualizations to use real saved `user.daily` values instead of a fabricated random activity heatmap. Guest initial XP/streak are labelled demo.
-- Left Supabase connection and `peera_catalog` / `peera_progress` unchanged.
+### Functional and user-experience changes
+- Five explicit primary tabs, accessible subroutes, account settings from avatar.
+- Course-first Home, resumable lesson drafts, objective quiz pass criteria, no synthetic progress for new guests.
+- Dedicated Practice and Results hubs, keyboard focus indicators and responsive mobile / desktop layout.
+- Functional support form and opt-in, SQL-validated lesson leaderboard; removed mock leaderboard JSON.
 
-## Tests performed
+### Verification
+- All ES module files parsed with `node --check`.
+- `node scripts/test-v7.mjs`: routes, new guest state, navigation, course selection, dictionary details/favorites, SRS review, lesson draft passed.
+- `python scripts/qa-v7.py`: 17 routes rendered in headless Chromium at 390px, no horizontal overflow, dictionary search/detail, flashcard flip/grade and lesson quiz all passed; Supabase was replaced by a local controlled stub.
+- Supabase migration created four protected database functions (two private definer + two public invoker) and three RLS tables; verified SQL grant state and full quiz via rolled-back test transaction.
 
-- `node --check` for all ES modules: passed.
-- `node scripts/test-v6.mjs`: 13 route-render smoke tests, course switching, vocabulary details, favorites, card-flip/review persistence calculations: passed.
-- Chromium offline static HTML rendering at 390px and 1280px for the dashboard and lessons, plus 7 further mobile screens: passed with zero document horizontal overflow.
-- Exact JS rendering/click handlers tested in Node via simulated app data. Screenshots are actual Chromium static rendering of those components, with local PNG assets embedded in the test page.
-- **Not tested:** the full browser app startup and live Supabase login/writes; Chromium refuses navigation to `localhost` (`ERR_BLOCKED_BY_ADMINISTRATOR`) in this execution environment.
-
-## No backend changes
-
-This is a UX/frontend-only redesign. The prior user data, Supabase catalog, RLS rules, authentication accounts, and cloud progress are not modified here.
+### Known limitations
+- Real Supabase login/session, cloud writes, password reset and cross-device syncing were not tested in a live browser.
+- Language level content is still sample only. Ranking includes server-validated lesson XP, not flashcard XP.
+- Reminder notification delivery remains unimplemented and labelled as such in profile.
+- Server-validated quiz scoring reduces easy client XP edits, but answers are publicly available so gamification is not fully anti-cheat.

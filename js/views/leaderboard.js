@@ -1,11 +1,19 @@
 import {store} from '../core/store.js';
-import {esc,icon,number,pill,img} from '../core/utils.js';
+import {cloud} from '../core/cloud.js';
+import {esc,number} from '../core/utils.js';
 import {pageTop} from '../components/chrome.js';
-let term='week';
-function showUsers(){const factor=term==='week'?7:term==='month'?3:1;const list=store.data.leaderboard.map(u=>({...u,xp:Math.round(u.xp/factor)}));list.push({id:'me',name:store.profile.name,avatar:store.profile.avatar||'👩🏻‍🎓',xp:Math.round(store.stats.xp/factor),streak:store.stats.streak});list.sort((a,b)=>b.xp-a.xp);return list;}
-export default {render(){const list=showUsers(),podium=[list[1],list[0],list[2]].filter(Boolean);return `${pageTop('რეიტინგი','🏆')}
- <p class="center text-small" style="color:#fff;margin:-6px 0 15px">საუკეთესო მოსწავლეები • საჩვენებელი მონაცემები</p>
- <div class="tab-row">${[['week','კვირეული'],['month','თვიური'],['all','ყველა დროის']].map(([id,t])=>`<button data-action="term" data-id="${id}" class="tab ${term===id?'active':''}">${t}</button>`).join('')}</div>
- <div class="leader-podium">${podium.map((u,i)=>`<div class="leader-person ${i===1?'first':i===2?'third':''}"><div class="head">${u.avatar}</div><span class="person-name">${esc(u.name)}</span><span class="xp">⭐ ${number(u.xp)} XP</span><div class="pedestal">${i===1?'1':i===0?'2':'3'}</div></div>`).join('')}</div>
- <div class="glass panel-pad">${list.slice(3).map((u,i)=>`<div class="glass-soft leader-row ${u.id==='me'?'mine':''}"><b>${i+4}</b><div class="head">${u.avatar}</div><div><b>${esc(u.name)} ${u.id==='me'?'(მე)':''}</b><br><small>🔥 ${u.streak} დღე</small></div><b>⭐ ${number(u.xp)} XP</b></div>`).join('')}</div>
- <div class="notice">🔎 ეს არის ადგილობრივი JSON დემო-რეიტინგი. სხვა ადამიანების ცოცხალი მონაცემები არ გამოიყენება.</div>`},handle(action,el,refresh){if(action==='term'){term=el.dataset.id;refresh();return true;}return false;}}
+let items=[],loading=false,loaded=false,error='';
+async function fetchBoard(){if(!cloud.user){items=[];loaded=true;return;}
+ loading=true;error='';try{items=await cloud.readLeaderboard();loaded=true;}catch(e){error=e.message;}finally{loading=false;loaded=true;}}
+function table(){if(error)return `<p class="notice">რეიტინგი ვერ ჩაიტვირთა: ${esc(error)} <button class="btn btn-light" data-action="rank-retry">ხელახლა ცდა</button></p>`;
+ if(loading&&!loaded)return '<p class="notice">რეიტინგი იტვირთება…</p>';
+ if(!items.length)return '<div class="glass panel-pad"><h3>რეიტინგში ჯერ მონაწილეები არ არიან</h3><p class="page-description">დაასრულე გაკვეთილები და ჩართე საჯარო მონაწილეობა. გამოგონილი მომხმარებლები არ გამოჩნდებიან.</p></div>';
+ return `<div class="glass panel-pad v7-board">${items.map((x,i)=>`<div class="v7-board-row"><span class="v7-board-pos">${i+1}</span><span class="v7-board-avatar">${esc(x.name?.[0]||'მ')}</span><div><strong>${esc(x.name||'მოსწავლე')}</strong><small>${x.lessons} დადასტურებული გაკვეთილი</small></div><b>${number(x.xp)} XP</b></div>`).join('')}</div>`;}
+export default {render(){if(!loaded&&!loading)queueMicrotask(()=>{fetchBoard().then(()=>window.dispatchEvent(new Event('peera:board')))});
+ const intro=`${pageTop('რეიტინგი','','#/results')}<p class="page-description">რეალური მონაწილეები და მხოლოდ სერვერის მიერ დადასტურებული გაკვეთილების ქულები.</p>`;
+ if(!cloud.user)return intro+'<div class="glass panel-pad"><h2>ანგარიში აუცილებელია</h2><p class="page-description">რეიტინგში ჩასართავად შედი შენი ანგარიშით. სტუმრის დემო მონაცემები რეიტინგში არ ხვდება.</p><a href="#/auth" class="btn btn-purple">შესვლა / რეგისტრაცია →</a></div>';
+ const opted=!!store.user.preferences?.rankOptIn;
+ return intro+`<div class="glass panel-pad"><h3>შენი მონაწილეობა</h3><p class="page-description">${opted?'✅ რეიტინგში მონაწილეობა ჩართულია':'მონაწილეობა სურვილისამებრია და გამორთულია'}</p><button class="btn btn-purple" data-action="rank-opt">${opted?'მონაწილეობის გამორთვა':'რეიტინგში ჩართვა'}</button></div>`+table();
+ },async handle(action,el,refresh){if(action==='rank-opt'){const next=!store.user.preferences?.rankOptIn;await cloud.setLeaderboardProfile(store.profile.name,next);store.user.preferences.rankOptIn=next;await store.save();await fetchBoard();refresh();return true;}
+ if(action==='rank-retry'){await fetchBoard();refresh();return true;}return false;},
+ refreshBoard(){loaded=false;items=[];error='';}};
