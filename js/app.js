@@ -55,7 +55,7 @@ root.addEventListener('submit',e=>{if(['cloud-auth-form','support-form'].include
 root.addEventListener('input',e=>{const target=e.target;if(target.dataset.input){activeView(routeOf()).input?.(target.dataset.input,target.value,refresh)}});
 root.addEventListener('change',async e=>{const t=e.target;if(t.dataset.change)await activeView(routeOf()).input?.(t.dataset.change,t.value,refresh)});
 root.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.closest('[data-action="flip-card"]')){e.preventDefault();e.target.click()}if(e.key==='Escape'&&isDrawer){isDrawer=false;render()}});
-window.addEventListener('peera:auth',async()=>{if(!store.ready)return;try{await store.reloadAuth();render()}catch(error){console.error(error);window.peeraToast('სინქრონიზაცია ვერ მოხერხდა')}});
+window.addEventListener('peera:auth',async()=>{if(!store.ready)return;try{await store.reloadAuth();leaderboard.refreshBoard();render()}catch(error){console.error(error);window.peeraToast('სინქრონიზაცია ვერ მოხერხდა')}});
 window.addEventListener('peera:board',()=>{if(routeOf()==='leaderboard')render()});
 window.addEventListener('hashchange',()=>{
  const query=location.hash.split('?')[1];if(routeOf()==='learn'&&query){const params=new URLSearchParams(query);const lang=params.get('lang');if(lang)learn.setCourse(lang)}
