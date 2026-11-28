@@ -1,0 +1,22 @@
+[
+  {
+    "id": "de",
+    "name": "გერმანული",
+    "subtitle": "საუბარი ყოველდღიურ ცხოვრებაში",
+    "flag": "🇩🇪",
+    "tag": "Deutsch",
+    "level": "A1",
+    "color": "violet",
+    "lessonCount": 10
+  },
+  {
+    "id": "en",
+    "name": "ინგლისური",
+    "subtitle": "საწყისი სასაუბრო ინგლისური",
+    "flag": "🇬🇧",
+    "tag": "English",
+    "level": "A1",
+    "color": "blue",
+    "lessonCount": 4
+  }
+]
