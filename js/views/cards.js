@@ -16,6 +16,6 @@ export default {
  if(action==='speak-word'){speak(store.word(el.dataset.id)?.term,store.lang);return true;}
  if(action==='favorite-word'){await store.favorite(el.dataset.id);refresh();return true;}
  if(action==='new-session'){session=null;refresh();return true;}
- if(action==='grade'&&w){if(!session.flipped||session.busy)return true;session.busy=true;const grade=Number(el.dataset.grade);const xp=await store.grade(w,grade);session.xp+=xp;session.queue.shift();session.done++;session.flipped=false;session.busy=false;refresh();if(xp)window.peeraToast(`✨ +${xp} XP!`);return true;}
+ if(action==='grade'&&w){if(!session.flipped||session.busy)return true;session.busy=true;const grade=Number(el.dataset.grade);const xp=await store.grade(w,grade);session.xp+=xp;session.queue.shift();if(grade===0&&!session.retryOnce?.[w.id]){session.retryOnce??={};session.retryOnce[w.id]=true;session.queue.push(w.id)}else session.done++;session.flipped=false;session.busy=false;refresh();if(xp)window.peeraToast(`✨ +${xp} XP!`);return true;}
  return false;}
 };
