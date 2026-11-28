@@ -98,7 +98,7 @@ export const store={
   },
   metric(stat){return ({xp:this.stats.xp,streak:this.stats.streak,lessons:Object.keys(this.user.completed).length,reviews:this.stats.reviews,learned:this.learned(),perfect:this.stats.perfect})[stat]||0},
   achievement(a){return {current:Math.min(a.goal,this.metric(a.stat)),done:this.metric(a.stat)>=a.goal}},
-  async updateProfile(fields){Object.assign(this.profile,fields);await this.save()},
+  async updateProfile(fields){Object.assign(this.profile,fields);if(cloud.user&&fields.name&&this.user.preferences?.rankOptIn)await cloud.setLeaderboardProfile(fields.name,true);await this.save()},
   async freshStart(){this.user=cloud.user?this.newSignedUser():this.newUser();await this.save()},
   appStatus(){return {words:this.words.length,lessons:this.lessons.length,lang:this.lang,flag:flag(this.lang)}}
 };
